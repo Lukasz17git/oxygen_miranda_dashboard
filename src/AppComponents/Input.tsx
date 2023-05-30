@@ -1,26 +1,15 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
-type InputProps = {
-   value?: string | number,
-   onChange?: React.ChangeEventHandler<HTMLInputElement>,
-   label?: string,
-   placeholder?: string,
-   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>,
-   className?: string,
-   inputClassName?: string,
-   labelClassName?: string
-}
+type InputType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & { wrapperClassName?: string, labelClassName?: string, label?: string }
 
-const Input = ({ value, onChange, label, placeholder, onKeyDown, className = '', inputClassName = '', labelClassName }: InputProps) => {
+const Input = ({ wrapperClassName, labelClassName, label, ...props }: InputType) => {
 
    return (
-      <label className={`input ${className}`}>
+      <label className={`tw-base-input ${wrapperClassName || ''}`}>
          <input
-            className={inputClassName}
-            value={value}
-            onChange={onChange}
             type='text'
-            placeholder={placeholder}
-            onKeyDown={onKeyDown}
+            {...props}
+            className={`${props.className || ''}`}
          />
          <span className={labelClassName}>
             {label}

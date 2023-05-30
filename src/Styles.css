@@ -1,0 +1,11 @@
+.status-in {
+   background-color: var(--green-dark);
+}
+
+.status-out {
+   background-color: var(--red-main);
+}
+
+.status-occupied {
+   background-color: var(--orange);
+}

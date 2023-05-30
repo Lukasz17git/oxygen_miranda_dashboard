@@ -1,27 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type AdminState = {
-   name: string,
-   email?: string,
-}
 
-const initialState: AdminState = {
-   name: 'Admin'
+const initialState = {
+   name: 'Lukasz',
+   lastname: 'Maraj',
+   email: 'lucas.m2295@gmail.com',
+   myData: 111,
+   data: {
+      myData: 'one',
+      files: 24
+   }
 }
 
 const adminSlice = createSlice({
    name: 'admin',
    initialState,
    reducers: {
-      incremented(state) {
-         state.name += "1"
-      },
-      decremented(state) {
-         state.name = state.name.slice(-1)
+      setNameAction(state, { payload }) {
+         state.name = payload
       }
    }
 })
 
 
-export const { incremented, decremented } = adminSlice.actions
+export const { setNameAction } = adminSlice.actions
 export default adminSlice.reducer

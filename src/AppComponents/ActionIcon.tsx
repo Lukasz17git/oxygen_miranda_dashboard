@@ -1,24 +1,12 @@
+import { DetailedHTMLProps, ButtonHTMLAttributes } from "react"
 
-type ActionIconProps = {
-   src: string,
-   className?: string,
-   iconClassName?: string,
-   onClick?: React.MouseEventHandler<HTMLButtonElement>,
-   ariaLabel?: string
-}
-
-const ActionIcon = ({ src, className = '', iconClassName, onClick, ariaLabel }: ActionIconProps) => {
-
-   const name = src.slice(src.lastIndexOf('/') + 1, src.lastIndexOf('.'))
+const ActionIcon = ({ children, ...props }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
 
    return (
-      <button className={`frcc ${className}`} aria-label={ariaLabel ?? name} onClick={onClick} >
-         <img
-            className={iconClassName}
-            src={src}
-            alt={name}
-            loading='lazy' />
+      <button {...props} className={`tw-base-action-icon ${props.className || ''}`}>
+         {children}
       </button>
    )
 }
+
 export default ActionIcon
