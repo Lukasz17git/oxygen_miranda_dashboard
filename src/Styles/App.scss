@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
    // colors
    --fff: #FFFFFF;
@@ -25,7 +26,9 @@
    --green-pastel: #EEF9F2;
    --red-main: #E23428;
    --red-pastel: #FFEDEC;
-   --orange: #FF9C3A;
+   --orange-main: #FF9C3A;
+   --yellow-main: rgb(144, 129, 31);
+   --yellow-pastel: rgb(253, 253, 224);
    // fonts
    --text-app: 'Poppins';
    font-family: var(--text-app);

@@ -1,11 +1,14 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
-type InputType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & { wrapperClassName?: string, labelClassName?: string, label?: string }
+type InputType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & { label: string, wrapperClassName?: string, labelClassName?: string }
 
-const Input = ({ wrapperClassName, labelClassName, label, ...props }: InputType) => {
+const Input = ({ wrapperClassName, labelClassName, label, children, ...props }: InputType) => {
 
    return (
-      <label className={`tw-base-input ${wrapperClassName || ''}`}>
+      <label
+         aria-label={label}
+         className={`base-input-wrapper ${wrapperClassName || ''}`}
+      >
          <input
             type='text'
             {...props}
@@ -14,6 +17,7 @@ const Input = ({ wrapperClassName, labelClassName, label, ...props }: InputType)
          <span className={labelClassName}>
             {label}
          </span>
+         {children}
       </label>
    )
 }

@@ -1,7 +1,7 @@
+import { useNavigate } from 'react-router-dom'
 import Button from '../../../AppComponents/Button'
 import Image from '../../../AppComponents/Img'
-import { setSettingsModalAction } from '../../../Store/Slices/modalSlice'
-import { useTypedDispatch, useTypedSelector } from '../../../Store/store'
+import { useTypedSelector } from '../../../Store/store'
 
 const Profile = () => {
    const name = useTypedSelector(state => state.admin.name)
@@ -9,8 +9,8 @@ const Profile = () => {
    const email = useTypedSelector(state => state.admin.email)
    const fullname = `${name}${lastname ? ' ' + lastname : ''}`
 
-   const dispatch = useTypedDispatch()
-   const openSettings = () => dispatch(setSettingsModalAction())
+   const navigate = useNavigate()
+   const openSettings = () => navigate('/settings')
 
    return (
       <div className="pos-r p-24 s-profile br-16 max-w-240 fccc g-8 pt-64 mt-64">
@@ -19,7 +19,12 @@ const Profile = () => {
             className="pos-a br-16 max-w-100 max-h-100 t-0 -translate-y-50%" />
          <strong className='tc-text-dark tf-app-semibold'>{fullname}</strong>
          <p className='ts-12 tc-text-silver'>{email}</p>
-         <Button onClick={openSettings} text='Settings' className='h:bg-green-dark h:tc-green-pastel' />
+         <Button
+            role='navigation'
+            onClick={openSettings}
+            text='Settings'
+            className='h:bg-green-dark h:tc-green-pastel'
+         />
       </div>
    )
 }

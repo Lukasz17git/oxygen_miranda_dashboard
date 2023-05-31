@@ -1,4 +1,5 @@
 import Calendar from "./Components/Calendar"
+import Comments from "./Components/Comments"
 import Graph from "./Components/Graph"
 import InsCard from "./Components/InsCard"
 import OccupiedCard from "./Components/OccupiedCard"
@@ -17,6 +18,7 @@ const Overview = () => {
          <Calendar />
          <Graph />
          <ReservationsResumee />
+         <Comments />
       </div>
    )
 }

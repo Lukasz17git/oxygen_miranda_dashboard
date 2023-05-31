@@ -13,7 +13,7 @@ export default {
    ],
    theme: {
       colors: {
-         'app-bg-white': '#f8f8f8',
+         'app-bg-white': '#f8f8f8', //var(--app-bg-white)
          'input-bg-white': '#fcfcfc',
          'black': '#212121',
          'text-black': '#262626',
@@ -32,7 +32,9 @@ export default {
          'green-pastel': '#EEF9F2',
          'red-main': '#E23428',
          'red-pastel': '#FFEDEC',
-         'orange': '#FF9C3A',
+         'orange-main': '#FF9C3A',
+         'yellow-main': 'var(--yellow-main)',
+         'yellow-pastel': 'rgb(253, 253, 224)',
          'fff': '#FFFFFF',
          '000': '#000',
          ...colors
@@ -40,7 +42,9 @@ export default {
       extend: {
          boxShadow: {
             'profile': '0px 20px 30px #00000014',
-            'card': '0px 4px 4px #00000005'
+            'card': '0px 4px 4px #00000005',
+            'comment': '0px 5px 5px rgba(0, 0, 0, 0.03)',
+            'table-row': '0px 0px 32px rgba(0,0,0,0.05)'
          },
          fontFamily: {
             'app': 'var(--text-app)'

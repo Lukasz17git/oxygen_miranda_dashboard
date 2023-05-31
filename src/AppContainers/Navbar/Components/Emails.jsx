@@ -9,12 +9,10 @@ const Emails = () => {
    const openEmails = () => console.log('openEmails')
 
    return (
-      <div className="pos-r h:bg-app-bg-white br-8">
-         <ActionIcon onClick={openEmails}>
-            <MdOutlineMailOutline className="fill-text-dark" />
-            <Badge text={emailsNumber} />
-         </ActionIcon>
-      </div>
+      <ActionIcon onClick={openEmails} className="pos-r h:bg-app-bg-white br-8">
+         <MdOutlineMailOutline className="fill-text-dark" />
+         <Badge text={emailsNumber} />
+      </ActionIcon>
    )
 }
 
