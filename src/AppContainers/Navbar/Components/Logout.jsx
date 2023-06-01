@@ -1,11 +1,15 @@
 import ActionIcon from "../../../AppComponents/ActionIcon"
 import { FiLogOut } from "react-icons/fi"
-import { useTypedDispatch } from "../../../Store/store"
+import { useNavigate } from "react-router-dom"
 
 
 const Logout = () => {
-   const handleLogout = () => console.log('logout and redirect to login page')
-   const dispatch = useTypedDispatch()
+   const navigate = useNavigate()
+   const handleLogout = () => {
+      localStorage.removeItem('isAuthenticated')
+      navigate('/login')
+   }
+
    return (
       <ActionIcon className="h:bg-app-bg-white br-8" onClick={handleLogout} >
          <FiLogOut className="stroke-text-dark scale-110 rotate-180" />

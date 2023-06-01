@@ -13,7 +13,7 @@ const Sidebar = () => {
    return (
       <div className={`py-16 fcc g-32 duration-[400ms] oh ${isSidebar ? 'max-w-300 fs0' : 'max-w-0 hidden'}`}>
          <Logo />
-         <ul className="fc g-16 w-100%">
+         <ul className="fc g-16 w-300">
             <SidebarLink href="" text='Dashboard' Icon={HiViewGrid} />
             <SidebarLink href="bookings" text='Bookings' Icon={BsCalendarCheck} iconClassName='scale-90'/>
             <SidebarLink href='rooms' text='Rooms' Icon={MdOutlineBedroomParent} iconClassName='scale-110' />

@@ -3,7 +3,7 @@
 const bookings = [
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Jessica Thompson',
          imageUrl: '',
          id: '123123'
       },
@@ -16,7 +16,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Benjamin Parker',
          imageUrl: '',
          id: '123123'
       },
@@ -29,7 +29,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Olivia Martinez',
          imageUrl: '',
          id: '123123'
       },
@@ -42,7 +42,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Liam Wilson',
          imageUrl: '',
          id: '123123'
       },
@@ -55,7 +55,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Emily Johnson',
          imageUrl: '',
          id: '123123'
       },
@@ -68,7 +68,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Ethan Adams',
          imageUrl: '',
          id: '123123'
       },
@@ -81,7 +81,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Sophia Davis',
          imageUrl: '',
          id: '123123'
       },
@@ -94,7 +94,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Noah Wright',
          imageUrl: '',
          id: '123123'
       },
@@ -107,7 +107,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Ava Lewis',
          imageUrl: '',
          id: '123123'
       },
@@ -120,7 +120,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'William Anderson',
          imageUrl: '',
          id: '123123'
       },
@@ -133,7 +133,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Isabella Garcia',
          imageUrl: '',
          id: '123123'
       },
@@ -146,7 +146,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'James Robinson',
          imageUrl: '',
          id: '123123'
       },
@@ -159,7 +159,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Mia Mitchell',
          imageUrl: '',
          id: '123123'
       },
@@ -172,7 +172,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Alexander Lee',
          imageUrl: '',
          id: '123123'
       },
@@ -185,7 +185,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Charlotte Hall',
          imageUrl: '',
          id: '123123'
       },
@@ -198,7 +198,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Daniel Turner',
          imageUrl: '',
          id: '123123'
       },
@@ -211,7 +211,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Harper Hernandez',
          imageUrl: '',
          id: '123123'
       },
@@ -224,7 +224,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Samuel Green',
          imageUrl: '',
          id: '123123'
       },
@@ -237,7 +237,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Amelia Cooper',
          imageUrl: '',
          id: '123123'
       },
@@ -250,7 +250,7 @@ const bookings = [
    },
    {
       customer: {
-         name: 'Customer Name',
+         name: 'Michael Campbell',
          imageUrl: '',
          id: '123123'
       },

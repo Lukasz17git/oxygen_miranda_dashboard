@@ -4,7 +4,10 @@ import SvgToggleTheme from '../../../Svgs/SvgToggleTheme'
 
 const ThemeMode = () => {
 
-   const switchThemeMode = () => console.log('dark')
+   const switchThemeMode = () => {
+      const body = document.body
+      body.classList.toggle('dark-theme')
+   }
 
    return (
       <ActionIcon onClick={switchThemeMode} className="pos-r h:bg-app-bg-white br-8">

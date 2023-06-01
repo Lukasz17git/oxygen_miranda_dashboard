@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-   sidebar: true,
+   sidebar: false,
 }
 
 const layoutSlice = createSlice({

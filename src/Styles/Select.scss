@@ -58,6 +58,7 @@
          pointer-events: none;
          color: var(--input-color-placeholder);
          background-color: var(--input-color-background);
+         margin-right: 5px;
       }
 
       &::before {
@@ -68,7 +69,7 @@
          padding-right: 1px;
       }
 
-      &:required+span::before {
+      &:required[value=""]+span::before {
          content: '*';
          color: var(--input-color-invalid);
          opacity: 0.7;

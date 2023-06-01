@@ -6,7 +6,6 @@ import Navbar from "../AppContainers/Navbar/Navbar"
 
 const DashboardLayout = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-   console.log('rendered dashboard')
    return (
       <div className="min-h-100vh w-100% fr bg-fff">
          <Sidebar isOpen={isSidebarOpen} />

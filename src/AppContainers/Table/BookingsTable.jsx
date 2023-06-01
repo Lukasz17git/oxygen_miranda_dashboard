@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import bookings from '../../JsonData/bookings'
-import Navigation from '../../AppComponents/Navigation'
+import Navigation from '../../AppComponentsShared/Navigation'
 import Select from '../../AppComponents/Select'
 import { BsSearch } from 'react-icons/bs'
 import Input from '../../AppComponents/Input'
@@ -20,7 +20,7 @@ const BookingsTable = () => {
    const [orderBy, setOrderBy] = useState('orderDate')
 
    const bookingsToDisplayByStatus = selectedStatus ? bookings.filter(booking => booking.status === selectedStatus) : bookings
-   const bookingsToDisplayByRequest = requestFilter ? bookingsToDisplayByStatus.filter(booking => booking.request.includes(requestFilter)) : bookingsToDisplayByStatus
+   const bookingsToDisplayByRequest = requestFilter ? bookingsToDisplayByStatus.filter(booking => booking.customer.name.toLowerCase().includes(requestFilter)) : bookingsToDisplayByStatus
    const bookingsToDisplayInCurrentPage = bookingsToDisplayByRequest.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
 
    //Pagination
@@ -60,6 +60,7 @@ const BookingsTable = () => {
                disableLabelAsOption={true}
                wrapperClassName='h-40 ml-a'
                className='tf-app-semibold !tc-green-dark'
+               labelClassName='!tc-green-dark'
                label='Order By'
                optionsMap={options}
                value={orderBy}
