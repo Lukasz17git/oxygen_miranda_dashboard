@@ -30,6 +30,8 @@ export const amenities = {
    expertTeam: false
 }
 
+export const amenitiesList = Object.keys(amenities)
+
 
 export const amenitiesIcons = {
    airConditioner: AirConditioner,

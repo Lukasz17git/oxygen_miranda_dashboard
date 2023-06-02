@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 
 
 const bookings = [
@@ -483,5 +484,10 @@ const bookings = [
       status: 'out',
    },
 ]
+
+
+bookings.forEach(booking => {
+   booking.id = nanoid()
+})
 
 export default bookings

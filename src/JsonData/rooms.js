@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 import { amenities } from "../AppComponentsShared/Amenity"
 
 const roomTypes = ['single', 'double', 'superior', 'suite']
@@ -133,5 +134,18 @@ const rooms = [
       amenities: amenities
    },
 ]
+
+
+rooms.forEach(room => {
+   room.id = nanoid()
+   room.status = Math.random() >= 0.5 ? 'available' : 'occupied'
+   room.photos[0] = `/Images/hotel-${Math.floor(Math.random() * 8) + 1}.jpg`
+   let amenities = {}
+   for (const key of Object.keys(room.amenities)) {
+      amenities[key] = (Math.random() >= 0.5)
+   }
+   room.amenities = amenities
+})
+
 
 export default rooms

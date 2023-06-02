@@ -20,19 +20,35 @@ const Navigation = ({ page, pages, setPage }) => {
 
    const paginationArray = Array(paginationLength).fill(startPageIndex)
 
+   const disabledButtonClass = 'bg-transparent bc-green-dark/30 tc-green-dark/50'
+   const enabledButtonClass = `bg-input-bg-white bc-green-dark dark:bc-green-light/20 dark:bg-dark-green dark:tc-app-bg-white`
+
+   const paginationOnClass = `bg-green-dark tc-white h:bg-green-dark dark:bg-dark-green dark:h:bg-dark-green dark:tc-app-bg-white dark:bc-green-light/20`
+   const pagnationOffClass = `h:bc-green-dark h:bg-input-bg-white dark:tc-dark-white dark:h:bg-dark-green/10 dark:h:bc-dark-green/90`
+
    return (
       <div className='frcc g-8'>
-         <Button disabled={isPrevDisabled} text='Prev' onClick={prevPage} className={`min-w-80 ${isPrevDisabled ? 'bg-transparent bc-green-dark/30 tc-green-dark/50' : 'bg-input-bg-white bc-green-dark '}`} />
+         <Button
+            disabled={isPrevDisabled}
+            text='Prev'
+            onClick={prevPage}
+            className={`min-w-80 ${isPrevDisabled ? disabledButtonClass : enabledButtonClass}`}
+         />
          {paginationArray.map((pageIndex, index) => (
             <ActionIcon
                key={index}
-               className={`br-8 ${pageIndex + index === page ? 'bg-green-dark tc-white h:bg-green-dark' : 'h:bc-green-dark h:bg-input-bg-white'}`}
+               className={`br-8 ${pageIndex + index === page ? paginationOnClass : pagnationOffClass}`}
                onClick={() => setPage(pageIndex + index)}
             >
                {pageIndex + index + 1}
             </ActionIcon>
          ))}
-         <Button disabled={isNextDisabled} text='Next' onClick={nextPage} className={`min-w-80 ${isNextDisabled ? 'bg-transparent bc-green-dark/30 tc-green-dark/50' : 'bg-input-bg-white bc-green-dark '}`} />
+         <Button
+            disabled={isNextDisabled}
+            text='Next'
+            onClick={nextPage}
+            className={`min-w-80 ${isNextDisabled ? disabledButtonClass : enabledButtonClass}`}
+         />
       </div>
    )
 }

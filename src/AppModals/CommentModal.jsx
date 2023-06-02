@@ -7,9 +7,7 @@ import { TiTick } from "react-icons/ti"
 import { RiDeleteBin4Fill } from 'react-icons/ri'
 
 
-const CommentModal = ({ index, closeModal }) => {
-
-   const comment = comments[index]
+const CommentModal = ({ index, comment = comments[index], closeModal }) => {
 
    return (
       <div className="pos-f z-1 transform-to-center bg-fff s-profile p-24 pb-28 bc-color-separator bw-1 fc w-400 br-12">

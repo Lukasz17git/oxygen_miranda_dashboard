@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import bookings from '../../JsonData/bookings'
-import Navigation from '../../AppComponentsShared/Navigation'
-import Select from '../../AppComponents/Select'
-import { BsSearch } from 'react-icons/bs'
-import Input from '../../AppComponents/Input'
 import BookingRow from './Components/BookingRow'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
-
+import TableFooter from './Components/TableFooter'
+import SearchInput from './Components/SearchInput'
+import OrderBySelect from './Components/OrderBySelect'
+import DndWrapper from '../../AppComponentsShared/DndWrapper'
 
 const BookingsTable = () => {
 
@@ -40,6 +39,7 @@ const BookingsTable = () => {
       checkOut: 'Check Out',
    }
 
+
    return (
       <div className='h-100% fc'>
          <div className='frc'>
@@ -47,26 +47,10 @@ const BookingsTable = () => {
             <TableButton text='Check In' onClick={() => handleLabelButton('in')} isActive={isActive('in')} />
             <TableButton text='Check Out' onClick={() => handleLabelButton('out')} isActive={isActive('out')} />
             <TableButton text='In Progress' onClick={() => handleLabelButton('progress')} isActive={isActive('progress')} />
-            <Input
-               value={requestFilter}
-               onChange={(e) => setRequestFilter(e.target.value)}
-               label='Search Customer'
-               className='!bw-0 !pr-40 !bg-fff/70'
-               wrapperClassName='ml-16'
-            >
-               <BsSearch className='pos-a r-8 t-50% -translate-y-50% fill-text-silver scale-80' />
-            </Input>
-            <Select
-               disableLabelAsOption={true}
-               wrapperClassName='h-40 ml-a'
-               className='tf-app-semibold !tc-green-dark'
-               labelClassName='!tc-green-dark'
-               label='Order By'
-               optionsMap={options}
-               value={orderBy}
-               onChange={(e) => setOrderBy(e.target.value)} />
+            <SearchInput label='Search Customer' value={requestFilter} setValue={setRequestFilter} />
+            <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
-         <div className='bg-fff br-12 fg1 my-16'>
+         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
             <TableLabels gridClassName='grid grid-cols-8 g-8 gcc pr-40'>
                <TableLabel className='col-span-2' text='Guest' />
                <TableLabel text='Order Date' />
@@ -77,17 +61,24 @@ const BookingsTable = () => {
                <TableLabel text='Status' />
             </TableLabels>
             <div>
-               {bookingsToDisplayInCurrentPage.map((booking, index) => (
-                  <BookingRow key={index} className='grid grid-cols-8 g-8 gcc pr-40' data={booking} />
-               ))}
+               <DndWrapper
+                  key={bookingsToDisplayInCurrentPage}
+                  data={bookingsToDisplayInCurrentPage}
+                  Component={({ data }) => (
+                     <BookingRow className='grid grid-cols-8 g-8 gcc pr-40' data={data} />
+                  )}
+               />
             </div>
          </div>
-         <div className='frcb py-16'>
-            <q className='ts-14 tf-app-regular tc-text-grey-darker'>
-               {`Showing ${page * ammountPerPage} - ${(page) * ammountPerPage + bookingsToDisplayInCurrentPage.length} of ${bookingsToDisplayByRequest.length} Filtered Data; out of All ${bookings.length} Data`}
-            </q>
-            <Navigation page={page} pages={pages} setPage={setPage} />
-         </div>
+         <TableFooter
+            page={page}
+            pages={pages}
+            setPage={setPage}
+            ammountPerPage={ammountPerPage}
+            currentDataLength={bookingsToDisplayInCurrentPage.length}
+            filteredDataLength={bookingsToDisplayByRequest.length}
+            maxDataLength={bookings.length}
+         />
       </div >
    )
 }

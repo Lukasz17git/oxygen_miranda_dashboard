@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import Navigation from '../../AppComponentsShared/Navigation'
-import Select from '../../AppComponents/Select'
-import { BsSearch } from 'react-icons/bs'
-import Input from '../../AppComponents/Input'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
 import rooms from '../../JsonData/rooms'
 import RoomRow from './Components/RoomRow'
+import TableFooter from './Components/TableFooter'
+import SearchInput from './Components/SearchInput'
+import OrderBySelect from './Components/OrderBySelect'
+import DndWrapper from '../../AppComponentsShared/DndWrapper'
 
 
 const RoomsTable = () => {
@@ -48,26 +48,10 @@ const RoomsTable = () => {
             <TableButton text='Double' onClick={() => handleLabelButton('double')} isActive={isActive('double')} />
             <TableButton text='Superior' onClick={() => handleLabelButton('superior')} isActive={isActive('superior')} />
             <TableButton text='Suite' onClick={() => handleLabelButton('suite')} isActive={isActive('suite')} />
-            <Input
-               value={searchFilter}
-               onChange={(e) => setSearchFilter(e.target.value)}
-               label='Search Room'
-               className='!bw-0 !pr-40 !bg-fff/70'
-               wrapperClassName='ml-16'
-            >
-               <BsSearch className='pos-a r-8 t-50% -translate-y-50% fill-text-silver scale-80' />
-            </Input>
-            <Select
-               disableLabelAsOption={true}
-               wrapperClassName='h-40 ml-a'
-               className='tf-app-semibold !tc-green-dark'
-               labelClassName='!tc-green-dark'
-               label='Order By'
-               optionsMap={options}
-               value={orderBy}
-               onChange={(e) => setOrderBy(e.target.value)} />
+            <SearchInput label='Search Room' value={searchFilter} setValue={setSearchFilter} />
+            <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
-         <div className='bg-fff br-12 fg1 my-16'>
+         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
             <TableLabels gridClassName='grid grid-cols-9 g-8 gcc pr-40'>
                <TableLabel className='col-span-3' text='Room' />
                <TableLabel text='Type' />
@@ -77,17 +61,24 @@ const RoomsTable = () => {
                <TableLabel text='Status' />
             </TableLabels>
             <div>
-               {dataToDisplayInCurrentPage.map((room, index) => (
-                  <RoomRow key={index} data={room} className='grid grid-cols-9 g-8 gcc pr-40' />
-               ))}
+               <DndWrapper
+                  key={dataToDisplayInCurrentPage}
+                  data={dataToDisplayInCurrentPage}
+                  Component={({ data }) => (
+                     <RoomRow data={data} className='grid grid-cols-9 g-8 gcc pr-40' />
+                  )}
+               />
             </div>
          </div>
-         <div className='frcb py-16'>
-            <q className='ts-14 tf-app-regular tc-text-grey-darker'>
-               {`Showing ${page * ammountPerPage} - ${(page) * ammountPerPage + dataToDisplayInCurrentPage.length} of ${dataToDisplayBySearchFilter.length} Filtered Data; out of All ${rooms.length} Data`}
-            </q>
-            <Navigation page={page} pages={pages} setPage={setPage} />
-         </div>
+         <TableFooter
+            page={page}
+            pages={pages}
+            setPage={setPage}
+            ammountPerPage={ammountPerPage}
+            currentDataLength={dataToDisplayInCurrentPage.length}
+            filteredDataLength={dataToDisplayBySearchFilter.length}
+            maxDataLength={rooms.length}
+         />
       </div >
    )
 }

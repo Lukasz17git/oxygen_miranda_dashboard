@@ -8,7 +8,7 @@ import ToggleSidebar from "./Components/ToggleSidebar"
 
 const Navbar = () => {
    return (
-      <div className="bg-fff frcc h-64 px-16 g-24 fs0">
+      <div className="bg-fff frcc h-64 px-16 g-24 fs0 dark:bg-dark-mode-black">
          <ToggleSidebar />
          <NavbarLabel />
          <div className="ml-a " />

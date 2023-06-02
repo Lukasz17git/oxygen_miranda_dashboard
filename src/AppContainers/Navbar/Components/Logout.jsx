@@ -11,8 +11,8 @@ const Logout = () => {
    }
 
    return (
-      <ActionIcon className="h:bg-app-bg-white br-8" onClick={handleLogout} >
-         <FiLogOut className="stroke-text-dark scale-110 rotate-180" />
+      <ActionIcon className="h:bg-app-bg-white dark:h:bg-dark-hover br-8" onClick={handleLogout} >
+         <FiLogOut className="stroke-text-dark dark:stroke-dark-green scale-110 rotate-180" />
       </ActionIcon>
    )
 }

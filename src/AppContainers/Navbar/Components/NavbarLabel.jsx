@@ -9,7 +9,7 @@ const NavbarLabel = () => {
    const mainPath = isNestedPath ? pathname.slice(1, firstSlash) : pathname.slice(1)
    return (
       <div className="frc g-4">
-         <h1 className="tcap tf-app-semibold ts-24">
+         <h1 className="tcap tf-app-semibold ts-24 dark:tc-dark-green">
             {mainPath || 'Dashboard'}
          </h1>
          {isNestedPath && (

@@ -9,9 +9,9 @@ const AmenityIcon = ({ amenity }) => {
 }
 
 const CellAmenities = ({ amenities }) => {
-   const validAmenities = Object.keys(amenities).filter(v => Math.random() >= 0.5)
+   const validAmenities = Object.keys(amenities).filter(v => amenities[v])
    return (
-      <div className="w-100% h-100% fw px-16 g-4 py-4">
+      <div className="w-100% fw px-16 g-4 py-4 col-span-2">
          {validAmenities.map(amenity => (
             <AmenityIcon key={amenity} amenity={amenity} />
          ))}

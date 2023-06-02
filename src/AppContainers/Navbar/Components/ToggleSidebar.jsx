@@ -9,9 +9,9 @@ const ToggleSidebar = () => {
    const toggleSidebar = () => dispatch(toggleSidebarAction())
    return (
       <ActionIcon
-         className='h:bg-app-bg-white br-8'
+         className='h:bg-app-bg-white br-8 dark:h:bg-dark-hover'
          onClick={toggleSidebar}>
-         <SvgToggleSidebar className={`scale-y-130 -translate-x-1 fs0 stroke-text-dark ${isSidebar ? '-scale-x-120' : 'scale-x-120'}`} />
+         <SvgToggleSidebar className={`scale-y-130 -translate-x-1 fs0 stroke-text-dark dark:stroke-dark-green ${isSidebar ? '-scale-x-120' : 'scale-x-120'}`} />
       </ActionIcon>
    )
 }

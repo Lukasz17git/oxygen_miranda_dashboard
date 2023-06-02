@@ -13,17 +13,17 @@ const Profile = () => {
    const openSettings = () => navigate('/settings')
 
    return (
-      <div className="pos-r p-24 s-profile br-16 max-w-240 fccc g-8 pt-64 mt-64">
+      <div className="pos-r p-24 s-profile br-16 max-w-240 fccc g-8 pt-64 mt-64 dark:bg-text-black">
          <Image
             src="/CriticalImages/profile.svg"
             className="pos-a br-16 max-w-100 max-h-100 t-0 -translate-y-50%" />
-         <strong className='tc-text-dark tf-app-semibold'>{fullname}</strong>
-         <p className='ts-12 tc-text-silver'>{email}</p>
+         <strong className='tc-text-dark tf-app-semibold dark:tc-dark-white'>{fullname}</strong>
+         <p className='ts-12 tc-text-silver dark:tc-text-grey'>{email}</p>
          <Button
             role='navigation'
             onClick={openSettings}
             text='Settings'
-            className='h:bg-green-dark h:tc-green-pastel'
+            className='h:bg-green-dark h:tc-green-pastel dark:bg-green-dark dark:tc-app-bg-white'
          />
       </div>
    )

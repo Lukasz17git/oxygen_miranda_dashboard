@@ -1,9 +1,7 @@
 import { useState } from "react"
-import ActionIcon from "../../AppComponents/ActionIcon"
 import Comment from "./Components/Comment"
 import comments from "../../JsonData/comments"
 import { useKeenSlider } from "keen-slider/react"
-import { BsFillArrowRightSquareFill } from 'react-icons/bs'
 import CommentModal from "../../AppModals/CommentModal"
 import LeftButton from "./Components/LeftButton"
 import RightButton from "./Components/RightButton"
@@ -37,10 +35,10 @@ const CommentsSimplified = () => {
    const [commentModalIndex, setCommentModalIndex] = useState(null)
 
    return (
-      <div className="pos-r p-16">
+      <div className="pos-r p-16 h-fit">
          <div ref={sliderRef} className="keen-slider py-8 frc oh mx-4 cursor-grab">
             {arrayHolder.map((_, index) => (
-               <Comment className='bg-fff' key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
+               <Comment className='bg-fff dark:bg-dark-mode-black' key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
             ))}
          </div>
          <LeftButton hidePrev={hidePrev} prevSlide={prevSlide} />

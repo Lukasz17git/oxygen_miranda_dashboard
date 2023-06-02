@@ -8,12 +8,13 @@
 
 .base-input-wrapper {
    position: relative;
+   display: block;
    height: 2.5rem;
    --input-color-text: var(--text-dark);
-   --input-color-border: var(--green-dark);
-   --input-color-border-focus: var(--green-dark);
+   --input-color-border: var(--color-separator-grey);
+   --input-color-border-focus: var(--color-separator-grey);
    --input-color-background: var(--fff);
-   --input-color-placeholder: var(--green-dark);
+   --input-color-placeholder: var(--text-dark);
 
    --input-color-invalid: var(--red-main);
 
@@ -24,7 +25,7 @@
       font-family: inherit;
       padding: 0.25rem 0.75rem;
       border-radius: 0.5rem;
-      border: 2px solid var(--input-color-border);
+      border: 1px solid var(--input-color-border);
       color: var(--input-color-text);
       background-color: var(--input-color-background);
 

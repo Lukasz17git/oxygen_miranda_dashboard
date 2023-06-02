@@ -5,7 +5,7 @@ import Img from "../AppComponents/Img"
 
 const NoteModal = ({ data, closeModal }) => {
 
-   const { customer, orderDate, inDate, outDate, request, roomType, status } = data
+   const { customer, request } = data
    const { name, imageUrl, id } = customer
    return (
       <div className="pos-f z-1 transform-to-center bg-fff s-profile p-24 pb-28 bc-color-separator bw-1 fc g-16 w-400 br-12">

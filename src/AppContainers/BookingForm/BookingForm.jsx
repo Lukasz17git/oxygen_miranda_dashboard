@@ -17,7 +17,7 @@ const BookingForm = () => {
       <div className="oh br-16 grid grid-cols-2 bg-fff">
          <div className="p-24">
             <div className="fr g-16">
-               <Img src="/public/Images/profile.jpg" className="h-120 max-w-200 br-8" />
+               <Img src="/Images/profile.jpg" className="h-120 max-w-200 br-8" />
                <div className="pos-r ">
                   <h2 className="tf-app-semibold ts-30">{name}</h2>
                   <q className="ts-14 tc-green-text">ID 123123132</q>

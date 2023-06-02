@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import Navigation from '../../AppComponentsShared/Navigation'
-import Select from '../../AppComponents/Select'
-import { BsSearch } from 'react-icons/bs'
-import Input from '../../AppComponents/Input'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
-import rooms from '../../JsonData/rooms'
+import users from '../../JsonData/users'
+import TableFooter from './Components/TableFooter'
+import OrderBySelect from './Components/OrderBySelect'
+import DndWrapper from '../../AppComponentsShared/DndWrapper'
+import SearchInput from './Components/SearchInput'
+import UserRow from './Components/UserRow'
 
 
 const UsersTable = () => {
@@ -16,14 +17,14 @@ const UsersTable = () => {
 
    const [labelFilter, setLabelFilter] = useState('')
    const [searchFilter, setSearchFilter] = useState('')
-   const [orderBy, setOrderBy] = useState('available')
+   const [orderBy, setOrderBy] = useState('lowestDischargeDate')
 
-   const dataToDisplayByLabelFilter = labelFilter ? rooms.filter(room => room.type === labelFilter) : rooms
-   const dataToDisplayBySearchFilter = searchFilter ? dataToDisplayByLabelFilter.filter(room => room.number.toLowerCase().includes(searchFilter)) : dataToDisplayByLabelFilter
+   const dataToDisplayByLabelFilter = labelFilter ? users.filter(user => user.status === labelFilter) : users
+   const dataToDisplayBySearchFilter = searchFilter ? dataToDisplayByLabelFilter.filter(user => `${user.name} ${user.lastname}`.toLowerCase().includes(searchFilter)) : dataToDisplayByLabelFilter
    const dataToDisplayInCurrentPage = dataToDisplayBySearchFilter.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
 
    //Pagination
-   const pages = Math.ceil(dataToDisplayBySearchFilter.length / ammountPerPage)
+   const pages = Math.ceil(dataToDisplayByLabelFilter.length / ammountPerPage)
 
    const isActive = (statusId) => statusId === labelFilter
    const handleLabelButton = (statusId) => {
@@ -33,63 +34,52 @@ const UsersTable = () => {
 
    //Select Options
    const options = {
-      lowestPrice: 'Price -',
-      highestPrice: 'Price +',
-      availability: 'Availability',
-      occupied: 'Occupied'
+      lowestDischargeDate: 'Discharge Date -',
+      highestDischargeDate: 'Discharge Date +',
+      alphabeticallyDescending: 'A to Z',
+      alphabeticallyAscending: 'Z to A',
    }
 
    return (
       <div className='h-100% fc'>
          <div className='frc'>
-            <TableButton text='All Rooms' onClick={() => handleLabelButton('')} isActive={isActive('')} />
-            <TableButton text='Single' onClick={() => handleLabelButton('single')} isActive={isActive('single')} />
-            <TableButton text='Double' onClick={() => handleLabelButton('double')} isActive={isActive('double')} />
-            <TableButton text='Superior' onClick={() => handleLabelButton('superior')} isActive={isActive('superior')} />
-            <TableButton text='Suite' onClick={() => handleLabelButton('suite')} isActive={isActive('suite')} />
-            <Input
-               value={searchFilter}
-               onChange={(e) => setSearchFilter(e.target.value)}
-               label='Search Room'
-               className='!bw-0 !pr-40 !bg-fff/70'
-               wrapperClassName='ml-16'
-            >
-               <BsSearch className='pos-a r-8 t-50% -translate-y-50% fill-text-silver scale-80' />
-            </Input>
-            <Select
-               disableLabelAsOption={true}
-               wrapperClassName='h-40 ml-a'
-               className='tf-app-semibold !tc-green-dark'
-               labelClassName='!tc-green-dark'
-               label='Order By'
-               optionsMap={options}
-               value={orderBy}
-               onChange={(e) => setOrderBy(e.target.value)} />
+            <TableButton text='All Employees' onClick={() => handleLabelButton('')} isActive={isActive('')} />
+            <TableButton text='Active' onClick={() => handleLabelButton('active')} isActive={isActive('active')} />
+            <TableButton text='Inactive' onClick={() => handleLabelButton('inactive')} isActive={isActive('inactive')} />
+            <SearchInput label='Search Employee' value={searchFilter} setValue={setSearchFilter} />
+            <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
-         <div className='bg-fff br-12 fg1 my-16'>
-            <TableLabels gridClassName='grid grid-cols-8 g-8 gcc pr-40'>
-               <TableLabel className='col-span-2' text='Guest' />
-               <TableLabel text='Order Date' />
-               <TableLabel text='Check In' />
-               <TableLabel text='Check Out' />
-               <TableLabel text='Request' />
-               <TableLabel text='Room Type' />
+         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
+            <TableLabels gridClassName='grid grid-cols-10 g-8 gcc pr-40'>
+               <TableLabel className='col-span-2' text='Employee' />
+               <TableLabel text='Discharge date' />
+               <TableLabel className='col-span-2' text='Email' />
+               <TableLabel className='col-span-2' text='Phone' />
+               <TableLabel className='col-span-2' text='Description' />
                <TableLabel text='Status' />
             </TableLabels>
             <div>
-               {dataToDisplayInCurrentPage.map((room, index) => (
-                  // <BookingRow key={index} className='grid grid-cols-8 g-8 gcc pr-40' data={room} />
-                  <div key={index} />
-               ))}
+               <DndWrapper
+                  data={dataToDisplayInCurrentPage}
+                  key={Date.now()}
+                  // key={dataToDisplayInCurrentPage}
+                  Component={({ data }) => (
+                     <UserRow className='grid grid-cols-10 g-8 gcc pr-40' data={data} />
+                  )}
+               />
             </div>
          </div>
-         <div className='frcb py-16'>
-            <q className='ts-14 tf-app-regular tc-text-grey-darker'>
-               {`Showing ${page * ammountPerPage} - ${(page) * ammountPerPage + dataToDisplayInCurrentPage.length} of ${dataToDisplayBySearchFilter.length} Filtered Data; out of All ${rooms.length} Data`}
-            </q>
-            <Navigation page={page} pages={pages} setPage={setPage} />
-         </div>
+         <TableFooter
+            page={page}
+            pages={pages}
+            setPage={setPage}
+            ammountPerPage={ammountPerPage}
+            currentDataLength={dataToDisplayInCurrentPage.length}
+            filteredDataLength={dataToDisplayByLabelFilter.length}
+            maxDataLength={users.length}
+         />
       </div >
    )
 }
+
 export default UsersTable

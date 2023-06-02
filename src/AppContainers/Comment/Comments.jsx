@@ -35,8 +35,8 @@ const Comments = () => {
    const [commentModalIndex, setCommentModalIndex] = useState(null)
 
    return (
-      <div className="pos-r bg-fff br-16 s-card p-16 col-span-4">
-         <h3 className="ts-19 tf-app-semibold tc-text-dark p-8">Latest Reviews by Customers</h3>
+      <div className="pos-r bg-fff br-16 s-card p-16 col-span-4 dark:bg-dark-mode-black">
+         <h3 className="ts-19 tf-app-semibold tc-text-dark p-8 dark:tc-dark-white">Latest Reviews by Customers</h3>
          <div className="pos-r">
             <div ref={sliderRef} className="keen-slider py-8 frc oh mx-4 cursor-grab">
                {arrayHolder.map((_, index) => (

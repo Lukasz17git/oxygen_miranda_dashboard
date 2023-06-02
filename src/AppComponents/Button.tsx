@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, ButtonHTMLAttributes } from "react"
 
-const Button = ({ text, children, ...props }: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & { text?: string }) => {
+const Button = ({ text, children, ...props }: { text?: string } & DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
    return (
       <button
          {...props}

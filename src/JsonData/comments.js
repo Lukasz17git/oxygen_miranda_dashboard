@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 
 
 const comments = [
@@ -112,5 +113,11 @@ const comments = [
       phone: '123123123',
    },
 ]
+
+comments.forEach(comment => {
+   comment.id = nanoid()
+   comment.archived = Math.random() >= 0.5
+   comment.subject = Math.random() >= 2 / 3 ? 'Subject A' : Math.random() >= 1 / 3 ? 'Subject B' : 'Subject C'
+})
 
 export default comments
