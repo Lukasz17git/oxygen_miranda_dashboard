@@ -1,8 +1,12 @@
+import { tw } from "tailwind-multi-class"
 
 
 const CellPrice = ({ price }) => {
    return (
-      <b className="ts-20 tf-app-semibold tc-text-dark after:content-['/night'] after:tf-app-light after:ts-14 after:tc-text-silver after:pl-2">
+      <b className={tw(
+         "ts-20px tf-app-semibold tc-text-dark",
+         { after: "content-['/night'] tf-app-light ts-14px tc-text-silver-B2B2B2 pl-2px" },
+      )}>
          {'$' + price / 100}
       </b>
    )

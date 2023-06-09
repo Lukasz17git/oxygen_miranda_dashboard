@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { calendarData } from "../../JsonData/calendarData"
 import ReservationResumee from "./Components/ReservationResumee"
+import { tw } from "tailwind-multi-class"
 
 
 const ReservationsResumee = () => {
@@ -12,12 +13,14 @@ const ReservationsResumee = () => {
    const seeMore = () => setMax(c => !c)
 
    return (
-      <div className="col-span-4 bg-fff br-16 p-16 s-card g-16 fc dark:bg-dark-mode-black">
+      <div className="col-span-4 bg-fff br-16px p-16px s-card g-16px fc">
          {arrayHolder.map((_, index) => (
             <ReservationResumee key={index} index={index} />
          ))}
          <div className="frcc">
-            <button onClick={seeMore} className="min-w-120 h-40 br-8 frcc px-16 tc-green-dark tf-app-semibold h:bg-app-bg-white dark:bg-green-dark/10 h:dark:bg-green-dark/20 dark:tc-dark-green ">
+            <button onClick={seeMore} className={tw(
+               "min-w-120px h-40px br-8px frcc px-16px tc-green-dark tf-app-semibold h:bg-app-bg-white"
+            )}>
                {max ? 'View Less' : 'View More'}
             </button>
          </div>

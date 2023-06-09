@@ -8,12 +8,12 @@ const NavbarLabel = () => {
    const isNestedPath = firstSlash !== -1
    const mainPath = isNestedPath ? pathname.slice(1, firstSlash) : pathname.slice(1)
    return (
-      <div className="frc g-4">
-         <h1 className="tcap tf-app-semibold ts-24 dark:tc-dark-green">
+      <div className="frc g-4px">
+         <h1 className="tcap tf-app-semibold ts-24px">
             {mainPath || 'Dashboard'}
          </h1>
          {isNestedPath && (
-            <Link to={`/${mainPath}`} className="tw-base-action-icon h-32 w-32 mt-3 h:bg-input-bg-white br-6" >
+            <Link to={`/${mainPath}`} className="tw-base-action-icon h-32px w-32px mt-3px h:bg-input-bg-white br-6px" >
                <MdSubdirectoryArrowRight className="rotate-180 -translate-x-2 translate-y-1" />
             </Link>
          )}

@@ -63,7 +63,7 @@ export default createImmutableUpdate
 
 
 
-export const createSelectorFromStringPath = <T extends object>(path: Flatten<T>) => (state: T) => {
+export const createSelectorFromStringPath = <T extends object>(path: Flatten<T>) => (state: unknown) => {
    if (typeof path !== 'string') throw new Error('Path should be string')
    if (!path) return state
    return path.split(".").reduce((current, key) => {

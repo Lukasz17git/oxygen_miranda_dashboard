@@ -3,21 +3,138 @@
 import plugin from 'tailwindcss/plugin'
 import { addExtensions } from './extensionsPlugin'
 import { microTailwind, microTailwindExperimental } from './microTailwindPlugin'
-import { pixelSpacing } from './pixelSizesPlugin'
 import colors from 'tailwindcss/colors'
+import { tw, twTransform } from 'tailwind-multi-class'
+// import twTransform from './twTransform'
 
+
+const palette = {
+   //white-black
+   white: '#FFFFFF',
+   white_darker: '',
+   white_contrast: '',
+   silver: '',
+
+   // green
+   'green-pastel': '#EEF9F2',
+
+   // red
+   'red-pastel': '#FFEDEC',
+
+   // orange
+
+   // yellow
+   'yellow-pastel': 'rgb(253, 253, 224)',
+
+   'text-black': '#262626',
+   'text-dark': '#393939',
+   'text-grey-darker': '#787878',
+   'text-grey': '#6E6E6E',
+   'text-silver': '#B2B2B2',
+   'text-white': '#D4D4D4',
+   'color-separator': '#EBEBEB',
+   'color-separator-grey': '#DCDCDC',
+   'color-separator-dark': '#A1A1A1',
+   'green-light': '#5AD07A',
+   'green-dark': '#135846',
+   'green-text': '#799283',
+   'green-pastel-darker': '#E8F2EF',
+   'red-main': '#E23428',
+   'orange-main': '#FF9C3A',
+   'yellow-main': 'var(--yellow-main)',
+}
 
 export default {
-   content: [
-      "./index.html",
-      "./src/**/*.{js,ts,jsx,tsx}",
-   ],
+   content: {
+      files: [
+         "./index.html",
+         "./src/**/*.{js,ts,jsx,tsx}",
+      ],
+      transform: {
+         DEFAULT: twTransform(tw)
+      }
+   },
    darkMode: 'class',
    theme: {
       colors: {
+         // backgrounds
+         'bg-white-fff': 'rgba(var(--bg-white-fff))',
+         'bg-white-contrast-f8f8f8': 'rgba(var(--bg-white-contrast-f8f8f8))',
+         'bg-red-E23428': 'rgba(var(--bg-red-E23428))',
+
+         // text color
+         'text-white-fff': 'rgba(var(--text-white-fff))',
+         'text-black-262626': 'rgba(var(--text-black-262626))',
+         'text-dark-393939': 'rgba(var(--text-dark-393939))',
+         'text-grey-6E6E6E': 'rgba(var(--text-grey-6E6E6E))',
+         'text-grey-dark-787878': 'rgba(var(--text-grey-dark-787878))',
+         'text-silver-B2B2B2': 'rgba(var(--text-silver-B2B2B2))',
+         'text-red-E23428': 'rgba(var(--text-red-E23428))',
+         'text-green-light-5AD07A': 'rgba(var(--text-green-light-5AD07A))',
+         'text-green-dark-135846': 'rgba(var(--text-green-dark-135846))',
+         'text-green-799283': 'rgba(var(--text-green-799283))',
+         'text-green-pastel-EEF9F2': 'rgba(var(--text-green-pastel-EEF9F2))',
+
+         // borders
+         'border-silver-EBEBEB': 'rgba(var(--border-silver-EBEBEB))',
+         'border-red-E23428': 'rgba(var(--border-red-E23428))', // opacities: 70
+         'border-green-dark-135846': 'rgba(var(--border-green-dark-135846))', // opacities: 40
+         'border-green-pastel-EEF9F2': 'rgba(var(--border-green-pastel-EEF9F2))',
+
+         // button
+         'button-white-contrast-fcfcfc': 'rgba(var(--button-white-contrast-fcfcfc))',
+         'button-red-pastel-FFEDEC': 'rgba(var(--button-red-pastel-FFEDEC))',
+         'button-green-dark-135846': 'rgba(var(--button-green-dark-135846))',
+         'button-green-pastel-EEF9F2': 'rgba(var(--button-green-pastel-EEF9F2))',
+
+         // icon
+         'icon-white-F8F8F8': 'rgba(var(--icon-white-F8F8F8))',
+         'icon-green-pastel-EEF9F2': 'rgba(var(--icon-green-pastel-EEF9F2))',
+
+         // svgs
+         'svg-white-FFFFFF': 'rgba(var(--svg-white-FFFFFF))',
+         'svg-silver-B2B2B2': 'rgba(var(--svg-silver-B2B2B2))',
+         'svg-grey-6E6E6E': 'rgba(var(--svg-grey-6E6E6E))',
+         'svg-dark-393939': 'rgba(var(--svg-dark-393939))',
+         'svg-red-E23428': 'rgba(var(--svg-red-E23428))',
+         'svg-green-799283': 'rgba(var(--svg-green-799283))',
+
+         // styles
+         'black': '#212121',
+         'white': '#FFFFFF',
+
+         // BEST APROACH => HAVE TO REFACTOR ALL AGAIN XDDDDDDDDD
+
+         // badge
+         'badge-bg': 'rgba(var(--badge-bg))',
+         'badge-tc': 'rgba(var(--badge-tc))',
+
+         // input
+         'input-main-bc': 'rgba(var(--input-main-bc))',
+
+         // box
+         'card-bg': '#FFFFFF',
+         'card-gradient': '#EEF9F2',
+         'card-bc--d': '#6E6E6E',
+
+         // buttons
+         'btn-main-bg': '#EEF9F2',
+         'btn-main-bg--h': '',
+         'btn-main-tc': '',
+         'btn-main-tc--h': '',
+
+
+
+
+
+
+         // END
+
+         'green-pastel': '#EEF9F2',
+         'red-pastel': '#FFEDEC',
+         'yellow-pastel': 'rgb(253, 253, 224)',
          'app-bg-white': '#f8f8f8',
          'input-bg-white': '#fcfcfc',
-         'black': '#212121',
          'text-black': '#262626',
          'text-dark': '#393939',
          'text-grey-darker': '#787878',
@@ -31,12 +148,9 @@ export default {
          'green-dark': '#135846',
          'green-text': '#799283',
          'green-pastel-darker': '#E8F2EF',
-         'green-pastel': '#EEF9F2',
          'red-main': '#E23428',
-         'red-pastel': '#FFEDEC',
          'orange-main': '#FF9C3A',
          'yellow-main': 'var(--yellow-main)',
-         'yellow-pastel': 'rgb(253, 253, 224)',
          'fff': '#FFFFFF',
          '000': '#000',
          //darkmode
@@ -70,7 +184,6 @@ export default {
          },
          ...addExtensions,
       },
-      spacing: pixelSpacing,
    },
    plugins: [
       plugin(microTailwind),
@@ -78,7 +191,7 @@ export default {
       plugin(({ addComponents, addBase }) => {
          addBase({
             svg: {
-               '@apply h-24 w-24': {}
+               '@apply h-24px w-24px': {}
             }
          });
          // fonts
@@ -99,13 +212,13 @@ export default {
          // base components
          addComponents({
             '.tw-base-icon': {
-               '@apply h-24 w-24': {}
+               '@apply h-24px w-24px': {}
             },
             '.tw-base-action-icon': {
-               '@apply pos-r frcc h-40 w-40 br-6': {}
+               '@apply pos-r frcc h-40px w-40px br-6px': {}
             },
             '.tw-base-button': {
-               '@apply h-40 frcc br-8 py-8 px-20 tf-app-semibold ts-14 min-w-120 max-w-100% bg-green-pastel tc-green-dark': {}
+               '@apply h-40px frcc br-8px py-8px px-20px tf-app-semibold ts-14px min-w-120px max-w-100% bg-green-pastel tc-green-dark': {}
             },
          });
          // custom components

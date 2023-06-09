@@ -467,7 +467,7 @@ export function microTailwind({ addVariant, addUtilities, matchUtilities, theme 
    })
    // VISIBILITY
    addUtilities({
-      ".hidden": { visibility: "hidden" },
+      ".hide": { visibility: "hidden" },
    })
    // CURSOR
    addUtilities({

@@ -16,11 +16,11 @@ const ContactRow = ({ data, className }) => {
    const [showNoteModal, setShowNoteModal] = useState(false)
 
    return (
-      <div className={`${className} min-h-72 h:s-table-row pos-r h:bg-fff dark:h:bg-text-black`}>
-         <div className="frc g-16 col-span-2 mr-a ml-24">
-            <Img src={photo || '/CriticalIcons/person.svg'} className="h-32 w-32 fs0" />
-            <div className="fcnb h-100% py-8">
-               <b className="tf-app-semibold tc-text-black">{name}</b>
+      <div className={`${className} min-h-72px h:s-table-row pos-r h:bg-bg-white-fff`}>
+         <div className="frc g-16px col-span-2 mr-a ml-24px">
+            <Img src={photo || '/CriticalIcons/person.svg'} className="h-32px w-32px fs0" />
+            <div className="fcnb h-100% py-8px">
+               <b className="tf-app-semibold tc-text-black-262626">{name}</b>
                {/* <SmallText text={'#' + id.slice(0, 8)} /> */}
                <SmallText text={email} />
                <SmallText text={'+' + phone} />
@@ -29,7 +29,7 @@ const ContactRow = ({ data, className }) => {
          <CellBigDate date={date} />
          <CellBold text={subject} />
          <div className="col-span-3">
-            <p className="i">{comment.length > 100 ? comment.slice(0, 97) + '...' : comment}</p>
+            <p className="inline">{comment.length > 100 ? comment.slice(0, 97) + '...' : comment}</p>
             <ActionIcon className="iblock h-100%" onClick={() => setShowNoteModal(true)}>
                <span>↗</span>
             </ActionIcon>

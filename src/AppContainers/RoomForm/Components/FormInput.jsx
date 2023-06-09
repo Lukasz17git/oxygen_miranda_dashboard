@@ -5,8 +5,8 @@ const FormInput = ({ ...props }) => {
    return (
       <Input
          {...props}
-         className="!bw-1 !bc-color-separator-grey"
-         labelClassName="!tc-text-dark"
+         className="!bw-1px !bc-border-silver-EBEBEB"
+         labelClassName="!tc-text-dark-393939"
       />
    )
 }

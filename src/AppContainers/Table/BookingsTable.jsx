@@ -8,6 +8,7 @@ import TableFooter from './Components/TableFooter'
 import SearchInput from './Components/SearchInput'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
+import TableContentLayout from './Components/TableContentLayout'
 
 const BookingsTable = () => {
 
@@ -50,8 +51,8 @@ const BookingsTable = () => {
             <SearchInput label='Search Customer' value={requestFilter} setValue={setRequestFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
-         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
-            <TableLabels gridClassName='grid grid-cols-8 g-8 gcc pr-40'>
+         <TableContentLayout>
+            <TableLabels gridClassName='grid grid-cols-8 g-8px gcc pr-40px'>
                <TableLabel className='col-span-2' text='Guest' />
                <TableLabel text='Order Date' />
                <TableLabel text='Check In' />
@@ -62,14 +63,14 @@ const BookingsTable = () => {
             </TableLabels>
             <div>
                <DndWrapper
-                  key={bookingsToDisplayInCurrentPage}
+                  key={Date.now()}
                   data={bookingsToDisplayInCurrentPage}
                   Component={({ data }) => (
-                     <BookingRow className='grid grid-cols-8 g-8 gcc pr-40' data={data} />
+                     <BookingRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
                   )}
                />
             </div>
-         </div>
+         </TableContentLayout>
          <TableFooter
             page={page}
             pages={pages}

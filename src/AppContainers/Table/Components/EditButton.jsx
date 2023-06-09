@@ -7,10 +7,10 @@ const EditButton = ({ id }) => {
    const navigate = useNavigate()
    return (
       <ActionIcon
-         className="pos-a r-8 h:bg-app-bg-white h-32 w-32 br-8 dark:h:bg-text-dark"
+         className="pos-a r-8px h:bg-bg-white-contrast-f8f8f8 h-32px w-32px br-8px"
          onClick={() => navigate(id)}
       >
-         <HiDotsVertical className="scale-80 fill-text-grey" />
+         <HiDotsVertical className="scale-80 fill-svg-grey-6E6E6E" />
       </ActionIcon>
    )
 }

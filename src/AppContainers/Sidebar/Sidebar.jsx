@@ -11,9 +11,9 @@ import { BsCalendarCheck } from 'react-icons/bs'
 const Sidebar = () => {
    const isSidebar = useTypedSelector(state => state.layout.sidebar)
    return (
-      <div className={`py-16 fcc g-32 duration-[400ms] oh ${isSidebar ? 'max-w-300 fs0' : 'max-w-0 hidden'}`}>
+      <div className={`py-16px fcc g-32px duration-[400ms] oh ${isSidebar ? 'max-w-300px fs0' : 'max-w-0 hide'}`}>
          <Logo />
-         <ul className="fc g-16 w-300">
+         <ul className="fc g-16px w-300px">
             <SidebarLink href="" text='Dashboard' Icon={HiViewGrid} />
             <SidebarLink href="bookings" text='Bookings' Icon={BsCalendarCheck} iconClassName='scale-90' />
             <SidebarLink href='rooms' text='Rooms' Icon={MdOutlineBedroomParent} iconClassName='scale-110' />
@@ -21,11 +21,11 @@ const Sidebar = () => {
             <SidebarLink href='users' text='Users' Icon={FaUsers} />
          </ul>
          <Profile />
-         <div className="w-240">
-            <strong className="block tf-app-semibold dark:tc-dark-white">Travi Hotel Admin Dashboard</strong>
-            <span className="block w-max tf-app-light tc-green-text ts-14">© 2020 All Rights Reserved</span>
+         <div className="w-240px">
+            <strong className="block tf-app-semibold">Travi Hotel Admin Dashboard</strong>
+            <span className="block w-max tf-app-light tc-text-green-799283 ts-14px">© 2020 All Rights Reserved</span>
          </div>
-         <span className="w-240 tc-green-text tf-app-light ts-14">Made with ♥ by Lukasz</span>
+         <span className="w-240px tc-text-green-799283 tf-app-light ts-14px">Made with ♥ by Lukasz</span>
       </div>
    )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from "react-router-dom"
-import Router from './Router'
+import createRouter from './Router'
 import { Provider } from 'react-redux'
 import "./Styles/Input.css"
 import "./Styles/Select.css"
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
    <React.StrictMode>
       <Provider store={store}>
          <DndProvider backend={HTML5Backend}>
-            <RouterProvider router={Router} />
+            <RouterProvider router={createRouter(store)} />
          </DndProvider>
       </Provider>
    </React.StrictMode>,

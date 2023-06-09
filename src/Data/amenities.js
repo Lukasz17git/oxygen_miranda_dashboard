@@ -13,6 +13,7 @@ import StrongLocker from '../Svgs/Amenities/StrongLocker'
 import Towels from '../Svgs/Amenities/Towels'
 import Wifi from '../Svgs/Amenities/Wifi'
 
+
 export const amenities = {
    airConditioner: false,
    wifi: false,
@@ -32,7 +33,6 @@ export const amenities = {
 
 export const amenitiesList = Object.keys(amenities)
 
-
 export const amenitiesIcons = {
    airConditioner: AirConditioner,
    wifi: Wifi,
@@ -50,7 +50,8 @@ export const amenitiesIcons = {
    expertTeam: ExpertTeam
 }
 
-const amenitiesText = {
+
+export const amenitiesText = {
    airConditioner: 'Air Conditioner',
    wifi: 'High speed WiFi',
    breakfast: 'Breakfast',
@@ -66,16 +67,3 @@ const amenitiesText = {
    smartSecurity: 'Smart Security',
    expertTeam: 'Expert Team'
 }
-
-
-const Amenity = ({ amenity }) => {
-   const Icon = amenitiesIcons[amenity]
-   return (
-      <div className="frcc g-8 br-12 py-12 px-16 bg-green-pastel tc-green-dark">
-         {Icon && <Icon className={`fill-green-dark`} />}
-         <span className='ts-14 tf-app-semibold'>{amenitiesText[amenity]}</span>
-      </div>
-   )
-}
-
-export default Amenity

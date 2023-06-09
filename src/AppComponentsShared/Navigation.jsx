@@ -1,3 +1,4 @@
+import { tw } from "tailwind-multi-class"
 import ActionIcon from "../AppComponents/ActionIcon"
 import Button from "../AppComponents/Button"
 
@@ -20,36 +21,48 @@ const Navigation = ({ page, pages, setPage }) => {
 
    const paginationArray = Array(paginationLength).fill(startPageIndex)
 
-   const disabledButtonClass = 'bg-transparent bc-green-dark/30 tc-green-dark/50'
-   const enabledButtonClass = `bg-input-bg-white bc-green-dark dark:bc-green-light/20 dark:bg-dark-green dark:tc-app-bg-white`
-
-   const paginationOnClass = `bg-green-dark tc-white h:bg-green-dark dark:bg-dark-green dark:h:bg-dark-green dark:tc-app-bg-white dark:bc-green-light/20`
-   const pagnationOffClass = `h:bc-green-dark h:bg-input-bg-white dark:tc-dark-white dark:h:bg-dark-green/10 dark:h:bc-dark-green/90`
-
+   // TODO Me quede aqui
+   const isCurrentPage = (pageIndex, index) => pageIndex + index === page
    return (
-      <div className='frcc g-8'>
-         <Button
-            disabled={isPrevDisabled}
-            text='Prev'
-            onClick={prevPage}
-            className={`min-w-80 ${isPrevDisabled ? disabledButtonClass : enabledButtonClass}`}
-         />
+      <div className='frcc g-8px'>
+         <NavigationSideButton text='Prev' onClick={prevPage} disabled={isPrevDisabled} />
          {paginationArray.map((pageIndex, index) => (
             <ActionIcon
                key={index}
-               className={`br-8 ${pageIndex + index === page ? paginationOnClass : pagnationOffClass}`}
                onClick={() => setPage(pageIndex + index)}
+               className={tw(
+                  'br-8px',
+                  isCurrentPage(pageIndex, index) ? 'bg-green-dark tc-text-white-fff' : 'h:bc-green-dark h:bg-input-bg-white',
+                  {
+                     dark: isCurrentPage(pageIndex, index)
+                        ? 'tc-text-white-fff bg-dark-green h:bg-dark-green bc-green-light/20'
+                        : 'tc-dark-white h:bg-dark-green/10 h:bc-dark-green/90'
+                  }
+               )}
             >
                {pageIndex + index + 1}
             </ActionIcon>
-         ))}
-         <Button
-            disabled={isNextDisabled}
-            text='Next'
-            onClick={nextPage}
-            className={`min-w-80 ${isNextDisabled ? disabledButtonClass : enabledButtonClass}`}
-         />
-      </div>
+         ))
+         }
+         <NavigationSideButton text='Next' onClick={nextPage} disabled={isNextDisabled} />
+      </div >
+   )
+}
+
+
+const NavigationSideButton = ({ text, disabled, onClick }) => {
+   return (
+      <Button
+         disabled={disabled}
+         text={text}
+         onClick={onClick}
+         className={tw(
+            'min-w-80px',
+            disabled ? 'bg-transparent bc-green-dark/30 tc-green-dark/50' : 'bc-green-dark',
+            { dark: !disabled && 'bc-green-light/20 bg-dark-green' },
+         )
+         }
+      />
    )
 }
 export default Navigation

@@ -8,6 +8,7 @@ import TableFooter from './Components/TableFooter'
 import SearchInput from './Components/SearchInput'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
+import TableContentLayout from './Components/TableContentLayout'
 
 
 const RoomsTable = () => {
@@ -51,8 +52,8 @@ const RoomsTable = () => {
             <SearchInput label='Search Room' value={searchFilter} setValue={setSearchFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
-         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
-            <TableLabels gridClassName='grid grid-cols-9 g-8 gcc pr-40'>
+         <TableContentLayout>
+            <TableLabels gridClassName='grid grid-cols-9 g-8px gcc pr-40px'>
                <TableLabel className='col-span-3' text='Room' />
                <TableLabel text='Type' />
                <TableLabel className='col-span-2' text='Amenities' />
@@ -62,14 +63,14 @@ const RoomsTable = () => {
             </TableLabels>
             <div>
                <DndWrapper
-                  key={dataToDisplayInCurrentPage}
+                  key={Date.now()}
                   data={dataToDisplayInCurrentPage}
                   Component={({ data }) => (
-                     <RoomRow data={data} className='grid grid-cols-9 g-8 gcc pr-40' />
+                     <RoomRow data={data} className='grid grid-cols-9 g-8px gcc pr-40px' />
                   )}
                />
             </div>
-         </div>
+         </TableContentLayout>
          <TableFooter
             page={page}
             pages={pages}

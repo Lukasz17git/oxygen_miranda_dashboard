@@ -15,19 +15,19 @@ const BookingRow = ({ data, className }) => {
    const { id, photos, type, number, discount, price, amenities, status } = data
 
    return (
-      <div className={`${className} min-h-100 h:s-table-row pos-r h:bg-fff dark:h:bg-text-black`}>
-         <div className="frc g-16 col-span-3 mr-a ml-16">
-            <Img src={photos[0] || `/Images/hotel-${5}.jpg`} className="h-96 w-150 br-6 cover fs0" />
-            <div className="py-8">
-               <b className="tf-app-semibold tc-text-black ts-18">{`Room ${number}`}</b>
-               <q className="tf-app-light ts-14 tc-text-grey">{'#' + id.slice(0, 8)}</q>
+      <div className={`${className} min-h-100px pos-r h:bg-bg-white-fff h:s-table-row`}>
+         <div className="frc g-16px col-span-3 mr-a ml-16px">
+            <Img src={photos[0] || `/Images/hotel-${5}.jpg`} className="h-96px w-150px br-6px cover fs0" />
+            <div className="py-8px">
+               <b className="tf-app-semibold tc-text-black-262626 ts-18px">{`Room ${number}`}</b>
+               <q className="tf-app-light ts-14px tc-text-grey-6E6E6E">{'#' + id.slice(0, 8)}</q>
             </div>
          </div>
          <CellBold text={type} />
          <CellAmenities amenities={amenities} />
          <CellPrice price={price} />
          <CellDiscount price={price} discount={discount} />
-         <div className={`tw-base-button min-w-100 w-100 br-10 tcap h-36 ${statusStyle[status]}`}>
+         <div className={`tw-base-button min-w-100px w-100px br-10px tcap h-36px ${statusStyle[status]}`}>
             {status}
          </div>
          <EditButton id={id} />

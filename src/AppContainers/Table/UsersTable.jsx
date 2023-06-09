@@ -2,12 +2,15 @@ import { useState } from 'react'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
-import users from '../../JsonData/users'
 import TableFooter from './Components/TableFooter'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
 import SearchInput from './Components/SearchInput'
 import UserRow from './Components/UserRow'
+import TableContentLayout from './Components/TableContentLayout'
+import { useTypedSelector } from '../../Store/store'
+import { shallowEqual } from 'react-redux'
+import NewFormButton from './Components/NewFormButton'
 
 
 const UsersTable = () => {
@@ -19,12 +22,34 @@ const UsersTable = () => {
    const [searchFilter, setSearchFilter] = useState('')
    const [orderBy, setOrderBy] = useState('lowestDischargeDate')
 
-   const dataToDisplayByLabelFilter = labelFilter ? users.filter(user => user.status === labelFilter) : users
-   const dataToDisplayBySearchFilter = searchFilter ? dataToDisplayByLabelFilter.filter(user => `${user.name} ${user.lastname}`.toLowerCase().includes(searchFilter)) : dataToDisplayByLabelFilter
-   const dataToDisplayInCurrentPage = dataToDisplayBySearchFilter.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   // const employeesArrayToShow = useTypedSelector(state => {
+   //    const employees = state.employees
+   //    const booleanArray = Array(employees.length).fill(true)
+   //    const byLabelFilter = labelFilter ? booleanArray.map((show, index) => show && employees[index].state === labelFilter) : booleanArray
+   //    const bySearchFilter = searchFilter ? byLabelFilter.map((show, index) => {
+   //       if (!show) return show
+   //       const { name, lastname } = employees[index]
+   //       return `${name} ${lastname}`.toLowerCase().includes(searchFilter)
+   //    }) : byLabelFilter
+   //    return bySearchFilter
+   // }, shallowEqual)
+
+   // const numberOfEmployeesToShow = employeesArrayToShow.filter(v => v).length
+
+   const numberOfEmployees = useTypedSelector(state => state.employees.list.length)
+   const employeesArrayToShow = useTypedSelector(state => {
+      const employees = state.employees.list
+      const byLabelFilter = labelFilter ? employees.filter(employee => employee.state === labelFilter) : employees
+      const bySearchFilter = searchFilter ? byLabelFilter.filter(({ name, lastname }) => `${name} ${lastname}`.toLowerCase().includes(searchFilter)) : byLabelFilter
+      return bySearchFilter
+   }, shallowEqual)
+
+   const numberOfEmployeesToShow = employeesArrayToShow.length
+
+   const dataToDisplayInCurrentPage = employeesArrayToShow.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
 
    //Pagination
-   const pages = Math.ceil(dataToDisplayByLabelFilter.length / ammountPerPage)
+   const pages = Math.ceil(numberOfEmployeesToShow / ammountPerPage)
 
    const isActive = (statusId) => statusId === labelFilter
    const handleLabelButton = (statusId) => {
@@ -48,9 +73,10 @@ const UsersTable = () => {
             <TableButton text='Inactive' onClick={() => handleLabelButton('inactive')} isActive={isActive('inactive')} />
             <SearchInput label='Search Employee' value={searchFilter} setValue={setSearchFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
+            <NewFormButton />
          </div>
-         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
-            <TableLabels gridClassName='grid grid-cols-10 g-8 gcc pr-40'>
+         <TableContentLayout>
+            <TableLabels gridClassName='grid grid-cols-10 g-8px gcc pr-40px'>
                <TableLabel className='col-span-2' text='Employee' />
                <TableLabel text='Discharge date' />
                <TableLabel className='col-span-2' text='Email' />
@@ -62,21 +88,20 @@ const UsersTable = () => {
                <DndWrapper
                   data={dataToDisplayInCurrentPage}
                   key={Date.now()}
-                  // key={dataToDisplayInCurrentPage}
                   Component={({ data }) => (
-                     <UserRow className='grid grid-cols-10 g-8 gcc pr-40' data={data} />
+                     <UserRow className='grid grid-cols-10 g-8px gcc pr-40px' data={data} />
                   )}
                />
             </div>
-         </div>
+         </TableContentLayout>
          <TableFooter
             page={page}
             pages={pages}
             setPage={setPage}
             ammountPerPage={ammountPerPage}
             currentDataLength={dataToDisplayInCurrentPage.length}
-            filteredDataLength={dataToDisplayByLabelFilter.length}
-            maxDataLength={users.length}
+            filteredDataLength={numberOfEmployeesToShow}
+            maxDataLength={numberOfEmployees}
          />
       </div >
    )

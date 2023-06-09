@@ -10,7 +10,7 @@ import OutsKpi from "../AppContainers/Kpi/OutsKpi"
 
 const Overview = () => {
    return (
-      <div className="w-100% grid grid-cols-4 g-16">
+      <div className="w-100% grid grid-cols-4 g-16px">
          <ReservationKpi />
          <OccupiedKpi />
          <InsKpi />

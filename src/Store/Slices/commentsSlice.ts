@@ -1,28 +1,19 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import wait from '../../Utils/wait.js'
+import { getDataFromLocalStore, updateDataToLocalStore } from '../../Utils/localStore'
+import { RootState } from "../store.js";
 
 type CommentType = {
-   name: string,
-   email: string,
+   id: string,
+   sentAt: number, //or better date?
+   viewed: boolean,
+   archived: boolean,
+   subject: 'Subject A' | 'Subject B' | 'Subject C',
    comment: string,
-   date: Date
-}
-
-const initialState: {
-   comments: CommentType[]
-} = {
-   comments: []
-}
-
-const adminSlice = createSlice({
-   name: 'comments',
-   initialState,
-   reducers: {
-      addCommentAction(state, action: PayloadAction<CommentType>) {
-         state.comments.push(action.payload)
-      },
+   person: {
+      name: string,
+      lastname: string,
+      email: string,
+      phone: string
    }
-})
-
-
-export const { addCommentAction } = adminSlice.actions
-export default adminSlice.reducer
+}

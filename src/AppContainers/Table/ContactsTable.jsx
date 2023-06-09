@@ -2,12 +2,13 @@ import { useState } from 'react'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
-import comments from '../../JsonData/comments'
 import TableFooter from './Components/TableFooter'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
 import ContactRow from './Components/ContactRow'
+import TableContentLayout from './Components/TableContentLayout'
 
+import comments from '../../JsonData/comments'
 
 const ContactsTable = () => {
 
@@ -34,17 +35,29 @@ const ContactsTable = () => {
       newest: 'Newest',
       oldest: 'Oldest',
    }
-   console.log('rendered c table')
 
    return (
       <div className='h-100% fc'>
          <div className='frc'>
-            <TableButton text='New Reviews' onClick={() => handleLabelButton('')} isActive={isActive('')} />
-            <TableButton text='Archived Reviews' onClick={() => handleLabelButton('archived')} isActive={isActive('archived')} />
-            <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
+            <TableButton
+               text='New Reviews'
+               onClick={() => handleLabelButton('')}
+               isActive={'' === labelFilter}
+            />
+            <TableButton
+               text='Archived Reviews'
+               onClick={() => handleLabelButton('archived')}
+               isActive={'archived' === labelFilter}
+            />
+            <OrderBySelect
+               label='Order By'
+               options={options}
+               value={orderBy}
+               setValue={setOrderBy}
+            />
          </div>
-         <div className='bg-fff br-12 fg1 my-16 dark:bg-dark-mode-black oh'>
-            <TableLabels gridClassName='grid grid-cols-8 g-8 gcc pr-40'>
+         <TableContentLayout>
+            <TableLabels gridClassName='grid grid-cols-8 g-8px gcc pr-40px'>
                <TableLabel className='col-span-2' text='Person' />
                <TableLabel text='Sent at' />
                <TableLabel text='Subject' />
@@ -53,14 +66,14 @@ const ContactsTable = () => {
             </TableLabels>
             <div>
                <DndWrapper
-                  key={dataToDisplayInCurrentPage}
+                  key={Date.now()}
                   data={dataToDisplayInCurrentPage}
                   Component={({ data }) => (
-                     <ContactRow className='grid grid-cols-8 g-8 gcc pr-40' data={data} />
+                     <ContactRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
                   )}
                />
             </div>
-         </div>
+         </TableContentLayout>
          <TableFooter
             page={page}
             pages={pages}

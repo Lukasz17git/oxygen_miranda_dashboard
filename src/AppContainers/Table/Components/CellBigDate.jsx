@@ -4,8 +4,8 @@ import { getDayMonthYear, getTime } from "../../../Utils/formatDate"
 const CellBigDate = ({ date }) => {
    return (
       <div className="fc">
-         <b className="tf-app-regular ts-15 dark:tc-dark-white">{getDayMonthYear(date)}</b>
-         <span className="tf-app-light ts-14 tc-text-grey-darker dark:tc-dark-silver">{getTime(date)}</span>
+         <b className="tf-app-regular ts-15px">{getDayMonthYear(date)}</b>
+         <span className="tf-app-light ts-14px tc-text-grey-dark-787878">{getTime(date)}</span>
       </div>
    )
 }

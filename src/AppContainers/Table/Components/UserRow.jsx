@@ -8,41 +8,49 @@ import CellText from "./CellText"
 import DescriptionModal from "../../../AppModals/DescriptionModal"
 import EditButton from "./EditButton"
 
-const statusStyle = {
-   active: 'tc-green-light',
-   inactive: 'tc-red-main'
+const stateStyle = {
+   active: 'tc-text-green-light-5AD07A',
+   inactive: 'tc-text-red-E23428'
 }
 
 const UserRow = ({ data, className }) => {
 
-   const { id, name, lastname, email, phone, description, status, imageUrl, date } = data
+   const { id, name, lastname, email, phone, description, state, profileUrl, dischargeDate } = data
    const fullname = lastname ? `${name} ${lastname}` : name
 
    const [showNoteModal, setShowNoteModal] = useState(false)
 
    return (
-      <div className={`${className} min-h-72 h:s-table-row pos-r h:bg-fff dark:h:bg-text-black`}>
-         <div className="frc g-16 col-span-2 mr-a ml-24">
-            <Img src={imageUrl || '/CriticalIcons/person.svg'} className="h-32 w-32 cover fs0" />
-            <div className="fcnb h-100% py-8">
-               <b className="tf-app-semibold tc-text-black">{fullname}</b>
+      <div className={`${className} pos-r min-h-72px h:s-table-row h:bg-bg-white-fff`}>
+         <div className="frc g-16px col-span-2 mr-a ml-24px">
+            <Img src={profileUrl || '/CriticalIcons/person.svg'} className="h-32px w-32px cover fs0" />
+            <div className="fcnb h-100% py-8px">
+               <b className="tf-app-semibold tc-text-black-262626">{fullname}</b>
                <SmallText text={'#' + id.slice(0, 8)} />
             </div>
          </div>
-         <CellBigDate date={date} />
+         <CellBigDate date={dischargeDate} />
          <CellText text={email} className='col-span-2' />
          <CellText text={'+' + phone} className='col-span-2' />
          <div className='col-span-2'>
-            <p className="i tc-text-dark ts-15">{description.length > 50 ? description.slice(0, 40) + '...' : description}</p>
+            <p className="inline tc-text-dark-393939 ts-15px">{description.length > 50 ? description.slice(0, 40) + '...' : description}</p>
             {description.length > 50 && (
-               <ActionIcon className="i h-100%" onClick={() => setShowNoteModal(true)}>
+               <ActionIcon className="inline h-100%" onClick={() => setShowNoteModal(true)}>
                   <span>↗</span>
                </ActionIcon>
             )}
          </div>
-         <CellBold text={status} className={`tcap ${statusStyle[status]}`} />
+         <CellBold text={state} className={`tcap ${stateStyle[state]}`} />
          <EditButton id={id} />
-         {showNoteModal && <DescriptionModal name={fullname} text={description} id={id} imageUrl={imageUrl} closeModal={() => setShowNoteModal(false)} />}
+         {showNoteModal && (
+            <DescriptionModal
+               name={fullname}
+               text={description}
+               id={id}
+               imageUrl={profileUrl}
+               closeModal={() => setShowNoteModal(false)}
+            />
+         )}
       </div>
    )
 }

@@ -28,15 +28,15 @@ const RoomForm = () => {
    const setValue = (key) => (e) => setRoom({ ...room, [key]: e.target.value })
 
    return (
-      <div className="oh br-16 grid grid-cols-2 bg-fff">
-         <div className="p-24">
+      <div className="oh br-16px grid grid-cols-2 bg-bg-white-fff">
+         <div className="p-24px">
             <div className="frcb">
                <div>
-                  <h2 className="tf-app-semibold ts-30">Room</h2>
-                  <q className="ts-14 tc-green-text">ID 123123132</q>
+                  <h2 className="tf-app-semibold ts-30px">Room</h2>
+                  <q className="ts-14px tc-text-green-799283">ID 123123132</q>
                </div>
                <Button text="Upload Photo" >
-                  <MdOutlineUploadFile className="-mr-4 ml-4 scale-95" />
+                  <MdOutlineUploadFile className="-mr-4px ml-4px scale-95" />
                </Button >
             </div>
             <Separator />
@@ -56,7 +56,7 @@ const RoomForm = () => {
             <TextArea value={room.cancellationPolicy} onChange={setValue('cancellationPolicy')} />
             <MediumLabel text='Amenities' />
             <Amenities amenities={room.amenities} toggleAmenity={toggleAmenity} />
-            <div className="frce pt-24">
+            <div className="frce pt-24px">
                <Button text="Cancel" />
                <Button text="Save" />
             </div>

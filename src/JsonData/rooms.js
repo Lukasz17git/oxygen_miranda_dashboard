@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { amenities } from "../AppComponentsShared/Amenity"
+import { amenities } from "../Data/amenities"
 
 const roomTypes = ['single', 'double', 'superior', 'suite']
 

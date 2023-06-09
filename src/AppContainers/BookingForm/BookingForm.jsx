@@ -1,9 +1,10 @@
 import Img from "../../AppComponents/Img"
 import MiniLabel from "./Components/MiniLabel"
-import { amenities } from "../../AppComponentsShared/Amenity"
-import Amenity from "../../AppComponentsShared/Amenity"
 import Slider from "./Components/Slider"
 import { getFullDate, getDayMonthYear } from "../../Utils/formatDate"
+import { tw } from "tailwind-multi-class"
+import { amenities } from "../../Data/amenities"
+import Amenity from "./Components/Amenity"
 
 
 const BookingForm = () => {
@@ -14,41 +15,44 @@ const BookingForm = () => {
    const checkOut = Date.now() + 333444
 
    return (
-      <div className="oh br-16 grid grid-cols-2 bg-fff">
-         <div className="p-24">
-            <div className="fr g-16">
-               <Img src="/Images/profile.jpg" className="h-120 max-w-200 br-8" />
+      <div className="oh br-16px grid grid-cols-2 bg-bg-white-fff">
+         <div className="p-24px">
+            <div className="fr g-16px">
+               <Img src="/Images/profile.jpg" className="h-120px max-w-200px br-8px" />
                <div className="pos-r ">
-                  <h2 className="tf-app-semibold ts-30">{name}</h2>
-                  <q className="ts-14 tc-green-text">ID 123123132</q>
+                  <h2 className="tf-app-semibold ts-30px">{name}</h2>
+                  <q className="ts-14px tc-green-text">ID 123123132</q>
                </div>
             </div>
-            <div className="grid grid-cols-2 g-16 py-16 bbc-color-separator">
+            <div className="grid grid-cols-2 g-16px py-16px bbc-color-separator">
                <div>
                   <MiniLabel text='Check In' />
-                  <p className="tf-app-semibold tc-text-dark ts-15">{getFullDate(checkIn)}</p>
+                  <p className="tf-app-semibold tc-text-dark ts-15px">{getFullDate(checkIn)}</p>
                </div>
                <div>
                   <MiniLabel text='Check Out' />
-                  <p className="tf-app-semibold tc-text-dark ts-15">{getDayMonthYear(checkOut)}</p>
+                  <p className="tf-app-semibold tc-text-dark ts-15px">{getDayMonthYear(checkOut)}</p>
                </div>
             </div>
-            <div className="grid grid-cols-2 g-16 py-16">
+            <div className="grid grid-cols-2 g-16px py-16px">
                <div>
                   <MiniLabel text='Room Info' />
-                  <p className="ts-24 tf-app-semibold tc-text-dark">Double Z</p>
+                  <p className="ts-24px tf-app-semibold tc-text-dark">Double Z</p>
                </div>
                <div>
                   <MiniLabel text='Price' />
-                  <b className="ts-24 tf-app-semibold tc-text-dark after:content-['/night'] after:tf-app-light after:ts-14 after:tc-text-silver after:pl-8">$145</b>
+                  <b className={tw(
+                     "ts-24px tf-app-semibold tc-text-dark",
+                     { after: "content-['/night'] tf-app-light ts-14px tc-text-silver pl-8px" }
+                  )}>$145</b>
                </div>
             </div>
-            <p className="tc-text-grey-darker ts-14 max-h-140 oya">
+            <p className="tc-text-grey-darker ts-14px max-h-140px oya">
                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
             </p>
-            <div className="py-16">
+            <div className="py-16px">
                <MiniLabel text='Amenities' />
-               <div className="fw g-8">
+               <div className="fw g-8px">
                   {availableAmenities.map(amenity => (
                      <Amenity amenity={amenity} key={amenity} />
                   ))}

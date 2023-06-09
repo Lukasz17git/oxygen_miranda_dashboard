@@ -12,9 +12,9 @@ const Notifications = () => {
    return (
       <ActionIcon
          onClick={openNotifications}
-         className="br-8 h:bg-app-bg-white dark:h:bg-dark-hover"
+         className="br-8px h:bg-app-bg-white"
       >
-         <BiBell className="fill-text-dark dark:fill-dark-green" />
+         <BiBell className="fill-text-dark" />
          <Badge text={notificationsNumber} />
       </ActionIcon>
    )

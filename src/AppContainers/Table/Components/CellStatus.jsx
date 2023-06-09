@@ -2,7 +2,7 @@
 
 const CellStatus = ({ text, className }) => {
    return (
-      <div className={`${className} tw-base-button min-w-100 w-100 br-10 tcap h-36`}>
+      <div className={`${className} tw-base-button w-100px br-10px tcap h-36px`}>
          {text}
       </div>
    )

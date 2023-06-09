@@ -35,10 +35,10 @@ const CommentsSimplified = () => {
    const [commentModalIndex, setCommentModalIndex] = useState(null)
 
    return (
-      <div className="pos-r p-16 h-fit">
-         <div ref={sliderRef} className="keen-slider py-8 frc oh mx-4 cursor-grab">
+      <div className="pos-r p-16px h-fit">
+         <div ref={sliderRef} className="keen-slider py-8px frc oh mx-4px cursor-grab">
             {arrayHolder.map((_, index) => (
-               <Comment className='bg-fff dark:bg-dark-mode-black' key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
+               <Comment className='bg-bg-white-fff' key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
             ))}
          </div>
          <LeftButton hidePrev={hidePrev} prevSlide={prevSlide} />

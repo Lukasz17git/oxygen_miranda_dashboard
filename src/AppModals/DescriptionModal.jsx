@@ -1,24 +1,20 @@
-import { IoClose } from "react-icons/io5"
-import ActionIcon from "../AppComponents/ActionIcon"
-import Img from "../AppComponents/Img"
+import ModalLayout from "./Components/ModalLayout"
+import ProfileWrapper from "./Components/ProfileWrapper"
+import StrongLabel from "./Components/StrongLabel"
+import LightLabel from "./Components/LightLabel"
+import ModalPharagraph from "./Components/ModalPharagraph"
 
 
 const DescriptionModal = ({ name, text, id, imageUrl, closeModal }) => {
 
    return (
-      <div className="pos-f z-1 transform-to-center bg-fff s-profile p-24 pb-28 bc-color-separator bw-1 fc g-16 w-400 br-12">
-         <div className="frc g-16">
-            <Img src={imageUrl || '/CriticalIcons/person.svg'} className="h-48 w-48 cover" />
-            <div className="fcnb h-100% py-8">
-               <b className="tf-app-semibold tc-text-black">{name}</b>
-               <q className="tf-app-light ts-14 tc-text-grey">{id}</q>
-            </div>
-            <ActionIcon onClick={closeModal} className="ml-a h:bg-app-bg-white br-6">
-               <IoClose className="scale-120 fill-text-dark" />
-            </ActionIcon>
-         </div>
-         <p className="tc-text-grey-darker tf-app-regular px-6 ts-15">{text}</p>
-      </div>
+      <ModalLayout>
+         <ProfileWrapper closeModal={closeModal} imageUrl={imageUrl}>
+            <StrongLabel text={name} />
+            <LightLabel text={id} />
+         </ProfileWrapper>
+         <ModalPharagraph text={text} />
+      </ModalLayout>
    )
 }
 

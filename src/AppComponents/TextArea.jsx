@@ -1,8 +1,16 @@
+import { tw } from "tailwind-multi-class"
 
 
 const TextArea = ({ props }) => {
    return (
-      <textarea {...props} className="block bc-color-separator bw-1 px-8 py-6 br-4 w-100% h-72 ts-15 hf:bc-color-separator hf:os-none" />
+      <textarea
+         {...props}
+         className={tw(
+            "block bc-input-main-bc bw-1px px-8px py-6px br-4px",
+            "w-100% h-72px ts-15px hf:bw-2px hf:os-none"
+         )}
+      />
    )
 }
+
 export default TextArea

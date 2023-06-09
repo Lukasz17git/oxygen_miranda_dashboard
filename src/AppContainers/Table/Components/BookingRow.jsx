@@ -6,11 +6,12 @@ import EditButton from "./EditButton"
 import CellBigDate from "./CellBigDate"
 import CellSmallDate from "./CellSmallDate"
 import CellStatus from "./CellStatus"
+import { tw } from "tailwind-multi-class"
 
 const statusStyle = {
-   in: 'bg-green-pastel tc-green-light dark:bg-green-dark/20 dark:bc-green-dark dark:bw-1 ',
-   out: 'bg-red-pastel tc-red-main dark:bg-red-main/20 dark:bc-red-main dark:bw-1 dark:tc-red-main/90',
-   progress: 'bg-yellow-pastel tc-yellow-main // dark:bg-dark-yellow-pastel/25 dark:bc-dark-yellow/60 dark:bw-1 dark:tc-dark-yellow/70 ',
+   in: tw('bg-[#EEF9F2] tc-[#5AD07A]', { dark: 'bw-1px bg-[rgba(19, 88, 70, 0.2)] bc-[#135846]' }),
+   out: tw('bg-[#FFEDEC] tc-[#E23428]', { dark: 'bw-1px bg-[rgba(226, 52, 40, 0.2)] bc-[#E23428] bw-1 tc-[rgba(226, 52, 40, 0.9)]' }),
+   progress: tw('bg-[#fdfde0] tc-[#90811f]', { dark: 'bw-1px bg-[rgba(241, 238, 58, 0.25)] bc-[rgba(255, 255, 33, 0.6)] tc-[rgba(255, 255, 33, 0.7)]' }),
 }
 
 const BookingRow = ({ data, className }) => {
@@ -21,12 +22,12 @@ const BookingRow = ({ data, className }) => {
    const [showNoteModal, setShowNoteModal] = useState(false)
 
    return (
-      <div className={`${className} min-h-72 h:s-table-row pos-r h:bg-fff dark:h:bg-text-black`}>
-         <div className="frc g-16 col-span-2 mr-a ml-24">
-            <Img src={imageUrl || '/CriticalIcons/person.svg'} className="h-32 w-32 cover fs0" />
-            <div className="fcnb h-100% py-8">
-               <b className="tf-app-semibold tc-text-black dark:tc-dark-white">{name}</b>
-               <q className="tf-app-light ts-14 tc-text-grey dark:tc-dark-silver">{'#' + id.slice(0, 8)}</q>
+      <div className={`${className} min-h-72px h:s-table-row pos-r h:bg-bg-white-fff`}>
+         <div className="frc g-16px col-span-2 mr-a ml-24px">
+            <Img src={imageUrl || '/CriticalIcons/person.svg'} className="h-32px w-32px cover fs0" />
+            <div className="fcnb h-100% py-8px">
+               <b className="tf-app-semibold tc-text-black-262626">{name}</b>
+               <q className="tf-app-light ts-14px tc-text-grey-6E6E6E">{'#' + id.slice(0, 8)}</q>
             </div>
          </div>
          <CellSmallDate date={orderDate} />
@@ -37,10 +38,10 @@ const BookingRow = ({ data, className }) => {
             disabled={!request}
             text={request ? "View Note ↗" : "No Note"}
             className={`tw ${request ?
-               'bg-green-pastel tf-app-semibold tc-text-dark dark:tc-dark-green/90 dark:bg-green-dark/5 dark:bc-green-dark'
-               : 'bg-transparent bc-green-pastel tc-green-dark/50 dark:bc-dark-hover dark:tc-text-dark'}`}
+               'bg-button-green-pastel-EEF9F2 tf-app-semibold tc-text-dark-393939'
+               : 'bg-transparent bc-border-green-pastel-EEF9F2 tc-text-green-dark-135846/50'}`}
          />
-         <p className="dark:tc-dark-white">{roomType}</p>
+         <p>{roomType}</p>
          <CellStatus text={status} className={statusStyle[status]} />
          <EditButton id={id} />
          {showNoteModal && <NoteModal data={data} closeModal={() => setShowNoteModal(false)} />}

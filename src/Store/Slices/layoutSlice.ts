@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-
-
 const initialState = {
-   sidebar: false,
+   sidebar: true,
+   isAuthenticated: false
 }
 
 const layoutSlice = createSlice({
@@ -12,9 +11,12 @@ const layoutSlice = createSlice({
    reducers: {
       toggleSidebarAction(state) {
          state.sidebar = !state.sidebar
+      },
+      authenticateAction: (state) => {
+         state.isAuthenticated = true
       }
    }
 })
 
-export const { toggleSidebarAction } = layoutSlice.actions
+export const { toggleSidebarAction, authenticateAction } = layoutSlice.actions
 export default layoutSlice.reducer
