@@ -42,7 +42,10 @@ const LoginForm = ({ children }) => {
 
          await wait(200)
 
-         if (password.length !== 3) throw 'wrong credentials'
+         if (password.length !== 3) {
+            dispatchState({ type: 'password', payload: '' })
+            throw 'wrong credentials'
+         }
 
          dispatch(authenticateAction())
 

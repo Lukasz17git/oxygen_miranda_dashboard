@@ -32,7 +32,14 @@ describe('login action', () => {
       cy.get('[e2e-id="login-password"]').should('have.value', '');
    });
 
-   it('should redirect to admin dashboard for valid credentials', () => {
+   it('should redirect to the home page on successful login', () => {
+      const validEmail = 'test@example.com';
+      const validPassword = '123';
 
-   })
+      cy.get('[e2e-id="login-email"]').type(validEmail);
+      cy.get('[e2e-id="login-password"]').type(validPassword);
+      cy.get('[e2e-id="login-submit"]').click();
+
+      cy.url().should('eq', 'http://localhost:5173/');
+   });
 })
