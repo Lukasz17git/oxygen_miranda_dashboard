@@ -14,7 +14,9 @@ const Password = () => {
          label="Password"
          type="password"
          value={password}
-         onChange={setPassword} />
+         onChange={setPassword}
+         e2e-id="login-password"
+      />
    )
 }
 export default Password

@@ -5,8 +5,8 @@ const initialState = {
    isAuthenticated: false
 }
 
-const layoutSlice = createSlice({
-   name: 'layout',
+const uiSlice = createSlice({
+   name: 'ui',
    initialState,
    reducers: {
       toggleSidebarAction(state) {
@@ -18,5 +18,6 @@ const layoutSlice = createSlice({
    }
 })
 
-export const { toggleSidebarAction, authenticateAction } = layoutSlice.actions
-export default layoutSlice.reducer
+export const { toggleSidebarAction, authenticateAction } = uiSlice.actions
+const uiReducer = uiSlice.reducer
+export default uiReducer

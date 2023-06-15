@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import wait from '../../Utils/wait.js'
-import { getDataFromLocalStore, updateDataToLocalStore } from '../../Utils/localStore'
-import { RootState } from "../store.js";
+import wait from '../../../Utils/wait.js'
+import { getDataFromLocalStore, updateDataToLocalStore } from '../../../Utils/localStore.js'
+import { RootState } from "../../store.js";
 
 type CommentType = {
    id: string,

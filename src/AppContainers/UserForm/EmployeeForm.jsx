@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import MediumLabel from "./Components/MediumLabel"
 import { tw } from "tailwind-multi-class"
 import { useTypedSelector } from "../../Store/store"
-import { updateEmployeeFieldAction, resetEmployeeAction, resetNewEmployeeAction, saveEmployeeThunk, createNewEmployeeThunk } from '../../Store/Slices/employeesSlice'
+// import { updateEmployeeFieldAction, resetEmployeeAction, resetNewEmployeeAction, saveEmployeeThunk, createNewEmployeeThunk } from '../../Store/Slices/employeesSlice'
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 
@@ -32,13 +32,13 @@ const EmployeeForm = () => {
    const storePath = isNewForm ? 'employees.newForm' : `employees.list.${index}`
 
    const cancelHandler = () => {
-      dispatch(isNewForm ? resetNewEmployeeAction() : resetEmployeeAction())
+      // dispatch(isNewForm ? resetNewEmployeeAction() : resetEmployeeAction())
       navigate(route)
       window.scrollTo(0, 0)
    }
 
    const saveHandler = () => {
-      dispatch(isNewForm ? createNewEmployeeThunk() : saveEmployeeThunk())
+      // dispatch(isNewForm ? createNewEmployeeThunk() : saveEmployeeThunk())
       navigate(route)
       window.scrollTo(0, 0)
    }
@@ -77,13 +77,13 @@ const EmployeeForm = () => {
             </div>
             <MediumLabel text="Employee data:" />
             <div className="fw g-16px">
-               <ReduxInput required label="Name" storePath={`${storePath}.name`} dispatchAction={updateEmployeeFieldAction} />
+               {/* <ReduxInput required label="Name" storePath={`${storePath}.name`} dispatchAction={updateEmployeeFieldAction} />
                <ReduxInput required label="Lastname" storePath={`${storePath}.lastname`} dispatchAction={updateEmployeeFieldAction} />
-               <ReduxInput label="Contact Phone" storePath={`${storePath}.phone`} dispatchAction={updateEmployeeFieldAction} />
+               <ReduxInput label="Contact Phone" storePath={`${storePath}.phone`} dispatchAction={updateEmployeeFieldAction} /> */}
             </div>
             <MediumLabel text="Credentials:" />
             <div className="fw g-16px">
-               <ReduxInput label="Email" storePath={`${storePath}.email`} dispatchAction={updateEmployeeFieldAction} />
+               {/* <ReduxInput label="Email" storePath={`${storePath}.email`} dispatchAction={updateEmployeeFieldAction} /> */}
             </div>
             <MediumLabel text="Powers and account state:" />
             <div className="fw g-16px">
@@ -93,7 +93,7 @@ const EmployeeForm = () => {
                   optionsMap={jobTypeOptions}
                   disableLabelAsOption={true}
                   storePath={`${storePath}.job`}
-                  dispatchAction={updateEmployeeFieldAction}
+                  // dispatchAction={updateEmployeeFieldAction}
                   className="min-w-160px"
                />
                <ReduxSelect
@@ -102,18 +102,18 @@ const EmployeeForm = () => {
                   optionsMap={accountStateOptions}
                   disableLabelAsOption={true}
                   storePath={`${storePath}.state`}
-                  dispatchAction={updateEmployeeFieldAction}
+                  // dispatchAction={updateEmployeeFieldAction}
                   className="min-w-160px"
                />
                <ReduxInput
                   label="Discharge date"
                   type="date"
                   storePath={`${storePath}.dischargeDate`}
-                  dispatchAction={updateEmployeeFieldAction}
+                  // dispatchAction={updateEmployeeFieldAction}
                />
             </div>
             <MediumLabel text="Description:" />
-            <ReduxTextarea storePath={`${storePath}.description`} dispatchAction={updateEmployeeFieldAction} />
+            {/* <ReduxTextarea storePath={`${storePath}.description`} dispatchAction={updateEmployeeFieldAction} /> */}
             <div className="frca max-w-500px m-a mt-24px">
                <Button
                   onClick={cancelHandler}

@@ -1,52 +1,14 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import wait from '../../Utils/wait.js'
-import { getDataFromLocalStore, updateDataToLocalStore } from '../../Utils/localStore'
-import { RootState } from "../store.js";
+import wait from '../../../Utils/wait.js'
+import { getDataFromLocalStore, updateDataToLocalStore } from '../../../Utils/localStore.js'
+import { RootState } from "../../store.js";
 import { nanoid } from "nanoid";
 
 
-type EmployeeType = {
-   __copy__: Omit<EmployeeType, "__copy__">
-   id: string,
-   createdAt: number, //or better date?
-   name: string,
-   lastname: string,
-   email: string,
-   phone: string,
-   dischargeDate: string, //or better date?
-   description: string,
-   state: 'active' | 'inactive' | 'vacation',
-   job: 'receptionist' | 'rooms_service',
-   profileUrl: string
-}
-
-const initialForm: Omit<EmployeeType, '__copy__' | 'id' | 'createdAt'> = {
-   name: '',
-   lastname: '',
-   email: '',
-   phone: '',
-   dischargeDate: '2023-06-09', //or better date?
-   description: '',
-   state: 'active',
-   job: 'receptionist',
-   profileUrl: ''
-}
-
-type EmployeesType = {
-   newForm: typeof initialForm,
-   loading: 'pending' | 'succeeded' | 'failed',
-   list: EmployeeType[]
-}
-
-const initialState: EmployeesType = {
-   newForm: initialForm,
-   loading: 'succeeded',
-   list: []
-}
 
 const employeesSlice = createSlice({
    name: 'employees',
-   initialState: initialState,
+   initialState: [] as Em,
    reducers: {
       updateEmployeeFieldAction: (state, action: PayloadAction<{ path: string, value: unknown }>) => {
          const { path, value } = action.payload
@@ -138,4 +100,5 @@ export const createNewEmployeeThunk = createAsyncThunk(
 )
 
 export const { resetEmployeeAction, updateEmployeeFieldAction, resetNewEmployeeAction } = employeesSlice.actions
-export default employeesSlice.reducer
+const employeesReducer = employeesSlice.reducer
+export default employeesReducer

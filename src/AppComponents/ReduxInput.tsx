@@ -1,26 +1,31 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
-import { StorePaths, useTypedSelector, selector } from '../Store/store'
-import { useDispatch } from 'react-redux'
-import { AnyAction } from 'redux'
+import { StorePaths, useTypedSelector, selector, useTypedDispatch, NestedStorePaths } from '../Store/store'
+import { updateFormValueAction } from '../Store/RootSlices/formSlice'
 
 
-type InputType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+type InputType<T extends StorePaths> = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
    label: string,
    wrapperClassName?: string,
    labelClassName?: string,
-   storePath: StorePaths,
-   dispatchAction: (v: unknown) => AnyAction
+   path: T,
+   fieldPath: NestedStorePaths<T>
 }
 
-const ReduxInput = ({ wrapperClassName, labelClassName, label, children, storePath, dispatchAction, ...props }: InputType) => {
+const ReduxInput = <T extends StorePaths>({ wrapperClassName, labelClassName, label, children, path, fieldPath, ...props }: InputType<T>) => {
 
-   const value = useTypedSelector(selector(storePath)) as string
-   const idPath = storePath.slice(storePath.indexOf(".") + 1)
-   const dispatch = useDispatch()
+   const value = useTypedSelector(state => {
+      const valueInsideForm = selector(`form.${fieldPath}` as StorePaths)(state)
+      const originalValue = selector(`${path}.${fieldPath}` as StorePaths)(state)
+      if (valueInsideForm !== undefined) return valueInsideForm
+      return originalValue
+   }) as string
+
+   const dispatch = useTypedDispatch()
    const setValue = (value: string) => {
-      dispatch(dispatchAction({ path: idPath, value }))
+      dispatch(updateFormValueAction({ stringPath: fieldPath, value }))
    }
 
+   console.log('rendered redux input', value)
    return (
       <label
          aria-label={label}

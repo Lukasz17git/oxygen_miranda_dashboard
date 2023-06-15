@@ -1,3 +1,5 @@
+
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import viteCompression from 'vite-plugin-compression'
@@ -18,4 +20,9 @@ export default defineConfig({
       assetsInlineLimit: 0,
       outDir: '../build',
    },
+   test: {
+      environment: 'jsdom',
+      setupFiles: ['./Tests/setup.ts'],
+      globals: true,
+   }
 })

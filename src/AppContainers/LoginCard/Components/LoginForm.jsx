@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { tw } from "tailwind-multi-class"
 import wait from '../../../Utils/wait'
 import { useDispatch } from "react-redux"
-import { authenticateAction } from "../../../Store/Slices/layoutSlice"
+import { authenticateAction } from "../../../Store/RootSlices/uiSlice"
 
 export const LoginContext = createContext(null)
 
@@ -13,6 +13,7 @@ const loginReducer = (state, { type, payload }) => {
    if (type === 'isPending') return { ...state, isPending: !state.isPending }
    return state
 }
+
 const initialReducerState = { email: '', password: '', isPending: false }
 
 const LoginForm = ({ children }) => {
@@ -41,9 +42,7 @@ const LoginForm = ({ children }) => {
 
          await wait(200)
 
-         // if (password.length !== 3) throw 'wrong credentials'
-
-         // alert('user authenticated correctly and received a session token')
+         if (password.length !== 3) throw 'wrong credentials'
 
          dispatch(authenticateAction())
 

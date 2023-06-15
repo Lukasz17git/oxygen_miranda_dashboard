@@ -9,7 +9,7 @@ import { useTypedSelector } from "../../Store/store"
 import { BsCalendarCheck } from 'react-icons/bs'
 
 const Sidebar = () => {
-   const isSidebar = useTypedSelector(state => state.layout.sidebar)
+   const isSidebar = useTypedSelector(state => state.ui.sidebar)
    return (
       <div className={`py-16px fcc g-32px duration-[400ms] oh ${isSidebar ? 'max-w-300px fs0' : 'max-w-0 hide'}`}>
          <Logo />

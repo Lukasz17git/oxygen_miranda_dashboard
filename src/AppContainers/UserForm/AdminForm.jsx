@@ -6,23 +6,27 @@ import Button from "../../AppComponents/Button"
 import { useNavigate } from "react-router-dom"
 import MediumLabel from "./Components/MediumLabel"
 import { tw } from "tailwind-multi-class"
-import { resetAdminFormAction, saveAdminThunk, updateAdminFieldAction } from "../../Store/Slices/adminSlice"
+import { } from "../../Store/Slices/Users/adminSlice"
 import { useDispatch } from "react-redux"
+import useReduxForm from '../../Store/useReduxForm'
+
 
 
 const AdminForm = () => {
 
+   const path = useReduxForm('admin')
+
    const dispatch = useDispatch()
    const navigate = useNavigate()
-   
+
    const cancelHandler = () => {
-      dispatch(resetAdminFormAction())
+      // dispatch(resetAdminFormAction())
       navigate('/')
       window.scrollTo(0, 0)
    }
 
    const saveHandler = () => {
-      dispatch(saveAdminThunk())
+      // dispatch(saveAdminThunk())
       navigate('/')
       window.scrollTo(0, 0)
    }
@@ -30,6 +34,10 @@ const AdminForm = () => {
    const accountStateOptions = {
       active: 'Active',
       inactive: 'Inactive'
+   }
+
+   const p = {
+      storePath
    }
 
    return (
@@ -56,14 +64,14 @@ const AdminForm = () => {
             </div>
             <MediumLabel text="About you:" />
             <div className="fw g-16px">
-               <ReduxInput required label="Name" storePath="admin.name" dispatchAction={updateAdminFieldAction} />
-               <ReduxInput required label="Lastname" storePath="admin.lastname" dispatchAction={updateAdminFieldAction} />
-               <ReduxInput label="Contact Phone" storePath="admin.phone" dispatchAction={updateAdminFieldAction} />
+               <ReduxInput {...path} fieldPath="name" required label="Name" />
+               <ReduxInput path={path} fieldPath="lastname" required label="Lastname" />
+               <ReduxInput label="Contact Phone" path={path} fieldPath="phone" />
             </div>
             <MediumLabel text="Credentials:" />
             <div className="fw g-16px">
-               <ReduxInput label="Email" storePath="admin.email" dispatchAction={updateAdminFieldAction} />
-               <ReduxInput label="Password" type="password" storePath="admin.password" dispatchAction={updateAdminFieldAction} />
+               <ReduxInput label="Email" storePath="admin" fieldPath="email" />
+               <ReduxInput label="Password" type="password" storePath="admin" fieldPath="password" />
             </div>
             <MediumLabel text="Powers and account state:" />
             <div className="fw g-16px">
@@ -73,12 +81,11 @@ const AdminForm = () => {
                   optionsMap={accountStateOptions}
                   disableLabelAsOption={true}
                   storePath="admin.state"
-                  dispatchAction={updateAdminFieldAction}
                   className="min-w-160px"
                />
             </div>
             <MediumLabel text="Description:" />
-            <ReduxTextarea storePath="admin.description" dispatchAction={updateAdminFieldAction} />
+            <ReduxTextarea storePath="admin.description" />
             <div className="frca max-w-500px m-a mt-24px">
                <Button
                   onClick={cancelHandler}

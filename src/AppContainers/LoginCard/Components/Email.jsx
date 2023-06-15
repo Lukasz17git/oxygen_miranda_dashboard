@@ -14,7 +14,9 @@ const Email = () => {
          type="email"
          label="Email"
          value={email}
-         onChange={setEmail} />
+         onChange={setEmail}
+         e2e-id="login-email"
+      />
    )
 }
 export default Email

@@ -11,24 +11,19 @@ import UsersTable from './AppContainers/Table/UsersTable.jsx'
 import RoomsTable from './AppContainers/Table/RoomsTable.jsx'
 import RoomForm from './AppContainers/RoomForm/RoomForm.jsx'
 import Contacts from './AppPages/Contacts.jsx'
-import wait from './Utils/wait.js'
-import { getAdminDataThunk } from './Store/Slices/adminSlice'
-import { getEmployeesDataThunk } from './Store/Slices/employeesSlice'
+import wait from './Utils/wait'
+import { getAdminDataThunk } from './Store/Slices/Users/adminSlice'
 
 const authenticationLoader = (store) => async () => {
 
-   // alert(`User supposedly has a session token,\n sending request to get all the data from server`)
+   const isAuthenticated = store.getState().ui.isAuthenticated
 
-   const isAuthenticated = store.getState().layout.isAuthenticated
-
-   await wait(1500)
+   await wait(500)
 
    if (!isAuthenticated) {
       alert(`User session expired, redirecting to login page`)
       return redirect('/login')
    }
-
-   // alert(`Done requesting all data from server,\n dispatching received data to the redux store`)
 
    return null
 }
@@ -61,7 +56,8 @@ const createRouter = (store) => createBrowserRouter(
                <Route path=':id' element={<RoomForm />} />
             </Route>
             <Route path='contacts' element={<Contacts />} />
-            <Route path='users' loader={fetchData(store, getEmployeesDataThunk)}>
+            {/* <Route path='users' loader={fetchData(store, getEmployeesDataThunk)}> */}
+            <Route path='users'>
                <Route index element={<UsersTable />} />
                <Route path='new' element={<EmployeeForm />} />
                <Route path=':id' element={<EmployeeForm />} />

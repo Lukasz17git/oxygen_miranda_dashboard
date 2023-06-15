@@ -1,9 +1,12 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import wait from '../../Utils/wait.js'
-import { getDataFromLocalStore, updateDataToLocalStore } from '../../Utils/localStore'
-import { RootState } from "../store.js";
-import { nanoid } from "nanoid";
 
+export type RoomTypeType = 'single' | 'double' | 'superior' | 'suite'
+
+export type RoomStatusType = 'available' | 'occupied'
+
+export type BookingStatusType = 'in' | 'out' | 'progress'
+
+
+// Creo que estos no hace falta, ya que puedo inferirlos
 
 type RoomType = {
    id: string,
@@ -22,6 +25,7 @@ type RoomType = {
    bookings: BookingType[]
 
 }
+
 
 type AmenitiesType = {
    airConditioner: boolean,
@@ -47,7 +51,6 @@ type GuestType = {
    profileUrl: string,
 }
 
-type GuestsType = GuestType[]
 
 type BookingType = {
    id: string, // he movido el id del guest a aqui, tiene más sentido

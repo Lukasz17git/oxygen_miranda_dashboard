@@ -1,11 +1,11 @@
 import ActionIcon from '../../../AppComponents/ActionIcon'
 import SvgToggleSidebar from '../../../Svgs/SvgToggleSidebar'
 import { useTypedDispatch, useTypedSelector } from '../../../Store/store'
-import { toggleSidebarAction } from '../../../Store/Slices/layoutSlice'
+import { toggleSidebarAction } from '../../../Store/RootSlices/uiSlice'
 import { tw } from 'tailwind-multi-class'
 
 const ToggleSidebar = () => {
-   const isSidebar = useTypedSelector(state => state.layout.sidebar)
+   const isSidebar = useTypedSelector(state => state.ui.sidebar)
    const dispatch = useTypedDispatch()
    const toggleSidebar = () => dispatch(toggleSidebarAction())
    return (
