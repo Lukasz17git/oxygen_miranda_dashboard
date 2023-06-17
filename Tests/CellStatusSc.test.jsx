@@ -1,5 +1,5 @@
 import { expect, describe, it } from "vitest";
-import CellStatusSC from "./CellStatusSC";
+import CellStatusSC from "../src/AppContainers/Table/Components/CellStatusSC";
 import { render, screen } from "@testing-library/react";
 
 
@@ -23,7 +23,8 @@ describe('Status Button', () => {
       render(
          <CellStatusSC status="in" />
       )
-      const button = screen.getByText("in")
+      // const button = screen.getByText("in")
+      const button = screen.getByTestId("status-button")
       expect(button).toHaveStyle(`color: ${expectedStatusStyles.in.tc}`)
       expect(button).toHaveStyle(`background-color: ${expectedStatusStyles.in.bg}`)
    })
@@ -32,7 +33,8 @@ describe('Status Button', () => {
       render(
          <CellStatusSC status="out" />
       )
-      const button = screen.getByText("out")
+      // const button = screen.getByText("out")
+      const button = screen.getByTestId("status-button")
       expect(button).toHaveStyle(`color: ${expectedStatusStyles.out.tc}`)
       expect(button).toHaveStyle(`background-color: ${expectedStatusStyles.out.bg}`)
    })
@@ -41,7 +43,8 @@ describe('Status Button', () => {
       render(
          <CellStatusSC status="progress" />
       )
-      const button = screen.getByText("progress")
+      // const button = screen.getByText("progress")
+      const button = screen.getByTestId("status-button")
       expect(button).toHaveStyle(`color: ${expectedStatusStyles.progress.tc}`)
       expect(button).toHaveStyle(`background-color: ${expectedStatusStyles.progress.bg}`)
    })

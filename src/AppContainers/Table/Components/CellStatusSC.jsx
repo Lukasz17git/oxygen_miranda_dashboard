@@ -37,7 +37,7 @@ const StatusButton = styled.div`
 const CellStatusSC = ({ status }) => {
    // status => in, out, progress
    return (
-      <StatusButton status={statusStyle[status]}>
+      <StatusButton status={statusStyle[status]} data-testid="status-button">
          {status}
       </StatusButton>
    )

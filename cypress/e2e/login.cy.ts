@@ -5,7 +5,6 @@ describe('login action', () => {
       cy.visit("http://localhost:5173/login")
    })
 
-
    it('should display login card correctly', () => {
       cy.get('[e2e-id="login-email"]').should('be.visible')
       cy.get('[e2e-id="login-password"]').should('be.visible')
