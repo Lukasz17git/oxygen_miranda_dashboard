@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
    sidebar: true,
-   isAuthenticated: false
+   isAuthenticated: true
 }
 
 const uiSlice = createSlice({

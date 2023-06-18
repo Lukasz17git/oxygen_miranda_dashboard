@@ -5,7 +5,24 @@ import { addExtensions } from './extensionsPlugin'
 import { microTailwind, microTailwindExperimental } from './microTailwindPlugin'
 import colors from 'tailwindcss/colors'
 import { tw, twTransform } from 'tailwind-multi-class'
-// import twTransform from './twTransform'
+
+
+const theme = {
+   white: '#FFFFFF',
+
+}
+
+const backgroundsPalette = {
+
+}
+const bordersPalette = {
+
+}
+
+const textPalette = {
+
+}
+
 
 
 const palette = {
@@ -44,6 +61,8 @@ const palette = {
    'yellow-main': 'var(--yellow-main)',
 }
 
+const color = (cssVariableColor) => `rgba(var(${cssVariableColor}))`
+
 export default {
    content: {
       files: [
@@ -61,10 +80,18 @@ export default {
          'bg-white-fff': 'rgba(var(--bg-white-fff))',
          'bg-white-contrast-f8f8f8': 'rgba(var(--bg-white-contrast-f8f8f8))',
          'bg-red-E23428': 'rgba(var(--bg-red-E23428))',
+         //box-main-bg
+         'box-main-bg': color('--bg-white-fff'),
+         //box-main-sc
+         //box-main-bc
+         //box-sec-bg
+         //box-sec-sc
+         //box-sec-bc
+         //box-red-bg
 
          // text color
          'text-white-fff': 'rgba(var(--text-white-fff))',
-         'text-black-262626': 'rgba(var(--text-black-262626))',
+         '1': 'rgba(var(--text-black-262626))',
          'text-dark-393939': 'rgba(var(--text-dark-393939))',
          'text-grey-6E6E6E': 'rgba(var(--text-grey-6E6E6E))',
          'text-grey-dark-787878': 'rgba(var(--text-grey-dark-787878))',
@@ -192,7 +219,13 @@ export default {
          addBase({
             svg: {
                '@apply h-24px w-24px': {}
+            },
+            '.dark': {
+               '.tc-text-dark': {
+                  'color': '#fff'
+               }
             }
+
          });
          // fonts
          addComponents({
