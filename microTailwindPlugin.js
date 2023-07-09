@@ -3,11 +3,18 @@ import flattenColorPalette from 'tailwindcss/src/util/flattenColorPalette'
 import { formatColor, parseColor } from 'tailwindcss/src/util/color'
 
 
+
+
+
 const colorWithOpacity = (color, opacityVariableName, returnPropertiesCallback) => {
    if (typeof color === 'function') {
       const withOpacity = color({ opacityVariable: opacityVariableName, opacityValue: `var(${opacityVariableName})` })
       return { [opacityVariableName]: '1', ...returnPropertiesCallback(withOpacity) }
    }
+   //if color is an array then add dark mode support
+
+
+   // end of darkmode support
    const parsed = parseColor(color)
    if (parsed === null) return { ...returnPropertiesCallback(color) }
    if (parsed.alpha !== undefined) return { ...returnPropertiesCallback(color) }
@@ -301,7 +308,7 @@ export function microTailwind({ addVariant, addUtilities, matchUtilities, theme 
    // TEXT COLOR
    matchUtilities(
       { tc: (value) => colorWithOpacity(value, '--tw-text-opacity', c => ({ color: c })) },
-      { values: flattenColorPalette(theme('colors')), type: ['color'] }
+      { values: { ...flattenColorPalette(theme('colors')) }, type: ['color'] }
    );
    // TEXT OPACITY
    matchUtilities(

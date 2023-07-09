@@ -1,7 +1,20 @@
 import { nanoid } from "nanoid"
 
-
-const comments = [
+type Comment = {
+   date: number;
+   viewed: boolean;
+   client: {
+      name: string;
+      photo: string;
+   };
+   comment: string;
+   email: string;
+   phone: string;
+   id?: string;
+   archived?: boolean;
+   subject?: string
+}
+const comments: Comment[] = [
    {
       date: Date.now() - 21321,
       viewed: false,

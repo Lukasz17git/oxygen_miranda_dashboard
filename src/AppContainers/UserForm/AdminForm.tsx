@@ -36,10 +36,6 @@ const AdminForm = () => {
       inactive: 'Inactive'
    }
 
-   const p = {
-      storePath
-   }
-
    return (
       <div className={tw(
          "p-24px br-16px bg-bg-white-fff",
@@ -64,14 +60,14 @@ const AdminForm = () => {
             </div>
             <MediumLabel text="About you:" />
             <div className="fw g-16px">
-               <ReduxInput {...path} fieldPath="name" required label="Name" />
+               <ReduxInput path={path} fieldPath="email" required label="Name" />
                <ReduxInput path={path} fieldPath="lastname" required label="Lastname" />
-               <ReduxInput label="Contact Phone" path={path} fieldPath="phone" />
+               <ReduxInput path={path} fieldPath="phone" label="Contact Phone" />
             </div>
             <MediumLabel text="Credentials:" />
             <div className="fw g-16px">
-               <ReduxInput label="Email" storePath="admin" fieldPath="email" />
-               <ReduxInput label="Password" type="password" storePath="admin" fieldPath="password" />
+               <ReduxInput path={path} fieldPath="email" label="Email" />
+               <ReduxInput path={path} fieldPath="password" label="Password" type="password" />
             </div>
             <MediumLabel text="Powers and account state:" />
             <div className="fw g-16px">

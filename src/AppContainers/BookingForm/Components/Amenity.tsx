@@ -1,8 +1,8 @@
 import { tw } from 'tailwind-multi-class'
-import { amenitiesIcons, amenitiesText } from '../../../Data/amenities'
+import { TAmenity, amenitiesIcons, amenitiesText } from '../../../Data/amenities'
 
 
-const Amenity = ({ amenity }) => {
+const Amenity = ({ amenity }: { amenity: TAmenity }) => {
    const Icon = amenitiesIcons[amenity]
    return (
       <div className={tw(

@@ -5,23 +5,7 @@ import { addExtensions } from './extensionsPlugin'
 import { microTailwind, microTailwindExperimental } from './microTailwindPlugin'
 import colors from 'tailwindcss/colors'
 import { tw, twTransform } from 'tailwind-multi-class'
-
-
-const theme = {
-   white: '#FFFFFF',
-
-}
-
-const backgroundsPalette = {
-
-}
-const bordersPalette = {
-
-}
-
-const textPalette = {
-
-}
+import { addUtilitesWithDarkMode } from './utilitiesWithDarkMode'
 
 
 
@@ -75,6 +59,9 @@ export default {
    },
    darkMode: 'class',
    theme: {
+      tc: {
+         'black': '#222'
+      },
       colors: {
          // backgrounds
          'bg-white-fff': 'rgba(var(--bg-white-fff))',
@@ -193,6 +180,7 @@ export default {
          ...colors
       },
       extend: {
+
          boxShadow: {
             'profile': '0px 20px 30px #00000014',
             'card': '0px 4px 4px #00000005',
@@ -215,17 +203,30 @@ export default {
    plugins: [
       plugin(microTailwind),
       plugin(microTailwindExperimental),
+      plugin(addUtilitesWithDarkMode(({ addUtility }) => {
+
+         addUtility('tc', 'color', {
+            black: ['#111111', '#cccccc'],
+            grey: ['#456456', '#dcbdcb'],
+            white: ['#aaaaaa', '#111111']
+         })
+
+         addUtility('bg', 'backgroundColor', {
+            black: ['#222', '#eee'],
+         })
+
+         addUtility('bc', 'borderColor', {
+            black: ['#222', '#eee'],
+         })
+
+
+      })),
       plugin(({ addComponents, addBase }) => {
+
          addBase({
             svg: {
                '@apply h-24px w-24px': {}
             },
-            '.dark': {
-               '.tc-text-dark': {
-                  'color': '#fff'
-               }
-            }
-
          });
          // fonts
          addComponents({

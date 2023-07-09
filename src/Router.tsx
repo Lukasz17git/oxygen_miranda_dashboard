@@ -3,7 +3,7 @@ import WebLayout from './AppLayouts/WebLayout.jsx'
 import DashboardLayout from './AppLayouts/DashboardLayout.jsx'
 import Overviews from './AppPages/Overview.jsx'
 import BookingsTable from './AppContainers/Table/BookingsTable.jsx'
-import BookingForm from './AppContainers/BookingForm/BookingForm.jsx'
+import BookingForm from './AppContainers/BookingForm/BookingForm.js'
 import AdminForm from './AppContainers/UserForm/AdminForm.jsx'
 import EmployeeForm from './AppContainers/UserForm/EmployeeForm.jsx'
 import LoginCard from './AppContainers/LoginCard/LoginCard.jsx'
@@ -11,10 +11,11 @@ import UsersTable from './AppContainers/Table/UsersTable.jsx'
 import RoomsTable from './AppContainers/Table/RoomsTable.jsx'
 import RoomForm from './AppContainers/RoomForm/RoomForm.jsx'
 import Contacts from './AppPages/Contacts.jsx'
-import wait from './Utils/wait'
-import { getAdminDataThunk } from './Store/Slices/Users/adminSlice'
+import wait from './Utils/wait.js'
+import { getAdminDataThunk } from './Store/Slices/Users/adminSlice.js'
+import { StoreType } from './Store/store.js'
 
-const authenticationLoader = (store) => async () => {
+const authenticationLoader = (store: StoreType) => async () => {
 
    const isAuthenticated = store.getState().ui.isAuthenticated
 
@@ -28,12 +29,13 @@ const authenticationLoader = (store) => async () => {
    return null
 }
 
-const fetchData = (store, thunk) => async () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fetchData = (store: StoreType, thunk: (...p: any[]) => any) => async () => {
    await store.dispatch(thunk())
    return null
 }
 
-const createRouter = (store) => createBrowserRouter(
+const createRouter = (store: StoreType) => createBrowserRouter(
    createRoutesFromElements(
       <Route>
 

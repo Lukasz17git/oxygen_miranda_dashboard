@@ -1,5 +1,5 @@
 
-export const getFullDate = (date) => {
+export const getFullDate = (date: string | number) => {
    return new Date(date).toLocaleDateString(undefined, {
       day: '2-digit',
       month: 'short',
@@ -10,7 +10,7 @@ export const getFullDate = (date) => {
 
 }
 
-export const getDayMonthYear = (date) => {
+export const getDayMonthYear = (date: string | number) => {
    return new Date(date).toLocaleDateString(undefined, {
       day: '2-digit',
       month: 'short',
@@ -18,7 +18,7 @@ export const getDayMonthYear = (date) => {
    })
 }
 
-export const getTime = (date) => {
+export const getTime = (date: string | number) => {
    return new Date(date).toLocaleTimeString(undefined, {
 
    })

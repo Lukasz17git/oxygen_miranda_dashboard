@@ -1,6 +1,6 @@
 
 
-const calculateTimeAgo = (time) => {
+const calculateTimeAgo = (time: number) => {
    const currentTime = Date.now()
    const elapsedTimeInMs = currentTime - time
 

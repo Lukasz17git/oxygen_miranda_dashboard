@@ -1,7 +1,42 @@
 import { nanoid } from "nanoid"
-import { amenities } from "../Data/amenities"
+import { TAmenities, TAmenity, amenities } from "../Data/amenities"
 
-const roomTypes = ['single', 'double', 'superior', 'suite']
+type GuestType = {
+   // id: string, no hace falta no?
+   name: string,
+   lastname: string,
+   profileUrl: string,
+}
+
+
+type BookingType = {
+   id: string, // he movido el id del guest a aqui, tiene más sentido
+   orderDate: number,
+   inDate: number,
+   outDate: number,
+   // state: 'in' | 'out' | 'progress', //no hace falta no?
+   specialRequest: string,
+   guest: GuestType,
+}
+
+type RoomType = {
+   id?: string,
+   name?: string,
+   type?: 'single' | 'double' | 'superior' | 'suite',
+   number?: number | string, //or string?
+   price?: number, // integer
+   discount?: number, //integer 0-100
+   offer?: boolean,
+   status?: 'available' | 'occupied', //no hace falta no?
+   description?: string,
+   cancellationPolicy?: string,
+
+   amenities: TAmenities,
+   photos: string[],
+
+   bookings?: BookingType[]
+
+}
 
 export const roomTypesText = {
    single: 'Single Bed',
@@ -10,7 +45,7 @@ export const roomTypesText = {
    suite: 'Suite'
 }
 
-const rooms = [
+const rooms: RoomType[] = [
    {
       id: '1',
       photos: ['', '', ''],
@@ -140,9 +175,9 @@ rooms.forEach(room => {
    room.id = nanoid()
    room.status = Math.random() >= 0.5 ? 'available' : 'occupied'
    room.photos[0] = `/Images/hotel-${Math.floor(Math.random() * 8) + 1}.jpg`
-   let amenities = {}
+   const amenities = {} as TAmenities
    for (const key of Object.keys(room.amenities)) {
-      amenities[key] = (Math.random() >= 0.5)
+      amenities[key as TAmenity] = (Math.random() >= 0.5)
    }
    room.amenities = amenities
 })

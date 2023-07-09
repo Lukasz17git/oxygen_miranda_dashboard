@@ -1,7 +1,9 @@
+import { ReactNode } from "react"
 import Img from "../../AppComponents/Img"
 import CloseModal from "./CloseModal"
 
-const ProfileWrapper = ({ imageUrl, children, closeModal }) => {
+type TProfileWrapperProp = { imageUrl?: string, children?: ReactNode, closeModal: () => unknown }
+const ProfileWrapper = ({ imageUrl, children, closeModal }: TProfileWrapperProp) => {
    return (
       <div className="frc g-16px">
          <Img src={imageUrl || '/CriticalIcons/person.svg'} className="h-48px w-48px cover" />

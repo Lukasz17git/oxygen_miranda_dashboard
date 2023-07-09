@@ -1,7 +1,20 @@
 import { nanoid } from "nanoid"
 
-
-const bookings = [
+type Booking = {
+   id?: string;
+   customer: {
+      name: string;
+      imageUrl: string;
+      id: string;
+   };
+   orderDate: number;
+   inDate: number;
+   outDate: number;
+   request: string;
+   roomType: string;
+   status: string;
+}
+const bookings: Booking[] = [
    {
       customer: {
          name: 'Jessica Thompson',

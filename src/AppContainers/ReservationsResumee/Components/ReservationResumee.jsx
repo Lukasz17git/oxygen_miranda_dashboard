@@ -18,11 +18,14 @@ const ReservationResumee = ({ index }) => {
       <div className="w-100% frc g-16px">
          <Img src={data.room.src} className="h-110px w-160px br-6px cover" />
          <div className="fcnb h-100% py-8px">
-            <b className="tf-app-semibold tc-text-dark ts-20px">{data.room.name}</b>
+            <b className="tf-app-semibold ts-20px ">{data.room.name}</b>
             <div className="frc g-12px" >
                <Img src={data.client.photo || '/CriticalIcons/person.svg'} className="h-32px w-32px cover" />
                <b className="tf-app-semibold ts-14px">{data.client.name}</b>
-               <q className="pl-4px tf-app-light ts-14px tc-text-dark">{timeAgo}</q>
+
+
+               <q className="text-color-black">{timeAgo}</q>
+
             </div>
          </div>
          <div className={`px-12px min-h-40px min-w-40px frcc tc-white ml-a br-8px ${reservationStatus[data.room.status]}`}>

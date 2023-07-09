@@ -7,8 +7,8 @@ import { RiDeleteBin4Fill } from "react-icons/ri"
 import { TiTick } from "react-icons/ti"
 import { tw } from "tailwind-multi-class"
 
-
-const Comment = ({ index, openCommentModal, className }) => {
+type TCommentProp = { index: number, openCommentModal: (...p: unknown[]) => unknown, className?: string }
+const Comment = ({ index, openCommentModal, className }: TCommentProp) => {
 
    const comment = comments[index]
    const timeAgo = calculateTimeAgo(comment.date)

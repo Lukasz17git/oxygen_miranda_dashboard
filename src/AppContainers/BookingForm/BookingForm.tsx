@@ -3,14 +3,14 @@ import MiniLabel from "./Components/MiniLabel"
 import Slider from "./Components/Slider"
 import { getFullDate, getDayMonthYear } from "../../Utils/formatDate"
 import { tw } from "tailwind-multi-class"
-import { amenities } from "../../Data/amenities"
+import { TAmenity, amenitiesList } from "../../Data/amenities"
 import Amenity from "./Components/Amenity"
 
 
 const BookingForm = () => {
    const name = 'Roberto Mansini'
 
-   const availableAmenities = Object.keys(amenities).filter(() => Math.random() >= 0.5)
+   const availableAmenities: TAmenity[] = amenitiesList.filter(() => Math.random() >= 0.5)
    const checkIn = Date.now() - 144555444
    const checkOut = Date.now() + 333444
 

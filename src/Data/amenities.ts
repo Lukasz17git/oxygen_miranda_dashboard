@@ -30,8 +30,11 @@ export const amenities = {
    smartSecurity: false,
    expertTeam: false
 }
+export type TAmenities = typeof amenities
+export type TAmenity = keyof TAmenities
 
-export const amenitiesList = Object.keys(amenities)
+// Preguntar
+export const amenitiesList = Object.keys(amenities) as TAmenity[]
 
 export const amenitiesIcons = {
    airConditioner: AirConditioner,

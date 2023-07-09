@@ -8,7 +8,7 @@ import RightButton from "./Components/RightButton"
 
 
 const Comments = () => {
-   const arrayHolder = Array(comments.length).fill().slice(-20)
+   const arrayHolder = Array(comments.length).fill(0).slice(-20)
 
    const [sliderRef, instanceRef] = useKeenSlider({
       mode: "snap",
@@ -32,7 +32,7 @@ const Comments = () => {
    const [hidePrev, setHidePrev] = useState(true)
    const [hideNext, setHideNext] = useState(comments.length < 4)
 
-   const [commentModalIndex, setCommentModalIndex] = useState(null)
+   const [commentModalIndex, setCommentModalIndex] = useState(null as null | number)
 
    return (
       <div className="pos-r bg-bg-white-fff br-16px s-card p-16px col-span-4">

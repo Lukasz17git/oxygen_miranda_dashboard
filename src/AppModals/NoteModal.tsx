@@ -4,8 +4,11 @@ import StrongLabel from "./Components/StrongLabel"
 import ProfileWrapper from "./Components/ProfileWrapper"
 import LightLabel from "./Components/LightLabel"
 
-
-const NoteModal = ({ data, closeModal }) => {
+type NoteModalProps = {
+   data: { request: string, customer: { id: string, name: string, imageUrl: string } },
+   closeModal: () => unknown
+}
+const NoteModal = ({ data, closeModal }: NoteModalProps) => {
 
    //TODO en este el layout y el pharagraph variaban, tengo que cambiarlo
 

@@ -1,7 +1,7 @@
 import { tw } from "tailwind-multi-class"
 
 
-const TextArea = ({ props }) => {
+const TextArea = (props: React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>) => {
    return (
       <textarea
          {...props}

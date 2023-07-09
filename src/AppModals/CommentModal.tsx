@@ -6,8 +6,9 @@ import StrongLabel from "./Components/StrongLabel"
 import LightLabel from "./Components/LightLabel"
 import ModalPharagraph from "./Components/ModalPharagraph"
 
-
-const CommentModal = ({ index, comment = comments[index], closeModal }) => {
+type CommentModalProps = { index: number, closeModal: () => unknown }
+const CommentModal = ({ index, closeModal }: CommentModalProps) => {
+   const comment = comments[index]
 
    return (
       <ModalLayout>

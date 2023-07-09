@@ -2,8 +2,8 @@ import { tw } from "tailwind-multi-class"
 import ActionIcon from "../AppComponents/ActionIcon"
 import Button from "../AppComponents/Button"
 
-
-const Navigation = ({ page, pages, setPage }) => {
+type TNavigationProps = { page: number, pages: number, setPage: (v: number) => unknown }
+const Navigation = ({ page, pages, setPage }: TNavigationProps) => {
 
    const isNextDisabled = pages === 1 || page + 1 === pages
    const isPrevDisabled = page === 0
@@ -22,7 +22,7 @@ const Navigation = ({ page, pages, setPage }) => {
    const paginationArray = Array(paginationLength).fill(startPageIndex)
 
    // TODO Me quede aqui
-   const isCurrentPage = (pageIndex, index) => pageIndex + index === page
+   const isCurrentPage = (pageIndex: number, index: number) => pageIndex + index === page
    return (
       <div className='frcc g-8px'>
          <NavigationSideButton text='Prev' onClick={prevPage} disabled={isPrevDisabled} />
@@ -49,8 +49,8 @@ const Navigation = ({ page, pages, setPage }) => {
    )
 }
 
-
-const NavigationSideButton = ({ text, disabled, onClick }) => {
+type TNavigationSideButtonProps = { text: string, disabled: boolean, onClick: (p: unknown) => unknown }
+const NavigationSideButton = ({ text, disabled, onClick }: TNavigationSideButtonProps) => {
    return (
       <Button
          disabled={disabled}
@@ -59,6 +59,8 @@ const NavigationSideButton = ({ text, disabled, onClick }) => {
          className={tw(
             'min-w-80px',
             disabled ? 'bg-transparent bc-green-dark/30 tc-green-dark/50' : 'bc-green-dark',
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             { dark: !disabled && 'bc-green-light/20 bg-dark-green' },
          )
          }

@@ -4,8 +4,8 @@ import StrongLabel from "./Components/StrongLabel"
 import LightLabel from "./Components/LightLabel"
 import ModalPharagraph from "./Components/ModalPharagraph"
 
-
-const DescriptionModal = ({ name, text, id, imageUrl, closeModal }) => {
+type DescriptionModalProps = { name: string, text: string, id: string, imageUrl: string, closeModal: () => unknown }
+const DescriptionModal = ({ name, text, id, imageUrl, closeModal }: DescriptionModalProps) => {
 
    return (
       <ModalLayout>

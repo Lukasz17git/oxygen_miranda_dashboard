@@ -1,8 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Flatten } from "../../Types/types";
-import { ModalAndFormType } from "./root.types";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState, selector, StorePaths } from "../store";
 
-const initialState = null
+const initialState = null as unknown
 
 const modalSlice = createSlice({
    name: 'modal',
@@ -11,10 +10,7 @@ const modalSlice = createSlice({
       clearModalAction: () => {
          return initialState
       },
-      setModalAction: (_, action: PayloadAction<ModalAndFormType>) => {
-         return action.payload
-      },
-      updateModalValueAction: (state, action: PayloadAction<{ stringPath: Flatten<typeof state>, value: unknown }>) => {
+      updateModalValueAction: (state, action: PayloadAction<{ stringPath: string, value: unknown }>) => {
          const { stringPath, value } = action.payload
          const path = stringPath.split('.')
          const prop = path.pop() as string //it cant be undefined
@@ -23,29 +19,23 @@ const modalSlice = createSlice({
          obj[prop as keyof typeof obj] = value as typeof obj[keyof typeof obj]
       }
       // maybe also add push item, and remove item from arrays
+   },
+   extraReducers(builder) {
+      builder.addCase(setModalThunk.fulfilled, (_, action) => {
+         return action.payload
+      })
    }
 })
 
+export const setModalThunk = createAsyncThunk(
+   'modal/setData',
+   (path: StorePaths, { getState }) => {
+      const state = getState() as RootState
+      const data = selector(path)(state)
+      return data
+   }
+)
+
 const modalReducer = modalSlice.reducer
 export default modalReducer
-export const { clearModalAction, setModalAction, updateModalValueAction } = modalSlice.actions
-
-
-
-
-/**
- *
- * 
-
-
-
-
-const createModalAction = (id: ModalIDsType, selector: SelectorType) =>
-   (dispatch: typeof store.dispatch, getState: typeof store.getState) =>
-      dispatch(setModalDataAction({ id, data: selector(getState()) }))
-
-export const setSettingsModalAction = () => createModalAction('settings', state => state.admin)
-
-
-
- */
+export const { clearModalAction, updateModalValueAction } = modalSlice.actions

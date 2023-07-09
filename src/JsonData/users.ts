@@ -1,7 +1,19 @@
 import { nanoid } from "nanoid"
 
+type TUser = {
+   id?: string,
+   name?: string,
+   lastname?: string,
+   email?: string,
+   phone?: string,
+   date?: string | number,
+   description?: string,
+   status?: string,
+   job?: string,
+   imageUrl?: string
+}
 
-const users = [
+const users: TUser[] = [
    {
       name: "Leonard",
       lastname: "Stockford",

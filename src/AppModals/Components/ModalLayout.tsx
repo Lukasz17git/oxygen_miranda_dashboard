@@ -1,7 +1,7 @@
 import { tw } from "tailwind-multi-class"
 
 
-const ModalLayout = ({ children }) => {
+const ModalLayout = ({ children }: { children: React.ReactNode }) => {
    return (
       <div className={tw(
          "pos-f z-1 transform-to-center p-24px pb-28px bw-1px",

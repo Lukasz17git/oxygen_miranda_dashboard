@@ -19,6 +19,7 @@ export const store = configureStore({
 })
 
 //Typings
+export type StoreType = typeof store
 export type RootState = ReturnType<typeof store.getState>
 export const useTypedDispatch = () => useDispatch<typeof store.dispatch>();
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -31,6 +32,7 @@ export const createSelectorFromStringPath = <T extends object>(path: Flatten<T>)
    if (typeof path !== 'string') throw new Error('Path should be string')
    if (!path) return state
    return path.split(".").reduce((current, key) => {
+      // eslint-disable-next-line no-prototype-builtins
       if (current?.hasOwnProperty(key)) return current[key as keyof typeof current]
       return undefined
    }, state)
