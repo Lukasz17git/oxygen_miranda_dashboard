@@ -1,14 +1,14 @@
 import CommentsSimplified from "../AppContainers/Comment/CommentsSimplified"
-import ContactsTable from "../AppContainers/Table/ContactsTable"
+import ReviewsTable from "../AppContainers/Table/ReviewsTable"
 
 
-const Contacts = () => {
+const Reviews = () => {
    return (
       <div className="h-100% grid w-100% grid-cols-1 grid-rows-contact">
          <CommentsSimplified />
-         <ContactsTable />
+         <ReviewsTable />
       </div>
    )
 }
 
-export default Contacts
+export default Reviews

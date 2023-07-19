@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, selector, StorePaths } from "../store";
+import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
 
 const initialState = null as unknown
 
@@ -29,10 +30,24 @@ const formSlice = createSlice({
 
 export const setFormThunk = createAsyncThunk(
    'form/setData',
-   (path: StorePaths, { getState }) => {
+   (pathOrInitialState: StorePaths | Record<string, any>, { getState }) => {
       const state = getState() as RootState
-      const data = selector(path)(state)
+      const data = typeof pathOrInitialState === 'string' ? selector(pathOrInitialState)(state) : pathOrInitialState
       return data
+   }
+)
+type SaveFormDataType = { pathOrInitialState: StorePaths | Record<string, any>, action: AnyAsyncThunk }
+export const executeSaveFormThunk = createAsyncThunk(
+   'form/saveData',
+   (payload: SaveFormDataType, { getState, dispatch }) => {
+      const store = getState() as RootState
+      const originalData = typeof payload.pathOrInitialState === 'string' ? selector(payload.pathOrInitialState)(store) : payload.pathOrInitialState
+      const updatedData = store.form
+      // const updates = compareDataAndGetChangedFieldsMaintainingId(originalData, updatedData)
+      const updates = updatedData
+      // @ts-ignore: next-line
+      dispatch(payload.action(updates))
+      // ASK
    }
 )
 

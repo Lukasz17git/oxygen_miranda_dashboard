@@ -10,21 +10,15 @@ import LoginCard from './AppContainers/LoginCard/LoginCard.jsx'
 import UsersTable from './AppContainers/Table/UsersTable.jsx'
 import RoomsTable from './AppContainers/Table/RoomsTable.jsx'
 import RoomForm from './AppContainers/RoomForm/RoomForm.jsx'
-import Contacts from './AppPages/Contacts.jsx'
-import wait from './Utils/wait.js'
-import { getAdminDataThunk } from './Store/Slices/Users/adminSlice.js'
+import Reviews from './AppPages/Reviews.js'
 import { StoreType } from './Store/store.js'
+import { getEmployeesThunk } from './Store/Slices/Users/employeesSlice.js'
 
 const authenticationLoader = (store: StoreType) => async () => {
 
-   const isAuthenticated = store.getState().ui.isAuthenticated
+   const isAuthenticated = store.getState().admin._id
 
-   await wait(500)
-
-   if (!isAuthenticated) {
-      alert(`User session expired, redirecting to login page`)
-      return redirect('/login')
-   }
+   if (!isAuthenticated) return redirect('/login')
 
    return null
 }
@@ -57,14 +51,13 @@ const createRouter = (store: StoreType) => createBrowserRouter(
                <Route path='new' element={<RoomForm />} />
                <Route path=':id' element={<RoomForm />} />
             </Route>
-            <Route path='contacts' element={<Contacts />} />
-            {/* <Route path='users' loader={fetchData(store, getEmployeesDataThunk)}> */}
-            <Route path='users'>
+            <Route path='reviews' element={<Reviews />} />
+            <Route path='users' loader={fetchData(store, getEmployeesThunk)}>
                <Route index element={<UsersTable />} />
                <Route path='new' element={<EmployeeForm />} />
                <Route path=':id' element={<EmployeeForm />} />
             </Route>
-            <Route path='settings' element={<AdminForm />} loader={fetchData(store, getAdminDataThunk)} />
+            <Route path='settings' element={<AdminForm />} />
          </Route>
       </Route>
    )

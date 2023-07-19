@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import adminReducer from "./Slices/Users/adminSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import employeesSlice from "./Slices/Users/employeesSlice";
-import { Flatten, NestedProperty } from "../Types/types";
+import { Flatten, NestedProperty } from "../Types/store";
 import uiReducer from "./RootSlices/uiSlice";
 import modalReducer from "./RootSlices/modalSlice";
 import formReducer from "./RootSlices/formSlice";
+import reviewsReducer from "./Slices/Reviews/reviewsSlice";
+import employeesReducer from "./Slices/Users/employeesSlice";
+import roomsReducer from "./Slices/Rooms/roomsSlice";
 
 export const store = configureStore({
    reducer: {
@@ -13,7 +15,9 @@ export const store = configureStore({
       // modal: modalReducer,
       form: formReducer,
       admin: adminReducer,
-      // employees: employeesSlice,
+      employees: employeesReducer,
+      reviews: reviewsReducer,
+      rooms: roomsReducer
    },
 
 })
@@ -21,7 +25,8 @@ export const store = configureStore({
 //Typings
 export type StoreType = typeof store
 export type RootState = ReturnType<typeof store.getState>
-export const useTypedDispatch = () => useDispatch<typeof store.dispatch>();
+export type DispatchType = typeof store.dispatch
+export const useTypedDispatch = () => useDispatch<DispatchType>();
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export type SelectorType = Parameters<typeof useTypedSelector>[0]
 

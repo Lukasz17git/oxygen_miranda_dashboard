@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { tw } from "tailwind-multi-class"
 import wait from '../../../Utils/wait'
 import { useDispatch } from "react-redux"
-import { authenticateAction } from "../../../Store/RootSlices/uiSlice"
+import { authenticateAdminThunk } from '../../../Store/Slices/Users/adminSlice'
+import { useTypedDispatch } from '../../../Store/store'
 
 export const LoginContext = createContext(null)
 
@@ -18,7 +19,7 @@ const initialReducerState = { email: '', password: '', isPending: false }
 
 const LoginForm = ({ children }) => {
 
-   const dispatch = useDispatch()
+   const dispatch = useTypedDispatch()
    const navigate = useNavigate()
 
    const [{ email, password, isPending }, dispatchState] = useReducer(loginReducer, initialReducerState)
@@ -40,19 +41,12 @@ const LoginForm = ({ children }) => {
       try {
          initialContextLoginValue.toggleIsPending()
 
-         await wait(200)
-
-         if (password.length !== 3) {
-            dispatchState({ type: 'password', payload: '' })
-            throw 'wrong credentials'
-         }
-
-         dispatch(authenticateAction())
+         await dispatch(authenticateAdminThunk({ email, password }))
 
          navigate("/")
 
       } catch (error) {
-         alert('wrong credentials, try with a password of length 3')
+         alert('wrong credentials')
       } finally {
          initialContextLoginValue.toggleIsPending()
       }

@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, SelectHTMLAttributes, useMemo } from 'react'
-import { StorePaths, selector, useTypedSelector } from '../Store/store'
-import { AnyAction } from 'redux'
+import { NestedStorePaths, StorePaths, selector, useTypedSelector } from '../Store/store'
 import { useDispatch } from 'react-redux'
+import { updateFormValueAction } from '../Store/RootSlices/formSlice'
 
-type SelectType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
+type SelectType<T extends StorePaths> = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
    label: string,
    optionsMap: Record<string, string | number>
    disableLabelAsOption?: boolean
@@ -13,11 +13,12 @@ type SelectType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTM
    optionClassName?: string
    invalidSelectClassName?: string
    invalidLabelClassName?: string
-   storePath: StorePaths,
-   dispatchAction: (v: unknown) => AnyAction
+   path: T
+   fieldPath: NestedStorePaths<T>
+
 }
 
-const Select = ({
+const Select = <T extends StorePaths>({
    label,
    optionsMap,
    disableLabelAsOption = false,
@@ -27,16 +28,21 @@ const Select = ({
    optionClassName,
    invalidSelectClassName,
    invalidLabelClassName,
-   storePath,
-   dispatchAction,
+   path,
+   fieldPath,
    ...props
-}: SelectType) => {
+}: SelectType<T>) => {
 
-   const value = useTypedSelector(selector(storePath)) as string
-   const idPath = storePath.slice(storePath.indexOf(".") + 1)
+   const value = useTypedSelector(state => {
+      const valueInsideForm = selector(`form.${fieldPath}` as StorePaths)(state)
+      const originalValue = selector(`${path}.${fieldPath}` as StorePaths)(state)
+      if (valueInsideForm !== undefined) return valueInsideForm
+      return originalValue
+   }) as string
+
    const dispatch = useDispatch()
    const setValue = (value: string) => {
-      dispatch(dispatchAction({ path: idPath, value }))
+      dispatch(updateFormValueAction({ stringPath: fieldPath, value }))
    }
 
    const options = useMemo(() => Object.keys(optionsMap), [optionsMap])

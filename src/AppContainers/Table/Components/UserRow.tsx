@@ -7,15 +7,17 @@ import SmallText from "./SmallText"
 import CellText from "./CellText"
 import DescriptionModal from "../../../AppModals/DescriptionModal"
 import EditButton from "./EditButton"
+import { UserStatusType, UserType } from "../../../Store/Slices/Users/users.types"
 
-const stateStyle = {
+const stateStyle: Record<UserStatusType, string> = {
    active: 'tc-text-green-light-5AD07A',
-   inactive: 'tc-text-red-E23428'
+   inactive: 'tc-text-red-E23428',
+   vacation: 'tc-text-red-E23428' //CHANGE
 }
 
-const UserRow = ({ data, className }) => {
+const UserRow = ({ data, className }: { data: UserType, className?: string }) => {
 
-   const { id, name, lastname, email, phone, description, state, profileUrl, dischargeDate } = data
+   const { _id, name, lastname, email, phone, description, status, profileImg, dischargeDate } = data
    const fullname = lastname ? `${name} ${lastname}` : name
 
    const [showNoteModal, setShowNoteModal] = useState(false)
@@ -23,10 +25,10 @@ const UserRow = ({ data, className }) => {
    return (
       <div className={`${className} pos-r min-h-72px h:s-table-row h:bg-bg-white-fff`}>
          <div className="frc g-16px col-span-2 mr-a ml-24px">
-            <Img src={profileUrl || '/CriticalIcons/person.svg'} className="h-32px w-32px cover fs0" />
+            <Img src={profileImg || '/CriticalIcons/person.svg'} className="h-32px w-32px cover fs0" />
             <div className="fcnb h-100% py-8px">
                <b className="tf-app-semibold tc-text-black-262626">{fullname}</b>
-               <SmallText text={'#' + id.slice(0, 8)} />
+               <SmallText text={'#' + _id.slice(0, 8)} />
             </div>
          </div>
          <CellBigDate date={dischargeDate} />
@@ -40,14 +42,14 @@ const UserRow = ({ data, className }) => {
                </ActionIcon>
             )}
          </div>
-         <CellBold text={state} className={`tcap ${stateStyle[state]}`} />
-         <EditButton id={id} />
+         <CellBold text={status} className={`tcap ${stateStyle[status]}`} />
+         <EditButton id={_id} />
          {showNoteModal && (
             <DescriptionModal
                name={fullname}
                text={description}
-               id={id}
-               imageUrl={profileUrl}
+               id={_id}
+               imageUrl={profileImg}
                closeModal={() => setShowNoteModal(false)}
             />
          )}

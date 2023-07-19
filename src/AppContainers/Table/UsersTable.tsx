@@ -36,10 +36,11 @@ const UsersTable = () => {
 
    // const numberOfEmployeesToShow = employeesArrayToShow.filter(v => v).length
 
-   const numberOfEmployees = useTypedSelector(state => state.employees.list.length)
+   const numberOfEmployees = useTypedSelector(state => state.employees.length)
+   console.log('numberOfEmployees', numberOfEmployees)
    const employeesArrayToShow = useTypedSelector(state => {
-      const employees = state.employees.list
-      const byLabelFilter = labelFilter ? employees.filter(employee => employee.state === labelFilter) : employees
+      const employees = state.employees
+      const byLabelFilter = labelFilter ? employees.filter(employee => employee.status === labelFilter) : employees
       const bySearchFilter = searchFilter ? byLabelFilter.filter(({ name, lastname }) => `${name} ${lastname}`.toLowerCase().includes(searchFilter)) : byLabelFilter
       return bySearchFilter
    }, shallowEqual)

@@ -1,6 +1,6 @@
 
 
-const FormSection = ({ label, children }) => {
+const FormSection = ({ label, children }: { label: string, children: React.ReactNode }) => {
    return (
       <div className="my-20px fc g-8px">
          <b className="tf-app-semibold tc-text-dark-393939">{label}</b>

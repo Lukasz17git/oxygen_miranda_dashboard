@@ -138,10 +138,6 @@ export default {
          'btn-main-tc--h': '',
 
 
-
-
-
-
          // END
 
          'green-pastel': '#EEF9F2',

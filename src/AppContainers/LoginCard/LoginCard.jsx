@@ -7,8 +7,6 @@ import Submit from "./Components/Submit"
 
 const LoginCard = () => {
 
-   console.log('rendered login card?')
-
    return (
       <LoginForm>
          <h1 className={tw("ts-32px tf-app-semibold tc-green-dark tc lh-1.3em", { dark: "tc-green-light" })}>
@@ -25,4 +23,5 @@ const LoginCard = () => {
       </LoginForm>
    )
 }
+
 export default LoginCard

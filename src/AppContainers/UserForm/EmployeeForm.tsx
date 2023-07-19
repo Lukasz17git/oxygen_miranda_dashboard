@@ -8,49 +8,51 @@ import { useNavigate, useParams } from "react-router-dom"
 import MediumLabel from "./Components/MediumLabel"
 import { tw } from "tailwind-multi-class"
 import { useTypedSelector } from "../../Store/store"
-// import { updateEmployeeFieldAction, resetEmployeeAction, resetNewEmployeeAction, saveEmployeeThunk, createNewEmployeeThunk } from '../../Store/Slices/employeesSlice'
-import { useDispatch } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
+import useReduxForm from "../../Store/useReduxForm"
+import { createNewEmployeeThunk, updateEmployeeThunk } from "../../Store/Slices/Users/employeesSlice"
+import { initialEmployeeState } from "../../Store/Slices/Users/users.data"
+import { UserStatusType, UsersJobType } from "../../Store/Slices/Users/users.types"
 
+
+const redirectRoute = '/users'
 
 const EmployeeForm = () => {
 
-   const route = '/users'
    const navigate = useNavigate()
-   const dispatch = useDispatch()
+   const redirect = useCallback(() => {
+      navigate(redirectRoute)
+      window.scrollTo(0, 0)
+   }, [navigate])
 
    const { id } = useParams()
    const isNewForm = id === undefined
-   const index = useTypedSelector(state => !isNewForm && state.employees.list.findIndex(employee => employee.id === id))
+   const index = useTypedSelector(state => !isNewForm && state.employees.findIndex(employee => employee._id === id))
    const notFoundId = index === -1
 
    useEffect(() => {
-      console.log('rendered effect')
-      if (notFoundId) navigate(route)
-   }, [notFoundId, navigate])
+      if (notFoundId) redirect()
+   }, [notFoundId, redirect])
 
-   const storePath = isNewForm ? 'employees.newForm' : `employees.list.${index}`
+   const { path, saveForm } = useReduxForm(`employees.${index as number}`, isNewForm ? createNewEmployeeThunk : updateEmployeeThunk, isNewForm ? initialEmployeeState : undefined)
 
-   const cancelHandler = () => {
-      // dispatch(isNewForm ? resetNewEmployeeAction() : resetEmployeeAction())
-      navigate(route)
-      window.scrollTo(0, 0)
+   const cancelHandler = () => redirect()
+
+   const saveHandler = async () => {
+      await saveForm()
+      redirect()
    }
 
-   const saveHandler = () => {
-      // dispatch(isNewForm ? createNewEmployeeThunk() : saveEmployeeThunk())
-      navigate(route)
-      window.scrollTo(0, 0)
-   }
-
-   const jobTypeOptions = {
+   const jobTypeOptions: Record<UsersJobType, string> = {
       receptionist: 'Receptionist',
-      rooms_service: 'Rooms Service'
+      roomsService: 'Rooms Service',
+      manager: 'Manager'
    }
 
-   const accountStateOptions = {
+   const accountStateOptions: Record<UserStatusType, string> = {
       active: 'Active',
-      inactive: 'Inactive'
+      inactive: 'Inactive',
+      vacation: 'Vacation'
    }
 
    return !notFoundId && (
@@ -77,43 +79,43 @@ const EmployeeForm = () => {
             </div>
             <MediumLabel text="Employee data:" />
             <div className="fw g-16px">
-               {/* <ReduxInput required label="Name" storePath={`${storePath}.name`} dispatchAction={updateEmployeeFieldAction} />
-               <ReduxInput required label="Lastname" storePath={`${storePath}.lastname`} dispatchAction={updateEmployeeFieldAction} />
-               <ReduxInput label="Contact Phone" storePath={`${storePath}.phone`} dispatchAction={updateEmployeeFieldAction} /> */}
+               <ReduxInput path={path} fieldPath="name" required label="Name" />
+               <ReduxInput path={path} fieldPath="lastname" required label="Lastname" />
+               <ReduxInput path={path} fieldPath="phone" label="Contact Phone" />
             </div>
-            <MediumLabel text="Credentials:" />
+            <MediumLabel text="Aditional Data:" />
             <div className="fw g-16px">
-               {/* <ReduxInput label="Email" storePath={`${storePath}.email`} dispatchAction={updateEmployeeFieldAction} /> */}
+               <ReduxInput path={path} fieldPath="email" label="Email" />
             </div>
             <MediumLabel text="Powers and account state:" />
             <div className="fw g-16px">
                <ReduxSelect
+                  path={path}
+                  fieldPath='job'
                   label="Job"
                   required
                   optionsMap={jobTypeOptions}
                   disableLabelAsOption={true}
-                  storePath={`${storePath}.job`}
-                  // dispatchAction={updateEmployeeFieldAction}
                   className="min-w-160px"
                />
                <ReduxSelect
+                  path={path}
+                  fieldPath="status"
                   label="Account State"
                   required
                   optionsMap={accountStateOptions}
                   disableLabelAsOption={true}
-                  storePath={`${storePath}.state`}
-                  // dispatchAction={updateEmployeeFieldAction}
                   className="min-w-160px"
                />
                <ReduxInput
+                  path={path}
+                  fieldPath="dischargeDate"
                   label="Discharge date"
                   type="date"
-                  storePath={`${storePath}.dischargeDate`}
-                  // dispatchAction={updateEmployeeFieldAction}
                />
             </div>
             <MediumLabel text="Description:" />
-            {/* <ReduxTextarea storePath={`${storePath}.description`} dispatchAction={updateEmployeeFieldAction} /> */}
+            <ReduxTextarea path={path} fieldPath="description" />
             <div className="frca max-w-500px m-a mt-24px">
                <Button
                   onClick={cancelHandler}

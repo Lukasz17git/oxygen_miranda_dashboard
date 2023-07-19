@@ -1,47 +1,29 @@
+import { WithoutId } from "../../../Types/mongo"
+import { UserType } from "./users.types"
 
-export type UserStateType = 'active' | 'inactive' | 'vacation'
-
-
-///////////////////////////////////////////
-//
-// ADMIN
-//
-///////////////////////////////////////////
-
-export const initialAdminState = {
-   id: '',
-   createdAt: 0,
+export const initialAdminState: UserType = {
+   _id: '',
    name: '',
    lastname: '',
    email: '',
    password: '',
    phone: '',
    description: '',
-   state: 'active' as UserStateType,
-   profileUrl: '',
+   status: 'active',
+   job: 'manager',
+   profileImg: '',
+   dischargeDate: ''
 }
-export type AdminType = typeof initialAdminState
 
-
-///////////////////////////////////////////
-//
-// EMPLOYEES
-//
-///////////////////////////////////////////
-
-
-export type EmployeeJobsType = 'receptionist' | 'rooms_service'
-
-export const initialEmployeeState = {
+export const initialEmployeeState: WithoutId<UserType> = {
    name: '',
    lastname: '',
    email: '',
    phone: '',
-   dischargeDate: '2023-06-09',
+   dischargeDate: '',
    description: '',
-   state: 'active' as UserStateType,
-   job: 'receptionist' as EmployeeJobsType,
-   profileUrl: ''
+   status: 'active',
+   job: 'receptionist',
+   profileImg: '',
+   password: ''
 }
-
-export type EmployeeType = typeof initialEmployeeState

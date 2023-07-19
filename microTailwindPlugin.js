@@ -3,9 +3,6 @@ import flattenColorPalette from 'tailwindcss/src/util/flattenColorPalette'
 import { formatColor, parseColor } from 'tailwindcss/src/util/color'
 
 
-
-
-
 const colorWithOpacity = (color, opacityVariableName, returnPropertiesCallback) => {
    if (typeof color === 'function') {
       const withOpacity = color({ opacityVariable: opacityVariableName, opacityValue: `var(${opacityVariableName})` })

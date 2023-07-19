@@ -6,29 +6,27 @@ import Button from "../../AppComponents/Button"
 import { useNavigate } from "react-router-dom"
 import MediumLabel from "./Components/MediumLabel"
 import { tw } from "tailwind-multi-class"
-import { } from "../../Store/Slices/Users/adminSlice"
-import { useDispatch } from "react-redux"
+import { saveAdminThunk } from "../../Store/Slices/Users/adminSlice"
 import useReduxForm from '../../Store/useReduxForm'
+import { useCallback } from "react"
 
-
+const redirectRoute = '/'
 
 const AdminForm = () => {
 
-   const path = useReduxForm('admin')
-
-   const dispatch = useDispatch()
    const navigate = useNavigate()
-
-   const cancelHandler = () => {
-      // dispatch(resetAdminFormAction())
-      navigate('/')
+   const redirect = useCallback(() => {
+      navigate(redirectRoute)
       window.scrollTo(0, 0)
-   }
+   }, [navigate])
 
-   const saveHandler = () => {
-      // dispatch(saveAdminThunk())
-      navigate('/')
-      window.scrollTo(0, 0)
+   const { path, saveForm } = useReduxForm('admin', saveAdminThunk)
+
+   const cancelHandler = () => redirect()
+
+   const saveHandler = async () => {
+      await saveForm()
+      redirect()
    }
 
    const accountStateOptions = {
@@ -60,7 +58,7 @@ const AdminForm = () => {
             </div>
             <MediumLabel text="About you:" />
             <div className="fw g-16px">
-               <ReduxInput path={path} fieldPath="email" required label="Name" />
+               <ReduxInput path={path} fieldPath="name" required label="Name" />
                <ReduxInput path={path} fieldPath="lastname" required label="Lastname" />
                <ReduxInput path={path} fieldPath="phone" label="Contact Phone" />
             </div>
@@ -72,16 +70,17 @@ const AdminForm = () => {
             <MediumLabel text="Powers and account state:" />
             <div className="fw g-16px">
                <ReduxSelect
+                  path={path}
                   label="Account State"
                   required
                   optionsMap={accountStateOptions}
                   disableLabelAsOption={true}
-                  storePath="admin.state"
+                  fieldPath="status"
                   className="min-w-160px"
                />
             </div>
             <MediumLabel text="Description:" />
-            <ReduxTextarea storePath="admin.description" />
+            <ReduxTextarea path={path} fieldPath="description" />
             <div className="frca max-w-500px m-a mt-24px">
                <Button
                   onClick={cancelHandler}

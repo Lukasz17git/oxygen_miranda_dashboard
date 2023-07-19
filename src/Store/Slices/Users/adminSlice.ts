@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import wait from '../../../Utils/wait.js'
-import { getDataFromLocalStore, updateDataToLocalStore } from '../../../Utils/localStore.js'
-import { AdminType, initialAdminState } from "./users.data.js";
-
+import { initialAdminState } from "./users.data.js";
+import { UserType } from "./users.types.js";
+import { loginUri, usersUri } from "../../../Uris/uris.js";
+import customFetch from "../../../Utils/customFetch.js";
 
 
 const adminSlice = createSlice({
@@ -10,34 +10,41 @@ const adminSlice = createSlice({
    initialState: initialAdminState,
    reducers: {},
    extraReducers(builder) {
-      builder.addCase(getAdminDataThunk.fulfilled, (_, action) => {
+      builder.addCase(authenticateAdminThunk.fulfilled, (_, action) => {
          return action.payload
       })
-
-      builder.addCase(saveAdminThunk.fulfilled, (_, action) => {
-         return action.payload
+      builder.addCase(saveAdminThunk.fulfilled, (state, action) => {
+         const updatedData = { ...state, ...action.payload }
+         return updatedData
       })
    },
 })
 
-export const getAdminDataThunk = createAsyncThunk(
-   'admin/get',
-   async () => {
-      await wait(1000)
-      console.log('getting data')
-      const dataFromServer: AdminType | null = getDataFromLocalStore('miranda/admin')
-      console.log(dataFromServer)
-      const data = dataFromServer || initialAdminState
-      return data
+export const authenticateAdminThunk = createAsyncThunk(
+   'admin/authenticate',
+   async (loginData: Pick<UserType, 'email' | 'password'>, { dispatch }) => {
+      const adminData = await customFetch<UserType>(dispatch, loginUri, {
+         method: 'POST',
+         credentials: "include",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(loginData)
+      })
+      return adminData
    }
 )
 
 export const saveAdminThunk = createAsyncThunk(
    'admin/save',
-   async (updates: AdminType) => {
-      await wait(1000)
-      const dataFromServer = updateDataToLocalStore('miranda/admin', updates)
-      return dataFromServer
+   async (updatesWithId: UserType, { dispatch }) => {
+      const { _id, ...updates } = updatesWithId
+      await customFetch<UserType>(dispatch, usersUri, {
+         method: 'PUT',
+         credentials: "include",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(updates)
+      })
+      console.log('updates', updates)
+      return updates
    }
 )
 

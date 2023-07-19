@@ -10,7 +10,7 @@ import TableContentLayout from './Components/TableContentLayout'
 
 import comments from '../../JsonData/comments'
 
-const ContactsTable = () => {
+const ReviewsTable = () => {
 
    const ammountPerPage = 8
    const [page, setPage] = useState(0)
@@ -86,4 +86,4 @@ const ContactsTable = () => {
       </div >
    )
 }
-export default ContactsTable
+export default ReviewsTable

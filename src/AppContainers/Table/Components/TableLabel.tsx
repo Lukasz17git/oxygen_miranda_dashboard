@@ -1,5 +1,5 @@
 
-type TableLabelType = { text: string, className: string }
+type TableLabelType = { text: string, className?: string }
 
 const TableLabel = ({ text, className }: TableLabelType) => {
    return (
