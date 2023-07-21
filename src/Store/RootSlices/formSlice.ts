@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, selector, StorePaths } from "../store";
 import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
+import compareDataAndGetChangedFieldsMaintainingId from "../../Utils/compareDataAndGetChangedFieldsMaintainingId";
 
-const initialState = null as unknown
+const initialState = null as null | Record<string, any>
 
 const formSlice = createSlice({
    name: 'form',
@@ -32,7 +33,7 @@ export const setFormThunk = createAsyncThunk(
    'form/setData',
    (pathOrInitialState: StorePaths | Record<string, any>, { getState }) => {
       const state = getState() as RootState
-      const data = typeof pathOrInitialState === 'string' ? selector(pathOrInitialState)(state) : pathOrInitialState
+      const data = typeof pathOrInitialState === 'string' ? selector(pathOrInitialState)(state) as Record<string, any> : pathOrInitialState
       return data
    }
 )
@@ -41,13 +42,14 @@ export const executeSaveFormThunk = createAsyncThunk(
    'form/saveData',
    (payload: SaveFormDataType, { getState, dispatch }) => {
       const store = getState() as RootState
-      const originalData = typeof payload.pathOrInitialState === 'string' ? selector(payload.pathOrInitialState)(store) : payload.pathOrInitialState
+      const originalData = typeof payload.pathOrInitialState === 'string' && selector(payload.pathOrInitialState)(store) as Record<string, any>
       const updatedData = store.form
-      // const updates = compareDataAndGetChangedFieldsMaintainingId(originalData, updatedData)
-      const updates = updatedData
+      if (!updatedData) return
+      const updates = originalData ? compareDataAndGetChangedFieldsMaintainingId(originalData, updatedData) : updatedData
+      const updateKeys = Object.keys(updates)
+      if (updateKeys.length === 0 || (updateKeys.length === 1 && updateKeys[0] === '_id')) return
       // @ts-ignore: next-line
       dispatch(payload.action(updates))
-      // ASK
    }
 )
 

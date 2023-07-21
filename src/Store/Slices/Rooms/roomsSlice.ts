@@ -33,6 +33,7 @@ export const getRoomsThunk = createAsyncThunk(
          method: 'GET',
          credentials: "include",
       })
+      console.log('rooms', rooms)
       return rooms
    }
 )
@@ -40,12 +41,14 @@ export const getRoomsThunk = createAsyncThunk(
 export const createNewRoomThunk = createAsyncThunk(
    'rooms/post',
    async (roomData, { dispatch }) => {
+      console.log('roomData', roomData)
       const newRoom = await customFetch<RoomType>(dispatch, roomsUri, {
          method: 'POST',
          credentials: "include",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(roomData)
       })
+      console.log('newRoom', newRoom)
       return newRoom
    }
 )
@@ -54,7 +57,7 @@ export const updateRoomThunk = createAsyncThunk(
    'rooms/put',
    async (updatesWithId: RoomType, { dispatch }) => {
       const { _id, ...updates } = updatesWithId
-      await customFetch(dispatch, `${roomsUri}${_id}`, {
+      await customFetch(dispatch, `${roomsUri}/${_id}`, {
          method: 'PUT',
          credentials: "include",
          headers: { "Content-Type": "application/json" },
@@ -67,7 +70,7 @@ export const updateRoomThunk = createAsyncThunk(
 export const deleteRoomThunk = createAsyncThunk(
    'rooms/delete',
    async (roomId: string, { dispatch }) => {
-      await customFetch(dispatch, `${roomsUri}${roomId}`, {
+      await customFetch(dispatch, `${roomsUri}/${roomId}`, {
          method: 'DELETE',
          credentials: "include",
       })
@@ -93,7 +96,7 @@ export const updateBookingThunk = createAsyncThunk(
    'bookings/put',
    async (updatesWithId: BookingType, { dispatch }) => {
       const { _id, ...updates } = updatesWithId
-      await customFetch(dispatch, `${bookingsUri}${_id}`, {
+      await customFetch(dispatch, `${bookingsUri}/${_id}`, {
          method: 'PUT',
          credentials: "include",
          headers: { "Content-Type": "application/json" },
@@ -106,7 +109,7 @@ export const updateBookingThunk = createAsyncThunk(
 export const deleteBookingThunk = createAsyncThunk(
    'bookings/delete',
    async (bookingId: string, { dispatch }) => {
-      await customFetch(dispatch, `${bookingsUri}${bookingId}`, {
+      await customFetch(dispatch, `${bookingsUri}/${bookingId}`, {
          method: 'DELETE',
          credentials: "include",
       })

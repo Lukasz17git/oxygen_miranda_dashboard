@@ -14,7 +14,6 @@ import { createNewEmployeeThunk, updateEmployeeThunk } from "../../Store/Slices/
 import { initialEmployeeState } from "../../Store/Slices/Users/users.data"
 import { UserStatusType, UsersJobType } from "../../Store/Slices/Users/users.types"
 
-
 const redirectRoute = '/users'
 
 const EmployeeForm = () => {
@@ -26,7 +25,7 @@ const EmployeeForm = () => {
    }, [navigate])
 
    const { id } = useParams()
-   const isNewForm = id === undefined
+   const isNewForm = id === 'new'
    const index = useTypedSelector(state => !isNewForm && state.employees.findIndex(employee => employee._id === id))
    const notFoundId = index === -1
 
@@ -55,7 +54,8 @@ const EmployeeForm = () => {
       vacation: 'Vacation'
    }
 
-   return !notFoundId && (
+   if (notFoundId) return <></>
+   return (
       <div className={tw(
          "p-24px br-16px bg-bg-white-fff",
          "bg-gradient-to-t from-green-pastel/0 via-green-pastel/1 to-green-pastel/5"

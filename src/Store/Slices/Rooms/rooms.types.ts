@@ -1,6 +1,7 @@
 
 // export type RoomStatusType = 'available' | 'occupied'
-// export type BookingStatusType = 'in' | 'out' | 'progress'
+
+export type BookingStatusType = 'in' | 'out' | 'progress'
 
 export type BookingType = {
    _id: string,
@@ -16,13 +17,18 @@ export type BookingType = {
    }
 }
 
+export type BookingWithRoomInfoType = BookingType & {
+   roomType: RoomsTypes,
+   status: BookingStatusType
+}
+
 export type RoomsTypes = 'single' | 'double' | 'superior' | 'suite'
 
 export type RoomType = {
    _id: string,
    name: string,
    type: RoomsTypes,
-   number: number,
+   number: string,
    price: number,
    discount: number,
    description: string,

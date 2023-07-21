@@ -1,7 +1,7 @@
 import { tw } from "tailwind-multi-class"
 
 
-const CellDiscount = ({ price, discount }) => {
+const CellDiscount = ({ price, discount }: { price: number, discount: number }) => {
 
    if (!discount) return <div>-</div>
 

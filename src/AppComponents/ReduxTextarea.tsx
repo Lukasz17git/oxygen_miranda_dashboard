@@ -14,7 +14,7 @@ const TextArea = <T extends StorePaths>({ path, fieldPath, ...props }: TextAreaT
       const valueInsideForm = selector(`form.${fieldPath}` as StorePaths)(state)
       const originalValue = selector(`${path}.${fieldPath}` as StorePaths)(state)
       if (valueInsideForm !== undefined) return valueInsideForm
-      return originalValue
+      return originalValue ?? ''
    }) as string
 
    const dispatch = useDispatch()

@@ -2,13 +2,16 @@ import { useState } from 'react'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
 import TableLabels from './Components/TableLabels'
-import rooms from '../../JsonData/rooms'
 import RoomRow from './Components/RoomRow'
 import TableFooter from './Components/TableFooter'
 import SearchInput from './Components/SearchInput'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
 import TableContentLayout from './Components/TableContentLayout'
+import { useTypedSelector } from '../../Store/store'
+import { shallowEqual } from 'react-redux'
+import { RoomType, RoomsTypes } from '../../Store/Slices/Rooms/rooms.types'
+import NewFormButton from './Components/NewFormButton'
 
 
 const RoomsTable = () => {
@@ -20,20 +23,24 @@ const RoomsTable = () => {
    const [searchFilter, setSearchFilter] = useState('')
    const [orderBy, setOrderBy] = useState('availability')
 
-   const dataToDisplayByLabelFilter = labelFilter ? rooms.filter(room => room.type === labelFilter) : rooms
-   const dataToDisplayBySearchFilter = searchFilter ? dataToDisplayByLabelFilter.filter(room => room.number.toLowerCase().includes(searchFilter)) : dataToDisplayByLabelFilter
-   const dataToDisplayInCurrentPage = dataToDisplayBySearchFilter.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   const numberOfRooms = useTypedSelector(state => state.rooms.length)
+   const roomsArrayToShow = useTypedSelector(state => {
+      const rooms = state.rooms
+      const byLabelFilter = labelFilter ? rooms.filter(room => room.type === labelFilter) : rooms
+      const bySearchFilter = searchFilter ? byLabelFilter.filter(room => room.number.toLowerCase().includes(searchFilter)) : byLabelFilter
+      return bySearchFilter
+   }, shallowEqual)
 
-   //Pagination
-   const pages = Math.ceil(dataToDisplayBySearchFilter.length / ammountPerPage)
+   const numberOfRoomsToShow = roomsArrayToShow.length
+   const dataToDisplayInCurrentPage = roomsArrayToShow.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   const pages = Math.ceil(numberOfRoomsToShow / ammountPerPage)
 
-   const isActive = (statusId) => statusId === labelFilter
-   const handleLabelButton = (statusId) => {
-      setLabelFilter(statusId)
+   const isActive = (status: RoomsTypes | '') => status === labelFilter
+   const handleLabelButton = (status: RoomsTypes | '') => {
+      setLabelFilter(status)
       setPage(0)
    }
 
-   //Select Options
    const options = {
       lowestPrice: 'Price -',
       highestPrice: 'Price +',
@@ -51,6 +58,7 @@ const RoomsTable = () => {
             <TableButton text='Suite' onClick={() => handleLabelButton('suite')} isActive={isActive('suite')} />
             <SearchInput label='Search Room' value={searchFilter} setValue={setSearchFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
+            <NewFormButton />
          </div>
          <TableContentLayout>
             <TableLabels gridClassName='grid grid-cols-9 g-8px gcc pr-40px'>
@@ -65,7 +73,7 @@ const RoomsTable = () => {
                <DndWrapper
                   key={Date.now()}
                   data={dataToDisplayInCurrentPage}
-                  Component={({ data }) => (
+                  Component={({ data }: { data: RoomType }) => (
                      <RoomRow data={data} className='grid grid-cols-9 g-8px gcc pr-40px' />
                   )}
                />
@@ -77,8 +85,8 @@ const RoomsTable = () => {
             setPage={setPage}
             ammountPerPage={ammountPerPage}
             currentDataLength={dataToDisplayInCurrentPage.length}
-            filteredDataLength={dataToDisplayBySearchFilter.length}
-            maxDataLength={rooms.length}
+            filteredDataLength={numberOfRoomsToShow}
+            maxDataLength={numberOfRooms}
          />
       </div >
    )

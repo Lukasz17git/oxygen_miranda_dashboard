@@ -6,7 +6,14 @@ import { useDispatch } from "react-redux"
 import { authenticateAdminThunk } from '../../../Store/Slices/Users/adminSlice'
 import { useTypedDispatch } from '../../../Store/store'
 
-export const LoginContext = createContext(null)
+export const LoginContext = createContext<{
+   email: string,
+   password: string,
+   isPending: boolean,
+   setEmail: (e) => React.Dispatch<{ type: 'email', payload: string }>,
+   setPassword: (e) => React.Dispatch<{ type: 'password', payload: string }>,
+   toggleIsPending: () => React.Dispatch<{ type: 'isPending' }>,
+}>(null!)
 
 const loginReducer = (state, { type, payload }) => {
    if (type === 'email') return { ...state, email: payload }
@@ -17,7 +24,7 @@ const loginReducer = (state, { type, payload }) => {
 
 const initialReducerState = { email: '', password: '', isPending: false }
 
-const LoginForm = ({ children }) => {
+const LoginForm = ({ children }: { children: React.ReactNode }) => {
 
    const dispatch = useTypedDispatch()
    const navigate = useNavigate()

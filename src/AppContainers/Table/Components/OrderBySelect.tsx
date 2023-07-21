@@ -1,7 +1,12 @@
 import Select from "../../../AppComponents/Select"
 
-
-const OrderBySelect = ({ label, options, value, setValue }) => {
+type TOrderBySelect = {
+   label: string,
+   options: Record<string, string | number>,
+   value: string | number | undefined,
+   setValue: (value: string) => any
+}
+const OrderBySelect = ({ label, options, value, setValue }: TOrderBySelect) => {
    return (
       <Select
          disableLabelAsOption={true}

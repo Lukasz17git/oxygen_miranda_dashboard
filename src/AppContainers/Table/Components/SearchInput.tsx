@@ -2,7 +2,7 @@ import { BsSearch } from "react-icons/bs"
 import Input from "../../../AppComponents/Input"
 
 
-const SearchInput = ({ label, value, setValue }) => {
+const SearchInput = ({ label, value, setValue }: { label: string, value: string, setValue: (value: string) => any }) => {
    return (
       <Input
          value={value}

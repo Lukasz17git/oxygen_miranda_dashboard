@@ -12,7 +12,7 @@ import { UserStatusType, UserType } from "../../../Store/Slices/Users/users.type
 const stateStyle: Record<UserStatusType, string> = {
    active: 'tc-text-green-light-5AD07A',
    inactive: 'tc-text-red-E23428',
-   vacation: 'tc-text-red-E23428' //CHANGE
+   vacation: 'tc-orange-main' //CHANGE
 }
 
 const UserRow = ({ data, className }: { data: UserType, className?: string }) => {
@@ -33,7 +33,7 @@ const UserRow = ({ data, className }: { data: UserType, className?: string }) =>
          </div>
          <CellBigDate date={dischargeDate} />
          <CellText text={email} className='col-span-2' />
-         <CellText text={'+' + phone} className='col-span-2' />
+         <CellText text={phone ? ('+' + phone) : '-'} className='col-span-2' />
          <div className='col-span-2'>
             <p className="inline tc-text-dark-393939 ts-15px">{description.length > 50 ? description.slice(0, 40) + '...' : description}</p>
             {description.length > 50 && (
@@ -43,7 +43,7 @@ const UserRow = ({ data, className }: { data: UserType, className?: string }) =>
             )}
          </div>
          <CellBold text={status} className={`tcap ${stateStyle[status]}`} />
-         <EditButton id={_id} />
+         <EditButton _id={_id} />
          {showNoteModal && (
             <DescriptionModal
                name={fullname}

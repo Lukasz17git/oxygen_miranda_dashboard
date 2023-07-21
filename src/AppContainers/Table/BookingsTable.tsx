@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import bookings from '../../JsonData/bookings'
 import BookingRow from './Components/BookingRow'
 import TableButton from './Components/TableButton'
 import TableLabel from './Components/TableLabel'
@@ -9,6 +8,9 @@ import SearchInput from './Components/SearchInput'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
 import TableContentLayout from './Components/TableContentLayout'
+import { useTypedSelector } from '../../Store/store'
+import { shallowEqual } from 'react-redux'
+import { BookingStatusType, BookingWithRoomInfoType } from '../../Store/Slices/Rooms/rooms.types'
 
 const BookingsTable = () => {
 
@@ -16,19 +18,26 @@ const BookingsTable = () => {
    const [page, setPage] = useState(0)
 
    const [selectedStatus, setSelectedStatus] = useState('')
-   const [requestFilter, setRequestFilter] = useState('')
+   const [searchFilter, setSearchFilter] = useState('')
    const [orderBy, setOrderBy] = useState('orderDate')
 
-   const bookingsToDisplayByStatus = selectedStatus ? bookings.filter(booking => booking.status === selectedStatus) : bookings
-   const bookingsToDisplayByRequest = requestFilter ? bookingsToDisplayByStatus.filter(booking => booking.customer.name.toLowerCase().includes(requestFilter)) : bookingsToDisplayByStatus
-   const bookingsToDisplayInCurrentPage = bookingsToDisplayByRequest.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   const numberOfBookings = useTypedSelector(state => state.rooms.reduce((acc, room) => room.bookings.length + acc, 0))
+   const bookingsArrayToShow = useTypedSelector(state => {
+      const rooms = state.rooms
+      const allBookings: BookingWithRoomInfoType[] = []
+      rooms.forEach(room => room.bookings.forEach(booking => allBookings.push({ ...booking, roomType: room.type, status: 'in' })))
+      const byLabelFilter = selectedStatus ? allBookings.filter(booking => booking.status === selectedStatus) : allBookings
+      const bySearchFilter = searchFilter ? byLabelFilter.filter(booking => `${booking.guest.name} ${booking.guest.lastname}`.toLowerCase().includes(searchFilter)) : byLabelFilter
+      return bySearchFilter
+   }, shallowEqual)
 
-   //Pagination
-   const pages = Math.ceil(bookingsToDisplayByRequest.length / ammountPerPage)
+   const numberOfBookingsToShow = bookingsArrayToShow.length
+   const dataToDisplayInCurrentPage = bookingsArrayToShow.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   const pages = Math.ceil(numberOfBookingsToShow / ammountPerPage)
 
-   const isActive = (statusId) => statusId === selectedStatus
-   const handleLabelButton = (statusId) => {
-      setSelectedStatus(statusId)
+   const isActive = (status: BookingStatusType | '') => status === selectedStatus
+   const handleLabelButton = (status: BookingStatusType | '') => {
+      setSelectedStatus(status)
       setPage(0)
    }
 
@@ -48,7 +57,7 @@ const BookingsTable = () => {
             <TableButton text='Check In' onClick={() => handleLabelButton('in')} isActive={isActive('in')} />
             <TableButton text='Check Out' onClick={() => handleLabelButton('out')} isActive={isActive('out')} />
             <TableButton text='In Progress' onClick={() => handleLabelButton('progress')} isActive={isActive('progress')} />
-            <SearchInput label='Search Customer' value={requestFilter} setValue={setRequestFilter} />
+            <SearchInput label='Search Customer' value={searchFilter} setValue={setSearchFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
          </div>
          <TableContentLayout>
@@ -64,8 +73,8 @@ const BookingsTable = () => {
             <div>
                <DndWrapper
                   key={Date.now()}
-                  data={bookingsToDisplayInCurrentPage}
-                  Component={({ data }) => (
+                  data={dataToDisplayInCurrentPage}
+                  Component={({ data }: { data: BookingWithRoomInfoType }) => (
                      <BookingRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
                   )}
                />
@@ -76,9 +85,9 @@ const BookingsTable = () => {
             pages={pages}
             setPage={setPage}
             ammountPerPage={ammountPerPage}
-            currentDataLength={bookingsToDisplayInCurrentPage.length}
-            filteredDataLength={bookingsToDisplayByRequest.length}
-            maxDataLength={bookings.length}
+            currentDataLength={dataToDisplayInCurrentPage.length}
+            filteredDataLength={numberOfBookingsToShow}
+            maxDataLength={numberOfBookings}
          />
       </div >
    )

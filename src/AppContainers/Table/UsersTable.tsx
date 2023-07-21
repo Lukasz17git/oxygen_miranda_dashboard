@@ -11,6 +11,7 @@ import TableContentLayout from './Components/TableContentLayout'
 import { useTypedSelector } from '../../Store/store'
 import { shallowEqual } from 'react-redux'
 import NewFormButton from './Components/NewFormButton'
+import { UserStatusType, UserType } from '../../Store/Slices/Users/users.types'
 
 
 const UsersTable = () => {
@@ -22,22 +23,7 @@ const UsersTable = () => {
    const [searchFilter, setSearchFilter] = useState('')
    const [orderBy, setOrderBy] = useState('lowestDischargeDate')
 
-   // const employeesArrayToShow = useTypedSelector(state => {
-   //    const employees = state.employees
-   //    const booleanArray = Array(employees.length).fill(true)
-   //    const byLabelFilter = labelFilter ? booleanArray.map((show, index) => show && employees[index].state === labelFilter) : booleanArray
-   //    const bySearchFilter = searchFilter ? byLabelFilter.map((show, index) => {
-   //       if (!show) return show
-   //       const { name, lastname } = employees[index]
-   //       return `${name} ${lastname}`.toLowerCase().includes(searchFilter)
-   //    }) : byLabelFilter
-   //    return bySearchFilter
-   // }, shallowEqual)
-
-   // const numberOfEmployeesToShow = employeesArrayToShow.filter(v => v).length
-
    const numberOfEmployees = useTypedSelector(state => state.employees.length)
-   console.log('numberOfEmployees', numberOfEmployees)
    const employeesArrayToShow = useTypedSelector(state => {
       const employees = state.employees
       const byLabelFilter = labelFilter ? employees.filter(employee => employee.status === labelFilter) : employees
@@ -45,20 +31,20 @@ const UsersTable = () => {
       return bySearchFilter
    }, shallowEqual)
 
+   console.log('employeesArrayToShow', employeesArrayToShow)
+
    const numberOfEmployeesToShow = employeesArrayToShow.length
 
    const dataToDisplayInCurrentPage = employeesArrayToShow.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
 
-   //Pagination
    const pages = Math.ceil(numberOfEmployeesToShow / ammountPerPage)
 
-   const isActive = (statusId) => statusId === labelFilter
-   const handleLabelButton = (statusId) => {
-      setLabelFilter(statusId)
+   const isActive = (status: UserStatusType | '') => status === labelFilter
+   const handleLabelButton = (status: UserStatusType | '') => {
+      setLabelFilter(status)
       setPage(0)
    }
 
-   //Select Options
    const options = {
       lowestDischargeDate: 'Discharge Date -',
       highestDischargeDate: 'Discharge Date +',
@@ -71,6 +57,7 @@ const UsersTable = () => {
          <div className='frc'>
             <TableButton text='All Employees' onClick={() => handleLabelButton('')} isActive={isActive('')} />
             <TableButton text='Active' onClick={() => handleLabelButton('active')} isActive={isActive('active')} />
+            <TableButton text='Vacation' onClick={() => handleLabelButton('vacation')} isActive={isActive('vacation')} />
             <TableButton text='Inactive' onClick={() => handleLabelButton('inactive')} isActive={isActive('inactive')} />
             <SearchInput label='Search Employee' value={searchFilter} setValue={setSearchFilter} />
             <OrderBySelect label='Order By' options={options} value={orderBy} setValue={setOrderBy} />
@@ -89,7 +76,7 @@ const UsersTable = () => {
                <DndWrapper
                   data={dataToDisplayInCurrentPage}
                   key={Date.now()}
-                  Component={({ data }) => (
+                  Component={({ data }: { data: UserType }) => (
                      <UserRow className='grid grid-cols-10 g-8px gcc pr-40px' data={data} />
                   )}
                />

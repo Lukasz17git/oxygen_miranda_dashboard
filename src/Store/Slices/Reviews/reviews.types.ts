@@ -9,8 +9,10 @@ export type ReviewType = {
    archived: boolean,
    subject: ReviewsSubjects,
    comment: string,
-   personName: string,
-   personLastname: string,
-   personEmail: string,
-   personPhone: string
+   person: {
+      name: string,
+      lastname: string,
+      email: string,
+      phone: string
+   }
 }

@@ -13,6 +13,6 @@ export type UserType = {
    description: string,
    status: UserStatusType,
    job: UsersJobType,
-   dischargeDate?: string,
+   dischargeDate: string,
    profileImg: string,
 }

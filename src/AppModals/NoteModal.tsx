@@ -3,24 +3,25 @@ import ModalLayout from "./Components/ModalLayout"
 import StrongLabel from "./Components/StrongLabel"
 import ProfileWrapper from "./Components/ProfileWrapper"
 import LightLabel from "./Components/LightLabel"
+import { BookingType } from "../Store/Slices/Rooms/rooms.types"
 
 type NoteModalProps = {
-   data: { request: string, customer: { id: string, name: string, imageUrl: string } },
+   data: BookingType,
    closeModal: () => unknown
 }
 const NoteModal = ({ data, closeModal }: NoteModalProps) => {
 
    //TODO en este el layout y el pharagraph variaban, tengo que cambiarlo
 
-   const { customer, request } = data
-   const { name, imageUrl, id } = customer
+   const { guest, specialRequest, _id } = data
+   const { name, profileUrl } = guest
    return (
       <ModalLayout>
-         <ProfileWrapper closeModal={closeModal} imageUrl={imageUrl}>
+         <ProfileWrapper closeModal={closeModal} imageUrl={profileUrl}>
             <StrongLabel text={name} />
-            <LightLabel text={id} />
+            <LightLabel text={_id} />
          </ProfileWrapper>
-         <ModalPharagraph text={request} />
+         <ModalPharagraph text={specialRequest} />
       </ModalLayout>
    )
 }

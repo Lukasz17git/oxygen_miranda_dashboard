@@ -1,7 +1,15 @@
 import Navigation from "../../../AppComponentsShared/Navigation"
 
-
-const TableFooter = ({ page, pages, setPage, ammountPerPage, currentDataLength, filteredDataLength, maxDataLength }) => {
+type TTableFooter = {
+   page: number,
+   pages: number,
+   setPage: (v: any) => any,
+   ammountPerPage: number
+   currentDataLength: number,
+   filteredDataLength: number,
+   maxDataLength: number,
+}
+const TableFooter = ({ page, pages, setPage, ammountPerPage, currentDataLength, filteredDataLength, maxDataLength }: TTableFooter) => {
    return (
       <div className='frcb py-16px'>
          <q className='ts-14px tf-app-regular tc-text-grey-dark-787878'>

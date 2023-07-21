@@ -1,17 +1,24 @@
 import ActionIcon from "../../../AppComponents/ActionIcon"
 import Img from "../../../AppComponents/Img"
-import comments from "../../../JsonData/comments"
 import { FaExpandAlt } from 'react-icons/fa'
 import calculateTimeAgo from "../../../Utils/calculateTimeAgo"
 import { RiDeleteBin4Fill } from "react-icons/ri"
 import { TiTick } from "react-icons/ti"
 import { tw } from "tailwind-multi-class"
+import { useTypedDispatch, useTypedSelector } from "../../../Store/store"
+import { deleteReviewThunk, updateReviewThunk } from "../../../Store/Slices/Reviews/reviewsSlice"
 
 type TCommentProp = { index: number, openCommentModal: (...p: unknown[]) => unknown, className?: string }
 const Comment = ({ index, openCommentModal, className }: TCommentProp) => {
 
-   const comment = comments[index]
-   const timeAgo = calculateTimeAgo(comment.date)
+   console.log('index', index)
+   const { sentAt, person, comment, viewed, _id } = useTypedSelector(state => state.reviews[index])
+   const timeAgo = calculateTimeAgo(new Date(sentAt).getTime())
+   const fullname = `${person.name} ${person.lastname}`
+
+   const dispatch = useTypedDispatch()
+   const deleteReview = () => dispatch(deleteReviewThunk(_id))
+   const markReviewAsViewed = () => dispatch(updateReviewThunk({ _id, viewed: true }))
 
    return (
       <div className={tw(
@@ -19,20 +26,20 @@ const Comment = ({ index, openCommentModal, className }: TCommentProp) => {
          "p-16px px-20px bc-color-separator bw-1px fc g-8px w-360px fs0 br-12px h:s-comment",
          { dark: "bc-dark-hover" }
       )}>
-         <p className="max-h-120px text-ellipsis tc-text-grey-darker tf-app-regular ts-15px">{comment.comment}</p>
+         <p className="min-h-48px max-h-120px text-ellipsis tc-text-grey-darker tf-app-regular ts-15px">{comment}</p>
          <div className="frc g-12px">
-            <Img src={comment.client.photo || '/CriticalIcons/person.svg'} className="h-32px w-32px cover" />
+            <Img src={'/CriticalIcons/person.svg'} className="h-32px w-32px cover" />
             <div className="fcnb h-100% py-8px">
-               <b className="tf-app-semibold tc-text-black">{comment.client.name}</b>
+               <b className="tf-app-semibold tc-text-black">{fullname}</b>
                <q className="tf-app-light ts-14px tc-text-grey">{timeAgo}</q>
             </div>
             <div className="frc ml-a mt-a mb-4px">
-               {comment.viewed || (
+               {viewed || (
                   <>
-                     <ActionIcon className="tc-red-main h-36px w-36px">
+                     <ActionIcon className="tc-red-main h-36px w-36px" onClick={deleteReview}>
                         <RiDeleteBin4Fill className="scale-80 fs0 pb-2px" />
                      </ActionIcon>
-                     <ActionIcon className="tc-green-dark h-36px w-36px">
+                     <ActionIcon className="tc-green-dark h-36px w-36px" onClick={markReviewAsViewed}>
                         <TiTick className="fs0 pb-2px scale-120" />
                      </ActionIcon>
                   </>

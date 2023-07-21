@@ -1,7 +1,7 @@
 import { tw } from "tailwind-multi-class"
 
 
-const CellPrice = ({ price }) => {
+const CellPrice = ({ price }: { price: number }) => {
    return (
       <b className={tw(
          "ts-20px tf-app-semibold tc-text-dark",

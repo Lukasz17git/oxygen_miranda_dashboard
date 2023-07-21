@@ -60,7 +60,7 @@ const DndWrapper = ({ data, Component }) => {
    return (
       <>
          {dndData.map((item, index) => (
-            <DndItemWrapper key={item.id} index={index} id={item.id} setValue={setDndData}>
+            <DndItemWrapper key={item._id} index={index} id={item._id} setValue={setDndData}>
                <Component data={item} />
             </DndItemWrapper>
          ))}

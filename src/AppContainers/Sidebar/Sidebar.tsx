@@ -17,7 +17,7 @@ const Sidebar = () => {
             <SidebarLink href="" text='Dashboard' Icon={HiViewGrid} />
             <SidebarLink href="bookings" text='Bookings' Icon={BsCalendarCheck} iconClassName='scale-90' />
             <SidebarLink href='rooms' text='Rooms' Icon={MdOutlineBedroomParent} iconClassName='scale-110' />
-            <SidebarLink href='contacts' text='Contacts' Icon={BiMessageDetail} />
+            <SidebarLink href='reviews' text='Reviews' Icon={BiMessageDetail} />
             <SidebarLink href='users' text='Users' Icon={FaUsers} />
          </ul>
          <Profile />

@@ -5,10 +5,11 @@ import TableLabels from './Components/TableLabels'
 import TableFooter from './Components/TableFooter'
 import OrderBySelect from './Components/OrderBySelect'
 import DndWrapper from '../../AppComponentsShared/DndWrapper'
-import ContactRow from './Components/ContactRow'
+import ReviewsRow from './Components/ReviewsRow'
 import TableContentLayout from './Components/TableContentLayout'
-
-import comments from '../../JsonData/comments'
+import { useTypedSelector } from '../../Store/store'
+import { shallowEqual } from 'react-redux'
+import { ReviewType } from '../../Store/Slices/Reviews/reviews.types'
 
 const ReviewsTable = () => {
 
@@ -18,19 +19,26 @@ const ReviewsTable = () => {
    const [labelFilter, setLabelFilter] = useState('')
    const [orderBy, setOrderBy] = useState('newest')
 
-   const dataToDisplayByLabelFilter = labelFilter ? comments.filter(comment => comment.archived) : comments
-   const dataToDisplayInCurrentPage = dataToDisplayByLabelFilter.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+   const numberOfReviews = useTypedSelector(state => state.reviews.length)
+   const reviewsArrayToShow = useTypedSelector(state => {
+      const reviews = state.reviews
+      const byLabelFilter = labelFilter ? reviews.filter(review => labelFilter === 'archived' ? review.archived : !review.archived) : reviews
+      return byLabelFilter
+   }, shallowEqual)
 
-   //Pagination
-   const pages = Math.ceil(dataToDisplayByLabelFilter.length / ammountPerPage)
+   const numberOfReviewsToShow = reviewsArrayToShow.length
 
-   const isActive = (statusId) => statusId === labelFilter
-   const handleLabelButton = (statusId) => {
-      setLabelFilter(statusId)
+   const dataToDisplayInCurrentPage = reviewsArrayToShow.slice(page * ammountPerPage, (page + 1) * ammountPerPage)
+
+   const pages = Math.ceil(numberOfReviewsToShow / ammountPerPage)
+
+   type TLabelFilterStates = '' | 'archived' | 'nonArchived'
+   const isActive = (status: TLabelFilterStates) => status === labelFilter
+   const handleLabelButton = (status: TLabelFilterStates) => {
+      setLabelFilter(status)
       setPage(0)
    }
 
-   //Select Options
    const options = {
       newest: 'Newest',
       oldest: 'Oldest',
@@ -42,12 +50,17 @@ const ReviewsTable = () => {
             <TableButton
                text='New Reviews'
                onClick={() => handleLabelButton('')}
-               isActive={'' === labelFilter}
+               isActive={isActive('')}
+            />
+            <TableButton
+               text='Non-Archived Reviews'
+               onClick={() => handleLabelButton('nonArchived')}
+               isActive={isActive('nonArchived')}
             />
             <TableButton
                text='Archived Reviews'
                onClick={() => handleLabelButton('archived')}
-               isActive={'archived' === labelFilter}
+               isActive={isActive('archived')}
             />
             <OrderBySelect
                label='Order By'
@@ -68,8 +81,8 @@ const ReviewsTable = () => {
                <DndWrapper
                   key={Date.now()}
                   data={dataToDisplayInCurrentPage}
-                  Component={({ data }) => (
-                     <ContactRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
+                  Component={({ data }: { data: ReviewType }) => (
+                     <ReviewsRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
                   )}
                />
             </div>
@@ -80,8 +93,8 @@ const ReviewsTable = () => {
             setPage={setPage}
             ammountPerPage={ammountPerPage}
             currentDataLength={dataToDisplayInCurrentPage.length}
-            filteredDataLength={dataToDisplayByLabelFilter.length}
-            maxDataLength={comments.length}
+            filteredDataLength={numberOfReviewsToShow}
+            maxDataLength={numberOfReviews}
          />
       </div >
    )

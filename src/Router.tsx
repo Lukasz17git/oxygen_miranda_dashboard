@@ -13,12 +13,18 @@ import RoomForm from './AppContainers/RoomForm/RoomForm.jsx'
 import Reviews from './AppPages/Reviews.js'
 import { StoreType } from './Store/store.js'
 import { getEmployeesThunk } from './Store/Slices/Users/employeesSlice.js'
+import { authorizeAdminThunk } from './Store/Slices/Users/adminSlice.js'
+import { getReviewsThunk } from './Store/Slices/Reviews/reviewsSlice.js'
+import { getRoomsThunk } from './Store/Slices/Rooms/roomsSlice.js'
 
 const authenticationLoader = (store: StoreType) => async () => {
 
    const isAuthenticated = store.getState().admin._id
-
-   if (!isAuthenticated) return redirect('/login')
+   if (!isAuthenticated) {
+      await store.dispatch(authorizeAdminThunk())
+      const isAuthenticated = store.getState().admin._id
+      if (!isAuthenticated) return redirect('/login')
+   }
 
    return null
 }
@@ -40,21 +46,18 @@ const createRouter = (store: StoreType) => createBrowserRouter(
 
          {/** PROTECTED ROUTES */}
          <Route path='/' element={<DashboardLayout />} loader={authenticationLoader(store)}>
-            <Route index element={<Overviews />} />
-            <Route path='bookings'>
+            <Route index element={<Overviews />} loader={fetchData(store, getReviewsThunk)} />
+            <Route path='bookings' loader={fetchData(store, getRoomsThunk)}>
                <Route index element={<BookingsTable />} />
-               <Route path='new' element={<BookingForm />} />
                <Route path=':id' element={<BookingForm />} />
             </Route>
-            <Route path='rooms' >
+            <Route path='rooms' loader={fetchData(store, getRoomsThunk)} >
                <Route index element={<RoomsTable />} />
-               <Route path='new' element={<RoomForm />} />
                <Route path=':id' element={<RoomForm />} />
             </Route>
-            <Route path='reviews' element={<Reviews />} />
+            <Route path='reviews' element={<Reviews />} loader={fetchData(store, getReviewsThunk)} />
             <Route path='users' loader={fetchData(store, getEmployeesThunk)}>
                <Route index element={<UsersTable />} />
-               <Route path='new' element={<EmployeeForm />} />
                <Route path=':id' element={<EmployeeForm />} />
             </Route>
             <Route path='settings' element={<AdminForm />} />

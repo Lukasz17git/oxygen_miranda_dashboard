@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UserType } from "./users.types.js";
 import customFetch from "../../../Utils/customFetch.js";
 import { usersUri } from "../../../Uris/uris.js";
+import { WithId } from "../../../Types/mongo.js";
 
 const employeesSlice = createSlice({
    name: 'employees',
@@ -53,9 +54,9 @@ export const createNewEmployeeThunk = createAsyncThunk(
 
 export const updateEmployeeThunk = createAsyncThunk(
    'employees/put',
-   async (updatesWithId: UserType, { dispatch }) => {
+   async (updatesWithId: WithId<Partial<UserType>>, { dispatch }) => {
       const { _id, ...updates } = updatesWithId
-      await customFetch(dispatch, `${usersUri}${_id}`, {
+      await customFetch(dispatch, `${usersUri}/${_id}`, {
          method: 'PUT',
          credentials: "include",
          headers: { "Content-Type": "application/json" },
@@ -68,7 +69,7 @@ export const updateEmployeeThunk = createAsyncThunk(
 export const deleteEmployeeThunk = createAsyncThunk(
    'employees/delete',
    async (employeeId: string, { dispatch }) => {
-      await customFetch(dispatch, `${usersUri}${employeeId}`, {
+      await customFetch(dispatch, `${usersUri}/${employeeId}`, {
          method: 'DELETE',
          credentials: "include",
       })

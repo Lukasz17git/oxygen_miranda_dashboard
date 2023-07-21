@@ -21,7 +21,7 @@ const ReduxInput = <T extends StorePaths>({ wrapperClassName, labelClassName, la
       const valueInsideForm = selector(`form.${fieldPath}` as StorePaths)(state)
       const originalValue = selector(`${path}.${fieldPath}` as StorePaths)(state)
       if (valueInsideForm !== undefined) return valueInsideForm
-      return originalValue
+      return originalValue ?? ''
    }) as string
 
    const dispatch = useTypedDispatch()

@@ -5,10 +5,13 @@ import { useKeenSlider } from "keen-slider/react"
 import CommentModal from "../../AppModals/CommentModal"
 import LeftButton from "./Components/LeftButton"
 import RightButton from "./Components/RightButton"
+import { useTypedSelector } from "../../Store/store"
 
 
 const CommentsSimplified = () => {
-   const arrayHolder = Array(comments.length).fill().slice(-20)
+   const maxReviews = 20
+   const reviewsArray = useTypedSelector(state => state.reviews.map((_, index) => index).slice(maxReviews * -1))
+
    const [sliderRef, instanceRef] = useKeenSlider({
       mode: "snap",
       slides: {
@@ -32,12 +35,12 @@ const CommentsSimplified = () => {
    const [hidePrev, setHidePrev] = useState(true)
    const [hideNext, setHideNext] = useState(comments.length < 4)
 
-   const [commentModalIndex, setCommentModalIndex] = useState(null)
+   const [commentModalIndex, setCommentModalIndex] = useState<number | null>(null)
 
    return (
       <div className="pos-r p-16px h-fit">
          <div ref={sliderRef} className="keen-slider py-8px frc oh mx-4px cursor-grab">
-            {arrayHolder.map((_, index) => (
+            {reviewsArray.map((_, index) => (
                <Comment className='bg-bg-white-fff' key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
             ))}
          </div>

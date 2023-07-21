@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import customFetch from "../../../Utils/customFetch.js";
 import { reviewsUri } from "../../../Uris/uris.js";
 import { ReviewType } from "./reviews.types.js";
+import { WithId } from "../../../Types/mongo.js";
 
 
 const reviewsSlice = createSlice({
@@ -35,6 +36,7 @@ export const getReviewsThunk = createAsyncThunk(
          method: 'GET',
          credentials: "include",
       })
+      console.log('reviews', reviews)
       return reviews
    }
 )
@@ -54,9 +56,9 @@ export const getReviewsThunk = createAsyncThunk(
 
 export const updateReviewThunk = createAsyncThunk(
    'reviews/put',
-   async (updatesWithId: ReviewType, { dispatch }) => {
+   async (updatesWithId: WithId<Partial<ReviewType>>, { dispatch }) => {
       const { _id, ...updates } = updatesWithId
-      await customFetch(dispatch, `${reviewsUri}${_id}`, {
+      await customFetch(dispatch, `${reviewsUri}/${_id}`, {
          method: 'PUT',
          credentials: "include",
          headers: { "Content-Type": "application/json" },
@@ -69,7 +71,7 @@ export const updateReviewThunk = createAsyncThunk(
 export const deleteReviewThunk = createAsyncThunk(
    'reviews/delete',
    async (reviewId: string, { dispatch }) => {
-      await customFetch(dispatch, `${reviewsUri}${reviewId}`, {
+      await customFetch(dispatch, `${reviewsUri}/${reviewId}`, {
          method: 'DELETE',
          credentials: "include",
       })

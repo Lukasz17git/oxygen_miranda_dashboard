@@ -1,7 +1,7 @@
 import { getDayMonthYear, getTime } from "../../../Utils/formatDate"
 
 
-const CellBigDate = ({ date }) => {
+const CellBigDate = ({ date }: { date: string | number }) => {
    return (
       <div className="fc">
          <b className="tf-app-regular ts-15px">{getDayMonthYear(date)}</b>
