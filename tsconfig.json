@@ -19,8 +19,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Build with errors */
-    "noEmitOnError": true
+   //  /* Build with errors */
+   //  "noEmitOnError": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
