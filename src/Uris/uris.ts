@@ -1,5 +1,6 @@
 
-export const uri = 'http://localhost:4000'
+// export const uri = 'http://localhost:4000'
+export const uri = 'https://sct2lc8cn2.execute-api.eu-west-1.amazonaws.com/dev'
 
 export const loginUri = `${uri}/login`
 export const registerUri = `${uri}/register`

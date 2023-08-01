@@ -31,7 +31,7 @@ export const getRoomsThunk = createAsyncThunk(
    async (_, { dispatch }) => {
       const rooms = await customFetch<RoomType[]>(dispatch, roomsUri, {
          method: 'GET',
-         credentials: "include",
+         credentials: "include"
       })
       console.log('rooms', rooms)
       return rooms
@@ -72,7 +72,7 @@ export const deleteRoomThunk = createAsyncThunk(
    async (roomId: string, { dispatch }) => {
       await customFetch(dispatch, `${roomsUri}/${roomId}`, {
          method: 'DELETE',
-         credentials: "include",
+         credentials: "include"
       })
       return roomId
    }
@@ -111,7 +111,7 @@ export const deleteBookingThunk = createAsyncThunk(
    async (bookingId: string, { dispatch }) => {
       await customFetch(dispatch, `${bookingsUri}/${bookingId}`, {
          method: 'DELETE',
-         credentials: "include",
+         credentials: "include"
       })
       return bookingId
    }

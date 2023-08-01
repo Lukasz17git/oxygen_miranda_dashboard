@@ -32,7 +32,7 @@ export const getEmployeesThunk = createAsyncThunk(
    async (_, { dispatch }) => {
       const employees = await customFetch<UserType[]>(dispatch, usersUri, {
          method: 'GET',
-         credentials: "include",
+         credentials: "include"
       })
       console.log('employees', employees)
       return employees
@@ -71,7 +71,7 @@ export const deleteEmployeeThunk = createAsyncThunk(
    async (employeeId: string, { dispatch }) => {
       await customFetch(dispatch, `${usersUri}/${employeeId}`, {
          method: 'DELETE',
-         credentials: "include",
+         credentials: "include"
       })
       return employeeId
    }

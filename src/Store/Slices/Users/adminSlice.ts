@@ -43,7 +43,7 @@ export const authorizeAdminThunk = createAsyncThunk(
    async (_, { dispatch }) => {
       const adminData = await customFetch<UserType>(dispatch, authorizationUri, {
          method: 'GET',
-         credentials: "include",
+         credentials: "include"
       })
       console.log('adminData', adminData)
       return adminData

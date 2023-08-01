@@ -34,7 +34,7 @@ export const getReviewsThunk = createAsyncThunk(
    async (_, { dispatch }) => {
       const reviews = await customFetch<ReviewType[]>(dispatch, reviewsUri, {
          method: 'GET',
-         credentials: "include",
+         credentials: "include"
       })
       console.log('reviews', reviews)
       return reviews
@@ -73,7 +73,7 @@ export const deleteReviewThunk = createAsyncThunk(
    async (reviewId: string, { dispatch }) => {
       await customFetch(dispatch, `${reviewsUri}/${reviewId}`, {
          method: 'DELETE',
-         credentials: "include",
+         credentials: "include"
       })
       return reviewId
    }
