@@ -24,14 +24,14 @@ const Navigation = ({ page, pages, setPage }: TNavigationProps) => {
    // TODO Me quede aqui
    const isCurrentPage = (pageIndex: number, index: number) => pageIndex + index === page
    return (
-      <div className='frcc g-8px'>
+      <div className='frcc g-8.'>
          <NavigationSideButton text='Prev' onClick={prevPage} disabled={isPrevDisabled} />
          {paginationArray.map((pageIndex, index) => (
             <ActionIcon
                key={index}
                onClick={() => setPage(pageIndex + index)}
                className={tw(
-                  'br-8px',
+                  'br-8.',
                   isCurrentPage(pageIndex, index) ? 'bg-green-dark tc-text-white-fff' : 'h:bc-green-dark h:bg-input-bg-white',
                   {
                      dark: isCurrentPage(pageIndex, index)
@@ -57,7 +57,7 @@ const NavigationSideButton = ({ text, disabled, onClick }: TNavigationSideButton
          text={text}
          onClick={onClick}
          className={tw(
-            'min-w-80px',
+            'min-w-80.',
             disabled ? 'bg-transparent bc-green-dark/30 tc-green-dark/50' : 'bc-green-dark',
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore

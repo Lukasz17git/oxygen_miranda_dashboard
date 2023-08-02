@@ -12,10 +12,12 @@ import errorReducer from "./RootSlices/errorSlice";
 
 export const store = configureStore({
    reducer: {
+      //general app reducers
       ui: uiReducer,
-      // modal: modalReducer,
+      modal: modalReducer,
       form: formReducer,
       error: errorReducer,
+      //reducers
       admin: adminReducer,
       employees: employeesReducer,
       reviews: reviewsReducer,

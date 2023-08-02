@@ -2,7 +2,7 @@
 
 const Separator = () => {
    return (
-      <div className="h-1px bg-bg-white-contrast-f8f8f8 mt-26px mb-8px" />
+      <div className="h-1. bg-bg-white-contrast-f8f8f8 mt-26. mb-8." />
    )
 }
 export default Separator

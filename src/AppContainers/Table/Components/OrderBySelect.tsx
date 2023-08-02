@@ -10,7 +10,7 @@ const OrderBySelect = ({ label, options, value, setValue }: TOrderBySelect) => {
    return (
       <Select
          disableLabelAsOption={true}
-         wrapperClassName='h-40px ml-a'
+         wrapperClassName='h-40. ml-a'
          className='!tc-text-green-dark-135846'
          labelClassName='!tc-text-green-dark-135846 none'
          label={label}

@@ -10,7 +10,7 @@ const DashboardLayout = () => {
          <Sidebar />
          <div className="w-100% fc bg-bg-white-contrast-f8f8f8">
             <Navbar />
-            <div className="p-24px py-22px w-100% oya h-100%" >
+            <div className="p-24. py-22. w-100% oya h-100%" >
                <Outlet />
             </div>
          </div>

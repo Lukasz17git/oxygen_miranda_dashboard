@@ -9,7 +9,7 @@ const Password = () => {
 
    return (
       <Input
-         wrapperClassName="w-100% my-24px"
+         wrapperClassName="w-100% my-24."
          required
          label="Password"
          type="password"

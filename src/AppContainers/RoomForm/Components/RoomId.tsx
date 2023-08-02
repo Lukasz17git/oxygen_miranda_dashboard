@@ -7,7 +7,7 @@ const RoomId = () => {
       return room?._id
    })
    return (
-      <q className="ts-14px tc-text-green-799283">{id || ''}</q>
+      <q className="ts-14. tc-text-green-799283">{id || ''}</q>
    )
 }
 export default RoomId

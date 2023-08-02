@@ -70,7 +70,7 @@ const ReviewsTable = () => {
             />
          </div>
          <TableContentLayout>
-            <TableLabels gridClassName='grid grid-cols-8 g-8px gcc pr-40px'>
+            <TableLabels gridClassName='grid grid-cols-8 g-8. gcc pr-40.'>
                <TableLabel className='col-span-2' text='Person' />
                <TableLabel text='Sent at' />
                <TableLabel text='Subject' />
@@ -82,7 +82,7 @@ const ReviewsTable = () => {
                   key={Date.now()}
                   data={dataToDisplayInCurrentPage}
                   Component={({ data }: { data: ReviewType }) => (
-                     <ReviewsRow className='grid grid-cols-8 g-8px gcc pr-40px' data={data} />
+                     <ReviewsRow className='grid grid-cols-8 g-8. gcc pr-40.' data={data} />
                   )}
                />
             </div>

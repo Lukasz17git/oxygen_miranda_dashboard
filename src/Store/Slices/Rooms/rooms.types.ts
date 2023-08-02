@@ -22,6 +22,8 @@ export type BookingWithRoomInfoType = BookingType & {
    status: BookingStatusType
 }
 
+export type RoomStatus = 'in' | 'out' | 'occupied'
+
 export type RoomsTypes = 'single' | 'double' | 'superior' | 'suite'
 
 export type RoomType = {

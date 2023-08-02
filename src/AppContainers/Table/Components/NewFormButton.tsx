@@ -7,7 +7,7 @@ const NewFormButton = () => {
    const navigate = useNavigate()
    return (
       <ActionIcon
-         className="bg-green-dark tc-text-white-fff fs0 ml-16px h-38px w-38px"
+         className="bg-green-dark tc-text-white-fff fs0 ml-16. h-38. w-38."
          onClick={() => navigate("new")}
       >
          <HiPlus />

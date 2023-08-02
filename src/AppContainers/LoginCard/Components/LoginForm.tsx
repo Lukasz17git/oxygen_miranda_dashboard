@@ -1,24 +1,30 @@
 import { createContext, useReducer } from "react"
 import { useNavigate } from "react-router-dom"
 import { tw } from "tailwind-multi-class"
-import wait from '../../../Utils/wait'
-import { useDispatch } from "react-redux"
 import { authenticateAdminThunk } from '../../../Store/Slices/Users/adminSlice'
 import { useTypedDispatch } from '../../../Store/store'
 
-export const LoginContext = createContext<{
+type LoginState = {
    email: string,
    password: string,
    isPending: boolean,
-   setEmail: (e) => React.Dispatch<{ type: 'email', payload: string }>,
-   setPassword: (e) => React.Dispatch<{ type: 'password', payload: string }>,
-   toggleIsPending: () => React.Dispatch<{ type: 'isPending' }>,
-}>(null!)
+}
+type LoginHandlers = {
+   setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
+   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void,
+   toggleIsPending: () => void
+}
 
-const loginReducer = (state, { type, payload }) => {
-   if (type === 'email') return { ...state, email: payload }
-   if (type === 'password') return { ...state, password: payload }
-   if (type === 'isPending') return { ...state, isPending: !state.isPending }
+type LoginContext = LoginState & LoginHandlers
+
+export const LoginContext = createContext<LoginContext>(null!)
+
+type LoginReducer = { type: 'email', payload: string } | { type: 'password', payload: string } | { type: 'isPending' }
+
+const loginReducer = (state: LoginState, action: LoginReducer) => {
+   if (action.type === 'email') return { ...state, email: action.payload }
+   if (action.type === 'password') return { ...state, password: action.payload }
+   if (action.type === 'isPending') return { ...state, isPending: !state.isPending }
    return state
 }
 
@@ -31,7 +37,7 @@ const LoginForm = ({ children }: { children: React.ReactNode }) => {
 
    const [{ email, password, isPending }, dispatchState] = useReducer(loginReducer, initialReducerState)
 
-   const initialContextLoginValue = {
+   const initialContextLoginValue: LoginContext = {
       email,
       setEmail: (e) => dispatchState({ type: 'email', payload: e.target.value }),
       password,
@@ -40,7 +46,7 @@ const LoginForm = ({ children }: { children: React.ReactNode }) => {
       toggleIsPending: () => dispatchState({ type: 'isPending' })
    }
 
-   const handleLogin = async (e) => {
+   const handleLogin = async (e: React.FormEvent) => {
       e.preventDefault()
 
       if (!email || !password) return
@@ -63,9 +69,9 @@ const LoginForm = ({ children }: { children: React.ReactNode }) => {
       <LoginContext.Provider value={initialContextLoginValue}>
          <form
             className={tw(
-               'pos-r p-32px s-profile br-16px max-w-340px fccc g-12px bg-card-bg ',
+               'pos-r p-32. s-profile br-16. max-w-340. fccc g-12. bg-card-bg ',
                'bg-gradient-to-t from-card-gradient/0 via-card-gradient/5 to-card-gradient/20',
-               { dark: 'bc-card-bc--d bw-1px' }
+               { dark: 'bc-card-bc--d bw-1.' }
             )}
             onSubmit={handleLogin}
          >

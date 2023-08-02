@@ -61,7 +61,7 @@ const RoomsTable = () => {
             <NewFormButton />
          </div>
          <TableContentLayout>
-            <TableLabels gridClassName='grid grid-cols-9 g-8px gcc pr-40px'>
+            <TableLabels gridClassName='grid grid-cols-9 g-8. gcc pr-40.'>
                <TableLabel className='col-span-3' text='Room' />
                <TableLabel text='Type' />
                <TableLabel className='col-span-2' text='Amenities' />
@@ -74,7 +74,7 @@ const RoomsTable = () => {
                   key={Date.now()}
                   data={dataToDisplayInCurrentPage}
                   Component={({ data }: { data: RoomType }) => (
-                     <RoomRow data={data} className='grid grid-cols-9 g-8px gcc pr-40px' />
+                     <RoomRow data={data} className='grid grid-cols-9 g-8. gcc pr-40.' />
                   )}
                />
             </div>

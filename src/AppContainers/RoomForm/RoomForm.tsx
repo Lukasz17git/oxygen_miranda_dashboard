@@ -1,5 +1,5 @@
 import Amenities from "./Components/Amenities"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect } from "react"
 import MediumLabel from "./Components/MediumLabel"
 import Grid from "./Components/Grid"
 import Button from "../../AppComponents/Button"
@@ -56,15 +56,15 @@ const RoomForm = () => {
    }
 
    return (
-      <div className="oh br-16px grid grid-cols-2 bg-bg-white-fff">
-         <div className="p-24px">
+      <div className="oh br-16. grid grid-cols-2 bg-bg-white-fff">
+         <div className="p-24.">
             <div className="frcb">
                <div>
-                  <h2 className="tf-app-semibold ts-30px">Room</h2>
+                  <h2 className="tf-app-semibold ts-30.">Room</h2>
                   <RoomId />
                </div>
                <Button text="Upload Photo" >
-                  <MdOutlineUploadFile className="-mr-4px ml-4px scale-95" />
+                  <MdOutlineUploadFile className="-mr-4. ml-4. scale-95" />
                </Button >
             </div>
             <Separator />
@@ -92,7 +92,7 @@ const RoomForm = () => {
             <ReduxTextarea path={path} fieldPath="cancellationPolicy" />
             <MediumLabel text='Amenities' />
             <Amenities path={path} />
-            <div className="frce pt-24px">
+            <div className="frce pt-24.">
                <Button text="Cancel" onClick={cancelHandler} />
                <Button text="Save" onClick={saveHandler} />
             </div>

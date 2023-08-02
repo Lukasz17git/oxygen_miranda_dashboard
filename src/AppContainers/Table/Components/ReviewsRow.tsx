@@ -23,10 +23,10 @@ const ReviewsRow = ({ data, className }: { data: ReviewType, className: string }
    const archiveReview = () => dispatch(updateReviewThunk({ _id, archived: !archived }))
 
    return (
-      <div className={`${className} min-h-72px h:s-table-row pos-r h:bg-bg-white-fff`}>
-         <div className="frc g-16px col-span-2 mr-a ml-24px">
-            <Img src={'/CriticalIcons/person.svg'} className="h-32px w-32px fs0" />
-            <div className="fcnb h-100% py-8px">
+      <div className={`${className} min-h-72. h:s-table-row pos-r h:bg-bg-white-fff`}>
+         <div className="frc g-16. col-span-2 mr-a ml-24.">
+            <Img src={'/CriticalIcons/person.svg'} className="h-32. w-32. fs0" />
+            <div className="fcnb h-100% py-8.">
                <b className="tf-app-semibold tc-text-black-262626">{fullName}</b>
                {/* <SmallText text={'#' + _id.slice(0, 8)} /> */}
                <SmallText text={email} />

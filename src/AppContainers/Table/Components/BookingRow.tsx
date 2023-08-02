@@ -10,9 +10,9 @@ import { tw } from "tailwind-multi-class"
 import { BookingType, BookingWithRoomInfoType, RoomType } from "../../../Store/Slices/Rooms/rooms.types"
 
 const statusStyle = {
-   in: tw('bg-[#EEF9F2] tc-[#5AD07A]', { dark: 'bw-1px bg-[rgba(19, 88, 70, 0.2)] bc-[#135846]' }),
-   out: tw('bg-[#FFEDEC] tc-[#E23428]', { dark: 'bw-1px bg-[rgba(226, 52, 40, 0.2)] bc-[#E23428] bw-1 tc-[rgba(226, 52, 40, 0.9)]' }),
-   progress: tw('bg-[#fdfde0] tc-[#90811f]', { dark: 'bw-1px bg-[rgba(241, 238, 58, 0.25)] bc-[rgba(255, 255, 33, 0.6)] tc-[rgba(255, 255, 33, 0.7)]' }),
+   in: tw('bg-[#EEF9F2] tc-[#5AD07A]', { dark: 'bw-1. bg-[rgba(19, 88, 70, 0.2)] bc-[#135846]' }),
+   out: tw('bg-[#FFEDEC] tc-[#E23428]', { dark: 'bw-1. bg-[rgba(226, 52, 40, 0.2)] bc-[#E23428] bw-1 tc-[rgba(226, 52, 40, 0.9)]' }),
+   progress: tw('bg-[#fdfde0] tc-[#90811f]', { dark: 'bw-1. bg-[rgba(241, 238, 58, 0.25)] bc-[rgba(255, 255, 33, 0.6)] tc-[rgba(255, 255, 33, 0.7)]' }),
 }
 type TBookingRow = {
    data: BookingWithRoomInfoType,
@@ -29,12 +29,12 @@ const BookingRow = ({ data, className }: TBookingRow) => {
    const status = Math.random() > 0.3333 ? 'in' : Math.random() > 0.5 ? 'out' : 'progress'
 
    return (
-      <div className={`${className} min-h-72px h:s-table-row pos-r h:bg-bg-white-fff`}>
-         <div className="frc g-16px col-span-2 mr-a ml-24px">
-            <Img src={profileUrl || '/CriticalIcons/person.svg'} className="h-32px w-32px cover fs0" />
-            <div className="fcnb h-100% py-8px">
+      <div className={`${className} min-h-72. h:s-table-row pos-r h:bg-bg-white-fff`}>
+         <div className="frc g-16. col-span-2 mr-a ml-24.">
+            <Img src={profileUrl || '/CriticalIcons/person.svg'} className="h-32. w-32. cover fs0" />
+            <div className="fcnb h-100% py-8.">
                <b className="tf-app-semibold tc-text-black-262626">{fullname}</b>
-               <q className="tf-app-light ts-14px tc-text-grey-6E6E6E">{'#' + _id.slice(0, 8)}</q>
+               <q className="tf-app-light ts-14. tc-text-grey-6E6E6E">{'#' + _id.slice(0, 8)}</q>
             </div>
          </div>
          <CellSmallDate date={orderDate} />

@@ -5,7 +5,7 @@ export type FieldError = keyof typeof fieldErrorsText
 export type TypeError = keyof typeof typeErrorsText
 
 export type Error = null | {
-   location: LocationError,
-   field: FieldError,
-   type: TypeError,
+   location?: LocationError | string,
+   field?: FieldError | string,
+   type?: TypeError | string,
 }

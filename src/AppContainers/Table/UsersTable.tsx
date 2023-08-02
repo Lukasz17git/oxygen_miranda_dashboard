@@ -64,7 +64,7 @@ const UsersTable = () => {
             <NewFormButton />
          </div>
          <TableContentLayout>
-            <TableLabels gridClassName='grid grid-cols-10 g-8px gcc pr-40px'>
+            <TableLabels gridClassName='grid grid-cols-10 g-8. gcc pr-40.'>
                <TableLabel className='col-span-2' text='Employee' />
                <TableLabel text='Discharge date' />
                <TableLabel className='col-span-2' text='Email' />
@@ -77,7 +77,7 @@ const UsersTable = () => {
                   data={dataToDisplayInCurrentPage}
                   key={Date.now()}
                   Component={({ data }: { data: UserType }) => (
-                     <UserRow className='grid grid-cols-10 g-8px gcc pr-40px' data={data} />
+                     <UserRow className='grid grid-cols-10 g-8. gcc pr-40.' data={data} />
                   )}
                />
             </div>

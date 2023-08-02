@@ -27,12 +27,12 @@ const Slider = () => {
             <Img className="keen-slider__slide cover h-100%" src="/public/Images/hotel-7.jpg" />
             <Img className="keen-slider__slide cover h-100%" src="/public/Images/hotel-8.jpg" />
          </div>
-         <div className="pos-a h-50% w-100% b-0 l-0 px-32px fc g-32px bg-gradient-to-t from-black/90 via-black/70 to-black/0">
+         <div className="pos-a h-50% w-100% b-0 l-0 px-32. fc g-32. bg-gradient-to-t from-black/90 via-black/70 to-black/0">
             <div className="frcb">
-               <ActionIcon onClick={prevSlide} className={`bg-white/20 br-8px bc-white/20`}>
+               <ActionIcon onClick={prevSlide} className={`bg-white/20 br-8. bc-white/20`}>
                   <BsArrowLeftShort className="h-100% w-100% fill-svg-white-FFFFFF" />
                </ActionIcon>
-               <ActionIcon onClick={nextSlide} className={`bg-white/20 br-8px bc-white/20`}>
+               <ActionIcon onClick={nextSlide} className={`bg-white/20 br-8. bc-white/20`}>
                   <BsArrowLeftShort className="h-100% w-100% fill-svg-white-FFFFFF -scale-x-100" />
                </ActionIcon>
             </div>

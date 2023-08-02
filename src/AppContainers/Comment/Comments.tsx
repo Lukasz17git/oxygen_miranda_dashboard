@@ -38,10 +38,10 @@ const Comments = () => {
    const [commentModalIndex, setCommentModalIndex] = useState(null as null | number)
 
    return (
-      <div className="pos-r bg-bg-white-fff br-16px s-card p-16px col-span-4">
-         <h3 className="ts-19px tf-app-semibold tc-text-dark p-8px">Latest Reviews by Customers</h3>
+      <div className="pos-r bg-bg-white-fff br-16. s-card p-16. col-span-4">
+         <h3 className="ts-19. tf-app-semibold tc-text-dark p-8.">Latest Reviews by Customers</h3>
          <div className="pos-r">
-            <div ref={sliderRef} className="keen-slider py-8px frc oh mx-4px cursor-grab">
+            <div ref={sliderRef} className="keen-slider py-8. frc oh mx-4. cursor-grab">
                {reviewsArray.map((_, index) => (
                   <Comment key={index} index={index} openCommentModal={() => setCommentModalIndex(index)} />
                ))}

@@ -221,7 +221,7 @@ export default {
 
          addBase({
             svg: {
-               '@apply h-24px w-24px': {}
+               '@apply h-24. w-24.': {}
             },
          });
          // fonts
@@ -242,13 +242,13 @@ export default {
          // base components
          addComponents({
             '.tw-base-icon': {
-               '@apply h-24px w-24px': {}
+               '@apply h-24. w-24.': {}
             },
             '.tw-base-action-icon': {
-               '@apply pos-r frcc h-40px w-40px br-6px': {}
+               '@apply pos-r frcc h-40. w-40. br-6.': {}
             },
             '.tw-base-button': {
-               '@apply h-40px frcc br-8px py-8px px-20px tf-app-semibold ts-14px min-w-120px max-w-100% bg-green-pastel tc-green-dark': {}
+               '@apply h-40. frcc br-8. py-8. px-20. tf-app-semibold ts-14. min-w-120. max-w-100% bg-green-pastel tc-green-dark': {}
             },
          });
          // custom components

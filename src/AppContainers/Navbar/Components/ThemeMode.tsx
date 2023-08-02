@@ -10,7 +10,7 @@ const ThemeMode = () => {
    }
 
    return (
-      <ActionIcon onClick={switchThemeMode} className="pos-r h:bg-app-bg-white br-8px">
+      <ActionIcon onClick={switchThemeMode} className="pos-r h:bg-app-bg-white br-8.">
          <SvgToggleTheme className="fill-text-dark/95 scale-105" />
       </ActionIcon>
    )

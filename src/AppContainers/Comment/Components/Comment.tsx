@@ -23,28 +23,28 @@ const Comment = ({ index, openCommentModal, className }: TCommentProp) => {
    return (
       <div className={tw(
          `${className} keen-slider__slide`,
-         "p-16px px-20px bc-color-separator bw-1px fc g-8px w-360px fs0 br-12px h:s-comment",
+         "p-16. px-20. bc-color-separator bw-1. fc g-8. w-360. fs0 br-12. h:s-comment",
          { dark: "bc-dark-hover" }
       )}>
-         <p className="min-h-48px max-h-120px text-ellipsis tc-text-grey-darker tf-app-regular ts-15px">{comment}</p>
-         <div className="frc g-12px">
-            <Img src={'/CriticalIcons/person.svg'} className="h-32px w-32px cover" />
-            <div className="fcnb h-100% py-8px">
+         <p className="min-h-48. max-h-120. text-ellipsis tc-text-grey-darker tf-app-regular ts-15.">{comment}</p>
+         <div className="frc g-12.">
+            <Img src={'/CriticalIcons/person.svg'} className="h-32. w-32. cover" />
+            <div className="fcnb h-100% py-8.">
                <b className="tf-app-semibold tc-text-black">{fullname}</b>
-               <q className="tf-app-light ts-14px tc-text-grey">{timeAgo}</q>
+               <q className="tf-app-light ts-14. tc-text-grey">{timeAgo}</q>
             </div>
-            <div className="frc ml-a mt-a mb-4px">
+            <div className="frc ml-a mt-a mb-4.">
                {viewed || (
                   <>
-                     <ActionIcon className="tc-red-main h-36px w-36px" onClick={deleteReview}>
-                        <RiDeleteBin4Fill className="scale-80 fs0 pb-2px" />
+                     <ActionIcon className="tc-red-main h-36. w-36." onClick={deleteReview}>
+                        <RiDeleteBin4Fill className="scale-80 fs0 pb-2." />
                      </ActionIcon>
-                     <ActionIcon className="tc-green-dark h-36px w-36px" onClick={markReviewAsViewed}>
-                        <TiTick className="fs0 pb-2px scale-120" />
+                     <ActionIcon className="tc-green-dark h-36. w-36." onClick={markReviewAsViewed}>
+                        <TiTick className="fs0 pb-2. scale-120" />
                      </ActionIcon>
                   </>
                )}
-               <ActionIcon onClick={openCommentModal} className="h-36px w-36px">
+               <ActionIcon onClick={openCommentModal} className="h-36. w-36.">
                   <FaExpandAlt className="scale-70 fill-text-dark dark:fill-text-grey" />
                </ActionIcon>
             </div>

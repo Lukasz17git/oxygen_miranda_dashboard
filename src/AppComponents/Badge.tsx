@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import { tw } from "tailwind-multi-class"
 
-type BadgeType = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & { text?: string }
+type BadgeType = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & { text?: string | number }
 
 const Badge = ({ text, ...props }: BadgeType) => {
    return (
@@ -9,8 +9,8 @@ const Badge = ({ text, ...props }: BadgeType) => {
          {...props}
          className={tw(
             props.className || '',
-            'pos-a t-6px r-6px h-fit min-h-20px w-fit min-w-21px px-3px frcc',
-            'br-4px bg-badge-bg tc-badge-tc translate-x-50% -translate-y-50% ts-12px tf-app-semibold',
+            'pos-a t-6. r-6. h-fit min-h-20. w-fit min-w-21. px-3. frcc',
+            'br-4. bg-badge-bg tc-badge-tc translate-x-50% -translate-y-50% ts-12. tf-app-semibold',
             { dark: '' }
          )}>
          {text}

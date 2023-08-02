@@ -12,7 +12,7 @@ const Emails = () => {
    const openEmails = () => navigate('/contacts')
 
    return (
-      <ActionIcon onClick={openEmails} className="pos-r h:bg-app-bg-white br-8px">
+      <ActionIcon onClick={openEmails} className="pos-r h:bg-app-bg-white br-8.">
          <MdOutlineMailOutline className="fill-text-dark" />
          {!!emailsNumber && <Badge text={emailsNumber} />}
       </ActionIcon>

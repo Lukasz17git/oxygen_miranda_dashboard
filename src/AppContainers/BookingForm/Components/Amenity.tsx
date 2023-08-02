@@ -6,11 +6,11 @@ const Amenity = ({ amenity }: { amenity: TAmenity }) => {
    const Icon = amenitiesIcons[amenity]
    return (
       <div className={tw(
-         "frcc g-8px br-12px py-12px px-16px bg-green-pastel tc-green-dark ",
+         "frcc g-8. br-12. py-12. px-16. bg-green-pastel tc-green-dark ",
          { dark: '' }
       )}>
          {Icon && <Icon className={`fill-green-dark`} />}
-         <span className='ts-14px tf-app-semibold'>
+         <span className='ts-14. tf-app-semibold'>
             {amenitiesText[amenity]}
          </span>
       </div>

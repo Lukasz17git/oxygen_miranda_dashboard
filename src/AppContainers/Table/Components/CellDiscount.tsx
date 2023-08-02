@@ -9,12 +9,12 @@ const CellDiscount = ({ price, discount }: { price: number, discount: number }) 
    return (
       <div className="fc">
          <b className={tw(
-            "ts-20px tf-app-semibold tc-text-red-E23428",
-            { after: "content-['/night'] tf-app-light ts-14px tc-text-red-E23428 pl-2px" },
+            "ts-20. tf-app-semibold tc-text-red-E23428",
+            { after: "content-['/night'] tf-app-light ts-14. tc-text-red-E23428 pl-2." },
          )}>
             {'$' + discountPrice / 100}
          </b>
-         <div className="tf-app-light ts-13px tc-text-red-E23428 lh-1.1em">
+         <div className="tf-app-light ts-13. tc-text-red-E23428 lh-1.1em">
             <span>(</span>
             <span className="tf-app-semibold">{`-${discount}%`}</span>
             <span> disc.)</span>
