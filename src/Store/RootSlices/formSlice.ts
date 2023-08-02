@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AnyAction, AsyncThunk, AsyncThunkAction, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, selector, StorePaths } from "../store";
-import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
+import { AnyAsyncThunk, UnknownAsyncThunkAction } from "@reduxjs/toolkit/dist/matchers";
 import compareDataAndGetChangedFieldsMaintainingId from "../../Utils/compareDataAndGetChangedFieldsMaintainingId";
 
 const initialState = null as null | Record<string, any>
@@ -37,7 +37,7 @@ export const setFormThunk = createAsyncThunk(
       return data
    }
 )
-type SaveFormDataType = { pathOrInitialState: StorePaths | Record<string, any>, action: AnyAsyncThunk }
+type SaveFormDataType = { pathOrInitialState: StorePaths | Record<string, any>, action: AsyncThunk<any, any, any> }
 export const executeSaveFormThunk = createAsyncThunk(
    'form/saveData',
    (payload: SaveFormDataType, { getState, dispatch }) => {
@@ -48,7 +48,6 @@ export const executeSaveFormThunk = createAsyncThunk(
       const updates = originalData ? compareDataAndGetChangedFieldsMaintainingId(originalData, updatedData) : updatedData
       const updateKeys = Object.keys(updates)
       if (updateKeys.length === 0 || (updateKeys.length === 1 && updateKeys[0] === '_id')) return
-      // @ts-ignore: next-line
       dispatch(payload.action(updates))
    }
 )

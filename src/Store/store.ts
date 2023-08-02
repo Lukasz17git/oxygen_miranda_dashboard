@@ -8,12 +8,14 @@ import formReducer from "./RootSlices/formSlice";
 import reviewsReducer from "./Slices/Reviews/reviewsSlice";
 import employeesReducer from "./Slices/Users/employeesSlice";
 import roomsReducer from "./Slices/Rooms/roomsSlice";
+import errorReducer from "./RootSlices/errorSlice";
 
 export const store = configureStore({
    reducer: {
       ui: uiReducer,
       // modal: modalReducer,
       form: formReducer,
+      error: errorReducer,
       admin: adminReducer,
       employees: employeesReducer,
       reviews: reviewsReducer,

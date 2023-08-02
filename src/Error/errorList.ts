@@ -1,4 +1,5 @@
 
+
 export const locationErrorsText = {
    unknown: 'Unknown',
    app: 'Application',

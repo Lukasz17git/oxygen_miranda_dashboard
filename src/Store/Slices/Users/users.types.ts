@@ -1,5 +1,4 @@
 
-
 export type UserStatusType = 'active' | 'inactive' | 'vacation'
 export type UsersJobType = 'manager' | 'receptionist' | 'roomsService'
 
