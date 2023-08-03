@@ -1,10 +1,10 @@
 import { useEffect } from "react"
 import { StorePaths, useTypedDispatch } from "./store"
 import { clearFormAction, executeSaveFormThunk, setFormThunk } from "./RootSlices/formSlice"
-import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
+import { AsyncThunk } from "@reduxjs/toolkit"
 
 
-const useReduxForm = <T extends StorePaths>(path: T, saveDataThunk: AnyAsyncThunk, newFormInitialState?: Record<string, any>) => {
+const useReduxForm = <T extends StorePaths>(path: T, saveDataThunk: AsyncThunk<any, any, any>, newFormInitialState?: Record<string, any>) => {
 
    const dispatch = useTypedDispatch()
 

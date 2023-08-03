@@ -18,7 +18,7 @@ export default defineConfig({
    }), viteCompression(), visualizer({ open: true, gzipSize: true, brotliSize: true })],
    build: {
       assetsInlineLimit: 0,
-      outDir: '../build',
+      outDir: './dist',
    },
    test: {
       environment: 'jsdom',

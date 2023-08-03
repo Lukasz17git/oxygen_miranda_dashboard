@@ -54,9 +54,8 @@ const LoginForm = ({ children }: { children: React.ReactNode }) => {
       try {
          initialContextLoginValue.toggleIsPending()
 
-         await dispatch(authenticateAdminThunk({ email, password }))
-
-         navigate("/")
+         const res = await dispatch(authenticateAdminThunk({ email, password }))
+         if (res.payload) navigate("/")
 
       } catch (error) {
          alert('wrong credentials')

@@ -3,7 +3,7 @@ import { initialAdminState } from "./users.data.js";
 import { UserType } from "./users.types.js";
 import { authorizationUri, loginUri, usersUri } from "../../../Uris/uris.js";
 import customFetch from "../../../Utils/customFetch.js";
-import { WithId, WithoutId } from "../../../Types/mongo.js";
+import { WithId } from "../../../Types/mongo.js";
 
 
 const adminSlice = createSlice({
@@ -34,6 +34,7 @@ export const authenticateAdminThunk = createAsyncThunk(
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(loginData)
       })
+      console.log('adminData', adminData)
       return adminData
    }
 )

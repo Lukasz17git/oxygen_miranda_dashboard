@@ -7,7 +7,7 @@ import CellBigDate from "./CellBigDate"
 import CellSmallDate from "./CellSmallDate"
 import CellStatus from "./CellStatus"
 import { tw } from "tailwind-multi-class"
-import { BookingType, BookingWithRoomInfoType, RoomType } from "../../../Store/Slices/Rooms/rooms.types"
+import { BookingWithRoomInfoType } from "../../../Store/Slices/Rooms/rooms.types"
 
 const statusStyle = {
    in: tw('bg-[#EEF9F2] tc-[#5AD07A]', { dark: 'bw-1. bg-[rgba(19, 88, 70, 0.2)] bc-[#135846]' }),

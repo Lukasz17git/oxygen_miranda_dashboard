@@ -1,5 +1,8 @@
+/* eslint-disable */
+//@ts-nocheck
 import { useRef, useState } from 'react';
 import { useDrag, useDrop, } from 'react-dnd';
+import { WithId } from '../Types/mongo';
 
 const DndItemWrapper = ({ id, children, index, setValue }) => {
 
@@ -53,7 +56,8 @@ const DndItemWrapper = ({ id, children, index, setValue }) => {
 }
 
 
-const DndWrapper = ({ data, Component }) => {
+type Props = { data: WithId<unknown>[], Component: any }
+const DndWrapper = ({ data, Component }: Props) => {
 
    const [dndData, setDndData] = useState(data)
 

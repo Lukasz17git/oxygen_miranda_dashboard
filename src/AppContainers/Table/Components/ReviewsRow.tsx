@@ -13,7 +13,7 @@ import { useTypedDispatch } from "../../../Store/store"
 
 const ReviewsRow = ({ data, className }: { data: ReviewType, className: string }) => {
 
-   const { _id, comment, subject, archived, sentAt, viewed, person } = data
+   const { _id, comment, subject, archived, sentAt, person } = data
    const { name, lastname, email, phone } = person
    const fullName = `${name} ${lastname}`
 

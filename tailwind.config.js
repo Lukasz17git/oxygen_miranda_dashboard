@@ -10,39 +10,17 @@ import { addUtilitesWithDarkMode } from './utilitiesWithDarkMode'
 
 
 const palette = {
-   //white-black
-   white: '#FFFFFF',
-   white_darker: '',
-   white_contrast: '',
-   silver: '',
-
-   // green
+   //colors
+   'green': '#799283',
    'green-pastel': '#EEF9F2',
-
-   // red
-   'red-pastel': '#FFEDEC',
-
-   // orange
-
-   // yellow
-   'yellow-pastel': 'rgb(253, 253, 224)',
-
-   'text-black': '#262626',
-   'text-dark': '#393939',
-   'text-grey-darker': '#787878',
-   'text-grey': '#6E6E6E',
-   'text-silver': '#B2B2B2',
-   'text-white': '#D4D4D4',
-   'color-separator': '#EBEBEB',
-   'color-separator-grey': '#DCDCDC',
-   'color-separator-dark': '#A1A1A1',
+   'green-pastel-darker': '#E8F2EF',
    'green-light': '#5AD07A',
    'green-dark': '#135846',
-   'green-text': '#799283',
-   'green-pastel-darker': '#E8F2EF',
-   'red-main': '#E23428',
-   'orange-main': '#FF9C3A',
-   'yellow-main': 'var(--yellow-main)',
+   'red': '#E23428',
+   'red-pastel': '#FFEDEC',
+   'orange': '#FF9C3A',
+   'yellow': '#90811f',
+   'yellow-pastel': 'rgb(253, 253, 224)'
 }
 
 const color = (cssVariableColor) => `rgba(var(${cssVariableColor}))`
@@ -83,6 +61,7 @@ export default {
          'text-grey-6E6E6E': 'rgba(var(--text-grey-6E6E6E))',
          'text-grey-dark-787878': 'rgba(var(--text-grey-dark-787878))',
          'text-silver-B2B2B2': 'rgba(var(--text-silver-B2B2B2))',
+         //
          'text-red-E23428': 'rgba(var(--text-red-E23428))',
          'text-green-light-5AD07A': 'rgba(var(--text-green-light-5AD07A))',
          'text-green-dark-135846': 'rgba(var(--text-green-dark-135846))',
@@ -143,6 +122,7 @@ export default {
          'green-pastel': '#EEF9F2',
          'red-pastel': '#FFEDEC',
          'yellow-pastel': 'rgb(253, 253, 224)',
+         //
          'app-bg-white': '#f8f8f8',
          'input-bg-white': '#fcfcfc',
          'text-black': '#262626',
@@ -151,13 +131,16 @@ export default {
          'text-grey': '#6E6E6E',
          'text-silver': '#B2B2B2',
          'text-white': '#D4D4D4',
+         //
          'color-separator': '#EBEBEB',
          'color-separator-grey': '#DCDCDC',
          'color-separator-dark': '#A1A1A1',
+         //
          'green-light': '#5AD07A',
          'green-dark': '#135846',
          'green-text': '#799283',
          'green-pastel-darker': '#E8F2EF',
+         //
          'red-main': '#E23428',
          'orange-main': '#FF9C3A',
          'yellow-main': 'var(--yellow-main)',
@@ -199,22 +182,54 @@ export default {
    plugins: [
       plugin(microTailwind),
       plugin(microTailwindExperimental),
-      plugin(addUtilitesWithDarkMode(({ addUtility }) => {
+      plugin(addUtilitesWithDarkMode(({ addUtility, addClassNamedUtility }) => {
+         //box, btn, input, line, icon, 
+         //main, sec, on, off, 
 
          addUtility('tc', 'color', {
-            black: ['#111111', '#cccccc'],
-            grey: ['#456456', '#dcbdcb'],
-            white: ['#aaaaaa', '#111111']
+            "void": ["#000000"],
+            "black": ["#262626"],
+            "dark": ["#393939"],
+            "grey": ["#6E6E6E"],
+            "grey-light": ["#787878"], //este es text-grey-dark en mis anteriores
+            "grey-dark": ["#"],
+            "silver": ["#B2B2B2"],
+            "white": ["#"],
+            "blank": ['#FFFFFF'],
+            "red": [palette.red],
+            "green": [palette.green]
          })
 
          addUtility('bg', 'backgroundColor', {
-            black: ['#222', '#eee'],
+            "box-main": ['#FFFFFF'],
+            "box-sec": ['#F8F8F8'],
+
+            "sidebar-active": [],
+            "sidebar-hover": [],
+            "icon-transparent-hover": [],
+            "badge": [],
+            "icon-kpi": [],
+            "icon-kpi-hover": [],
+            "icon-status-on": [],
+            "icon-status-off": [],
+            "icon-status-warning": [],
+            "btn-transparent-hover": [],
+            "btn-main": [],
+            "btn-main-hover": [],
+            "amenities": [],
+            "status-available": [],
+            "status-occupied": [],
          })
 
-         addUtility('bc', 'borderColor', {
-            black: ['#222', '#eee'],
+         addClassNamedUtility('btn-main', {
+            backgroundColor: [palette['green-pastel']],
+            color: [palette.green]
          })
 
+         addClassNamedUtility('btn-main-h', {
+            backgroundColor: [palette['green-pastel']],
+            color: [palette.green]
+         })
 
       })),
       plugin(({ addComponents, addBase }) => {

@@ -46,7 +46,6 @@ const fetchData = (store: StoreType, thunk: (...p: any[]) => any) => async () =>
 const createRouter = (store: StoreType) => createBrowserRouter(
    createRoutesFromElements(
       <Route>
-
          {/** PUBLIC ROUTES */}
          <Route path='/' element={<WebLayout />} >
             <Route path='login' element={<LoginCard />} />
