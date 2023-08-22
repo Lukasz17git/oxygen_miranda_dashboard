@@ -27,3 +27,4 @@ jobs:
          title: 'S3 AWS Bucket Deployment'
          body: 'Merge this branch to deploy to AWS S3 Bucket.'
          labels: 'enhancement'
+         commit-message: PR to deploy to AWS
