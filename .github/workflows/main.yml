@@ -23,7 +23,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
          token: ${{ secrets.GITHUB_TOKEN }}
-         branch: aws-s3-deploy
+         branch: aws-s3
          title: 'S3 AWS Bucket Deployment'
          body: 'Merge this branch to deploy to AWS S3 Bucket.'
          labels: 'enhancement'
