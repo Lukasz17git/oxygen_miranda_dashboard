@@ -19,6 +19,6 @@ jobs:
       - run: npm run ci
 
       - name: Create a PR for deployment
-        run: gh pr create -H s3deploy -B master --title 'Merge into main to trigger deployment to S3 AWS Bucket' --body 'Created by Github action'
+        run: gh pr create --title 'Merge into main to trigger deployment to S3 AWS Bucket' --body 'Created by Github action' -H master -B master
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
