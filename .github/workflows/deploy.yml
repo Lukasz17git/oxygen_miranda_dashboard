@@ -8,7 +8,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   deploy_to_aws_s3:
-    if: github.event.pull_request.base.ref == 'master' && github.event.pull_request.head.ref == 'aws-s3-deploys'
+    if: github.event.pull_request.base.ref == 'master' && github.event.pull_request.head.ref == 'aws-s3-deploy'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
