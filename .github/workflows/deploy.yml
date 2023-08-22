@@ -28,4 +28,4 @@ jobs:
           aws-region: eu-west-1
           
       - name: Deploy to S3 bucket
-        run: npm deploy
+        run: npm run deploy
