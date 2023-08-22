@@ -2,7 +2,7 @@
    "name": "oxygen_miranda_dashboard",
    "private": true,
    "version": "0.0.0",
-   "lastDeploymentTimestamp": "Tue, 22 Aug 2023 23:55:54 GMT",
+   "lastDeploymentTimestamp": "",
    "type": "module",
    "scripts": {
       "dev": "vite",
@@ -10,8 +10,8 @@
       "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 100",
       "preview": "vite preview",
       "test": "vitest",
-      "timestamp": "node deploymentVersioning.cjs",
-      "ci": "npm run lint && npm run test && npm run build && npm run timestamp",
+      "deployment-versioning": "node deploymentVersioning.js",
+      "ci": "npm run lint && npm run test && npm run build",
       "deploy": "aws s3 sync ./dist/ s3://miranda-dashboard-app --delete"
    },
    "files": [
