@@ -19,10 +19,6 @@ jobs:
       - run: npm run ci
 
       - name: Create a PR for deployment
-        uses: peter-evans/create-pull-request@v3
-        with:
-         token: ${{ secrets.GITHUB_TOKEN }}
-         branch: aws-s3-deploy
-         title: 'S3 AWS Bucket Deployment'
-         body: 'Merge this branch to deploy to AWS S3 Bucket.'
-         labels: 'enhancement'
+        run: gh pr create --title 'Merge into main to trigger deployment to S3 AWS Bucket' --body 'Created by Github action' -H s3deploy -B master
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
