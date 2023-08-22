@@ -4,12 +4,10 @@ on:
    push:
       branches:
          - "master"
-   pull_request:
-      types:
-         - closed
       
 jobs:
   build:
+    if: github.event_name != 'pull_request' || (github.event.pull_request.base.ref == 'master' && github.event.pull_request.head.ref == 'aws-s3-deploys')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,24 +27,3 @@ jobs:
          title: 'S3 AWS Bucket Deployment'
          body: 'Merge this branch to deploy to AWS S3 Bucket.'
          labels: 'enhancement'
-
-  deploy_to_aws_s3:
-   needs: build
-   if: github.event.pull_request.base.ref == 'master' && github.event.pull_request.head.ref == 'aws-s3-deploy'
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v3
-     - uses: actions/setup-node@v3
-       with:
-         node-version: 16.x
-         cache: 'npm'
-
-     - name: Configure AWS Credentials
-       uses: aws-actions/configure-aws-credentials@v1
-       with:
-         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         aws-region: eu-west-1
-         
-     - name: Deploy to S3 bucket
-       run: npm run deploy
