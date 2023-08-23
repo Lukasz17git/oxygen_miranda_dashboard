@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "timestamp": "node deploymentVersioning.cjs",
-    "ci": "npm run lint && npm run test && npm run build && npm run timestamp",
+    "ci": "npm run lint && npm run test && npm run timestamp && npm run build",
     "deploy": "aws s3 sync ./dist/ s3://miranda-dashboard-app --delete"
   },
   "files": [
